@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZibBox - Criar Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a008c;
+            --accent: #00b0ff;
+            --accent-hover: #0091ea;
+            --bg: #f5f6fa;
+            --text-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container do Celular */
+        .app-container {
+            width: 100%;
+            max-width: 380px;
+            height: 800px;
+            max-height: 92vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a0054 100%);
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(74, 0, 140, 0.25);
+            display: flex;
+            flex-direction: column;
+            color: var(--text-white);
+        }
+
+        @media (max-height: 740px) or (max-width: 400px) {
+            .app-container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px 15px;
+            flex-shrink: 0;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 25px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-btn:hover { color: var(--accent); }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+        }
+        .logo span { color: var(--accent); }
+
+        /* Centro */
+        .main-content {
+            flex: 1;
+            border-top-left-radius: 60px; 
+            padding: 30px 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content::-webkit-scrollbar { width: 4px; }
+
+        .title-section {
+            margin-bottom: 25px;
+        }
+        .title-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .title-section p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        /* Form */
+        .form-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex: 1;
+        }
+        
+        .input-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding: 14px 15px;
+            backdrop-filter: blur(10px);
+        }
+        .input-box:focus-within {
+            border-color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 176, 255, 0.2);
+        }
+        .input-box i {
+            color: rgba(255, 255, 255, 0.7);
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+        .input-box input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            color: var(--text-white);
+        }
+        .input-box input::placeholder { color: rgba(255, 255, 255, 0.4); }
+        .toggle-password { cursor: pointer; }
+
+        /* Termos de Uso */
+        .terms-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            line-height: 1.4;
+            margin-top: 5px;
+        }
+        .terms-container input {
+            margin-top: 3px;
+            accent-color: var(--accent);
+        }
+        .terms-container a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .terms-container a:hover { text-decoration: underline; }
+
+        /* Botão Finalizar */
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 176, 255, 0.4);
+            margin-top: auto; /* Joga para o final da tela */
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-submit:hover { 
+            background: var(--accent-hover); 
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Header -->
+        <div class="header">
+            <a href="cadastro.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="logo">
+                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
+                <span>Zib</span>Box
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            
+            <div class="title-section">
+                <h2>Criar Login</h2>
+                <p>Configure as credenciais de administrador para acessar o painel do seu condomínio.</p>
+            </div>
+
+            <form class="form-container" id="formCriarLogin">
+                
+                <!-- Nome Completo do Admin -->
+                <div class="input-box">
+                    <i class="fa-regular fa-id-card"></i>
+                    <input type="text" id="nomeAdmin" placeholder="Seu nome completo" required>
+                </div>
+
+                <!-- Usuário/E-mail -->
+                <div class="input-box">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="emailAdmin" placeholder="Digite seu e-mail" required>
+                </div>
+
+                <!-- Senha -->
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="senhaAdmin" placeholder="Crie uma senha forte" required>
+                    <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                </div>
+
+                <!-- Confirmar Senha -->
+                <div class="input-box">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <input type="password" id="confirmarSenhaAdmin" placeholder="Confirme sua senha" required>
+                </div>
+
+                <!-- Aceitar termos -->
+                <label class="terms-container">
+                    <input type="checkbox" required>
+                    <span>Li e estou de acordo com os <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>.</span>
+                </label>
+
+                <!-- Botão Criar -->
+                <button type="submit" class="btn-submit">
+                    Finalizar Cadastro <i class="fa-solid fa-circle-check"></i>
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Integração do Banco de Dados Local (JSON + LocalStorage) -->
+    <script>
+// 1. Mostrar/Esconder Senha
+const togglePassword = document.querySelector('#togglePassword');
+const senhaAdmin = document.querySelector('#senhaAdmin');
+
+if (togglePassword && senhaAdmin) {
+    togglePassword.addEventListener('click', function () {
+        const type = senhaAdmin.getAttribute('type') === 'password' ? 'text' : 'password';
+        senhaAdmin.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+}
+
+// 2. Lógica de Validação e Envio ao Servidor
+const form = document.querySelector('#formCriarLogin');
+
+form.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    const nome = document.querySelector('#nomeAdmin').value;
+    const email = document.querySelector('#emailAdmin').value;
+    const senha = senhaAdmin.value;
+    const confirmarSenha = document.querySelector('#confirmarSenhaAdmin').value;
+
+    // Validação de senha
+    if (senha !== confirmarSenha) {
+        alert("As senhas informadas não coincidem. Tente novamente!");
+        return;
+    }
+
+    // Pega dados prévios salvos no localStorage (ex: dados do condomínio se houver)
+    const dadosCondominioExistentes = JSON.parse(localStorage.getItem('dados_condominio')) || {};
+
+    // Unindo os dados para enviar
+    const contaCompleta = {
+        ...dadosCondominioExistentes,
+        nomeAdministrador: nome,
+        login: email.split('@')[0], // Gera usuário com o que vem antes do @
+        email: email,
+        senha: senha
+    };
+
+    // CORREÇÃO: Usando rota relativa "/api/registrar". O navegador já sabe que a porta é 3000.
+    fetch("/api/registrar", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(contaCompleta)
+    })
+    .then(async response => {
+        // CORREÇÃO ESSENCIAL: Converte para JSON primeiro, mesmo se o status for de erro (como 400 ou 401)
+        const dados = await response.json();
+        
+        if (!response.ok) {
+            // Se o servidor respondeu com erro (ex: e-mail duplicado), envia a mensagem real do backend
+            throw new Error(dados.mensagem || 'Erro desconhecido no servidor.');
+        }
+        
+        return dados;
+    })
+    .then(dados => {
+        if (dados.sucesso) {
+            alert(`Parabéns! A conta foi criada.\nSeu usuário de login será: ${contaCompleta.login}`);
+            localStorage.setItem('usuario_zibbox', JSON.stringify(contaCompleta));
+            
+            // Redireciona para a página de login
+            window.location.href = "login.html";
+        } else {
+            alert("Erro ao salvar: " + dados.mensagem);
+        }
+    })
+    .catch(erro => {
+        console.error("Erro processado:", erro);
+        // Se o erro veio da validação do backend, mostra a mensagem real. Se não, mostra falha de conexão.
+        if (erro.message && erro.message !== "Failed to fetch" && erro.message !== "Resposta inválida do servidor") {
+            alert(erro.message);
+        } else {
+            alert("Servidor indisponível. Verifique se o Node está rodando na porta 3000.");
+        }
+    });
+});
+</script>
+</body>
+</html>

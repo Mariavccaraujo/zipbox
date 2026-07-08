@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZibBox - Cadastro</title>
+    <!-- No arquivo cadastro.html altere a tag do botão ou o redirecionamento JS para: -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a008c;
+            --accent: #00b0ff;
+            --accent-hover: #0091ea;
+            --bg: #f5f6fa;
+            --text-dark: #1e1e24;
+            --text-light: #7f8c8d;
+            --border-color: #dcdde1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container do App - Travado com overflow hidden */
+        .app-container {
+            width: 100%;
+            max-width: 380px;
+            height: 800px;
+            max-height: 92vh;
+            background: var(--primary);
+            border-radius: 40px;
+            overflow: hidden; /* Evita que qualquer elemento vaze para a esquerda/direita */
+            position: relative;
+            box-shadow: 0 20px 40px rgba(74, 0, 140, 0.25);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-height: 740px) or (max-width: 400px) {
+            .app-container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+        }
+
+        /* Topo Roxo corrigido e centralizado */
+        .header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px 20px;
+            color: white;
+            flex-shrink: 0;
+            width: 100%;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 25px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            color: var(--accent);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Corpo Branco Arredondado */
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border-top-left-radius: 40px; 
+            border-top-right-radius: 40px; 
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .main-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .main-content::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .page-title {
+            color: var(--text-dark);
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        /* Formulário */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-bottom: 1.5px solid var(--border-color);
+            padding: 8px 0;
+        }
+
+        .input-group.active, .input-group:focus-within {
+            border-bottom-color: var(--accent);
+        }
+
+        .input-group i {
+            color: var(--text-dark);
+            font-size: 18px;
+            width: 30px;
+            text-align: left;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 14px;
+            color: var(--text-dark);
+            padding-right: 20px;
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .input-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 5px;
+            color: var(--text-dark);
+            pointer-events: none;
+            font-size: 14px !important;
+        }
+
+        /* Botão Continuar */
+        .btn-container {
+            margin-top: auto;
+            padding-top: 25px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid var(--accent);
+            padding: 12px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 176, 255, 0.1);
+        }
+
+        .btn-submit:hover {
+            background: #f0faff;
+            box-shadow: 0 6px 15px rgba(0, 176, 255, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="header">
+            <a href="login.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="logo">
+                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
+                <span>Zib</span>Box
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h2 class="page-title">Cadastro</h2>
+
+            <form class="form-container" action="#" method="POST">
+                
+                <div class="input-group active">
+                    <i class="fa-solid fa-building"></i>
+                    <input type="text" placeholder="Nome do condomínio ou empresa" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <input type="text" placeholder="Cpf ou CNPJ" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-magnifying-glass-location"></i>
+                    <input type="text" placeholder="CEP" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-city"></i>
+                    <input type="text" placeholder="Cidade" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" placeholder="Endereço" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-map-pin"></i>
+                    <input type="text" placeholder="Bairro" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-house-laptop"></i>
+                    <select required>
+                        <option value="" disabled selected hidden>Tipo do estabelecimento</option>
+                        <option value="condominio_residencial">Condomínio Residencial</option>
+                        <option value="condominio_comercial">Condomínio Comercial</option>
+                        <option value="empresa">Empresa / Escritório</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-right select-arrow"></i>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn-submit">
+                        Continuar <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        const inputGroups = document.querySelectorAll('.input-group');
+        
+        inputGroups.forEach(group => {
+            const input = group.querySelector('input, select');
+            if(input) {
+                input.addEventListener('focus', () => {
+                    inputGroups.forEach(g => g.classList.remove('active'));
+                    group.classList.add('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

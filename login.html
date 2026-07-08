@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZibBox - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a008c;
+            --primary-light: #6a1b9a;
+            --accent: #00b0ff;
+            --accent-hover: #0091ea;
+            --bg: #f5f6fa;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container Limitador do Celular */
+        .app-container {
+            width: 100%;
+            max-width: 380px;
+            height: 800px;
+            max-height: 92vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a0054 100%);
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(74, 0, 140, 0.25);
+            display: flex;
+            flex-direction: column;
+            color: var(--text-white);
+        }
+
+        @media (max-height: 740px) or (max-width: 400px) {
+            .app-container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+        }
+
+        /* Topo */
+        .header {
+            text-align: center;
+            padding: 25px 0 15px;
+            flex-shrink: 0;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+        }
+        .logo span { color: var(--accent); }
+
+        /* Centro com Rolagem Controlada */
+        .main-content {
+            flex: 1;
+            background-image: linear-gradient(to bottom, rgba(42, 0, 84, 0.75) 0%, rgba(74, 0, 140, 0.95) 100%), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9RymbAi6sp4FNX-nP4ExkzlZatxGOhcsVn_dxMlQoqGpNv9o8A0m-8GeT&s=10');
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 60px; 
+            padding: 25px 25px 30px 25px; /* Aumentado padding inferior para criar área de escape no scroll */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content::-webkit-scrollbar { width: 4px; }
+        .main-content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+
+        /* Perfil */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+        }
+        .profile-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 0;
+            background-color: #4cd137;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #4a008c;
+        }
+        .profile-name {
+            font-size: 15px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        .login-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Formulário */
+        .form-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .input-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            backdrop-filter: blur(10px);
+        }
+        .input-box:focus-within {
+            border-color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .input-box i {
+            color: rgba(255, 255, 255, 0.7);
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+        .input-box input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            color: var(--text-white);
+        }
+        .input-box input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .toggle-password { cursor: pointer; }
+
+        /* Links */
+        .extra-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .extra-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        /* Seção Novidades */
+        .news-section {
+            margin-bottom: 5px;
+        }
+        .news-section h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .news-card {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 12px;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .news-icon {
+            background: rgba(0, 176, 255, 0.2);
+            color: var(--accent);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .news-text {
+            font-size: 12px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Botão Entrar */
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 176, 255, 0.4);
+            margin-top: 5px;
+            margin-bottom: 5px;
+            flex-shrink: 0;
+        }
+        .btn-submit:hover { background: var(--accent-hover); }
+
+        /* Rodapé Fixo Inferior */
+        .footer {
+            text-align: center;
+            padding: 2px 0; /* Aumentado sutilmente para manter o padrão das outras telas */
+            background-color: #230046;
+            flex-shrink: 0;
+            width: 100%;
+            z-index: 5;
+        }
+        .footer a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+        }
+        .footer a:hover { opacity: 1; color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="header">
+            <div class="logo">
+                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
+                <span>Zib</span>Box
+            </div>
+        </div>
+
+        <div class="main-content">
+            
+            <div class="profile-section">
+                <div class="profile-wrapper">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Foto de perfil" class="profile-img">
+                    <span class="profile-badge"></span>
+                </div>
+                <div class="profile-name">Jardelisson Silva</div>
+            </div>
+
+            <h2 class="login-title">Acessar Conta</h2>
+
+            <form class="form-container" action="#" method="POST">
+                
+                <div class="input-box">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" placeholder="E-mail ou usuário" required>
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="passwordField" placeholder="Digite sua senha" required>
+                    <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                </div>
+
+                <div class="extra-links">
+                    <label class="checkbox-container">
+                        <input type="checkbox"> Lembrar acesso
+                    </label>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+
+                <div class="news-section">
+                    <h3>Novidades</h3>
+                    <div class="news-card">
+                        <div class="news-icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div class="news-text">
+                            Tenha todo o controle das encomendas do seu condomínio na palma da mão.
+                        </div>
+                    </div>
+                </div>
+
+<button type="submit" class="btn-submit" a href="zibbox-painel.html">Entrar</button>
+            </form>
+        </div>
+
+        <!-- O link aponta para a primeira etapa do fluxo (cadastro.html) -->
+        <div class="footer">
+            <a href="cadastro.html"><i class="fa-solid fa-building-user"></i> Cadastrar meu condomínio</a>
+        </div>
+
+    </div>
+
+    
+<script>
+// 1. Mostrar/Esconder Senha
+const togglePassword = document.querySelector('#togglePassword');
+const campoSenha = document.querySelector('#senhaUsuario'); // Verifique o ID do seu campo de senha no HTML
+
+if (togglePassword && campoSenha) {
+    togglePassword.addEventListener('click', function () {
+        const type = campoSenha.getAttribute('type') === 'password' ? 'text' : 'password';
+        campoSenha.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+}
+
+// 2. Lógica de Autenticação com o Servidor
+const formLogin = document.querySelector('#formLogin') || document.querySelector('form');
+
+formLogin.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    // Verifique se os IDs abaixo batem exatamente com os id="" dos seus inputs no HTML
+    const identificadorDigitado = document.querySelector('#emailAdmin') ? document.querySelector('#emailAdmin').value : document.querySelector('input[type="text"]').value;
+    const senhaDigitada = campoSenha ? campoSenha.value : document.querySelector('input[type="password"]').value;
+
+    const dadosLogin = {
+        login: identificadorDigitado, // O backend aceita o identificador aqui
+        senha: senhaDigitada
+    };
+
+    // Usando rota relativa limpa compatível com a pasta public
+    fetch("/api/login", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dadosLogin)
+    })
+    .then(async response => {
+        const dados = await response.json();
+        
+        if (!response.ok) {
+            // Se o status for 401 ou 400, extrai a mensagem de erro real vinda do banco
+            throw new Error(dados.mensagem || 'Usuário ou senha incorretos.');
+        }
+        
+        return dados;
+    })
+    .then(dados => {
+        if (dados.sucesso) {
+            alert(dados.mensagem || "Login realizado com sucesso!");
+            
+            // Salva a sessão do usuário logado
+            localStorage.setItem('usuario_logado', JSON.stringify(dados.usuario));
+            
+            // Redireciona para a tela inicial do sistema (ajuste o nome do arquivo se for diferente)
+            window.location.href = "home.html"; 
+        } else {
+            alert("Erro: " + dados.mensagem);
+        }
+    })
+    .catch(erro => {
+        console.error("Erro no processamento do login:", erro);
+        if (erro.message && erro.message !== "Failed to fetch") {
+            alert(erro.message);
+        } else {
+            alert("Servidor indisponível. Certifique-se de que o Node está rodando no terminal na porta 3000.");
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZibBox - Encomendas do seu condomínio, sob controle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root{
+        --primary:#4a008c;
+        --primary-dark:#2a0054;
+        --accent:#00b0ff;
+        --accent-hover:#0091ea;
+        --warm:#ffb100;
+        --bg:#f5f6fa;
+        --surface:#ffffff;
+        --text-dark:#1c1330;
+        --text-muted:#6b6478;
+        --border:#e7e4ef;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text-dark);overflow-x:hidden;}
+    img{max-width:100%;display:block;}
+    a{color:inherit;}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+    /* ---------- NAV ---------- */
+    .nav{
+        position:sticky;top:0;z-index:100;
+        background:rgba(74,0,140,0.92);
+        backdrop-filter:blur(10px);
+    }
+    .nav-inner{
+        display:flex;align-items:center;justify-content:space-between;
+        padding:16px 24px;max-width:1180px;margin:0 auto;
+    }
+    .logo{
+        font-size:22px;font-weight:800;color:#fff;
+        display:flex;align-items:center;gap:8px;
+        font-family:'Franklin Gothic Medium',Arial,sans-serif;
+    }
+    .logo span{color:var(--accent);}
+    .nav-links{display:flex;align-items:center;gap:30px;}
+    .nav-links a{
+        color:rgba(255,255,255,0.82);text-decoration:none;font-size:14px;font-weight:500;
+    }
+    .nav-links a:hover{color:#fff;}
+    .nav-actions{display:flex;gap:10px;align-items:center;}
+    .btn{
+        display:inline-flex;align-items:center;gap:8px;justify-content:center;
+        padding:11px 20px;border-radius:12px;font-size:14px;font-weight:600;
+        text-decoration:none;cursor:pointer;border:none;white-space:nowrap;
+    }
+    .btn-accent{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(0,176,255,0.35);}
+    .btn-accent:hover{background:var(--accent-hover);}
+    .btn-ghost{background:rgba(255,255,255,0.08);color:#fff;border:1.5px solid rgba(255,255,255,0.25);}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+    .btn-dark{background:var(--primary);color:#fff;}
+    .btn-dark:hover{background:var(--primary-dark);}
+    .menu-toggle{
+        display:none;background:rgba(255,255,255,0.1);border:none;color:#fff;
+        width:40px;height:40px;border-radius:10px;font-size:16px;cursor:pointer;
+    }
+
+    /* mobile drawer */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:150;}
+    .overlay.open{opacity:1;pointer-events:auto;}
+    .drawer{
+        position:fixed;top:0;right:-85%;width:78%;max-width:320px;height:100%;
+        background:var(--primary-dark);z-index:200;padding:26px 24px;
+        display:flex;flex-direction:column;gap:6px;
+        transition:right .32s cubic-bezier(.4,0,.2,1);
+        box-shadow:-10px 0 30px rgba(0,0,0,0.35);
+    }
+    .drawer.open{right:0;}
+    .drawer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+    .drawer-close{background:rgba(255,255,255,0.08);border:none;color:#fff;width:34px;height:34px;border-radius:10px;cursor:pointer;}
+    .drawer a{
+        color:#fff;text-decoration:none;font-size:15px;padding:13px 8px;border-radius:10px;
+        display:flex;align-items:center;gap:12px;
+    }
+    .drawer a i{width:18px;color:var(--accent);}
+    .drawer a:hover{background:rgba(255,255,255,0.08);}
+    .drawer-cta{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:16px;}
+
+    /* ---------- HERO ---------- */
+    .hero{
+        background:linear-gradient(150deg,var(--primary) 0%,var(--primary-dark) 100%);
+        color:#fff;position:relative;overflow:hidden;
+    }
+    .hero::after{
+        content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+        background:radial-gradient(circle,rgba(0,176,255,0.35),transparent 70%);
+        top:-180px;right:-160px;pointer-events:none;
+    }
+    .hero-inner{
+        display:grid;grid-template-columns:1.05fr 0.95fr;gap:50px;align-items:center;
+        padding:70px 24px 90px;max-width:1180px;margin:0 auto;position:relative;
+    }
+    .eyebrow{
+        display:inline-flex;align-items:center;gap:8px;
+        font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;
+        color:var(--accent);background:rgba(0,176,255,0.12);
+        border:1px solid rgba(0,176,255,0.35);padding:7px 14px;border-radius:30px;margin-bottom:20px;
+    }
+    .hero h1{font-size:42px;line-height:1.18;font-weight:800;margin-bottom:18px;}
+    .hero h1 .hl{color:var(--accent);}
+    .hero p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.78);font-weight:300;max-width:480px;margin-bottom:30px;}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+    .hero-note{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.65);}
+    .hero-note i{color:var(--accent);}
+
+    .hero-media{position:relative;}
+    .hero-media img{
+        border-radius:26px;width:100%;height:420px;object-fit:cover;
+        box-shadow:0 30px 60px rgba(0,0,0,0.35);
+    }
+    .float-card{
+        position:absolute;background:#fff;color:var(--text-dark);border-radius:16px;
+        padding:14px 16px;box-shadow:0 12px 30px rgba(0,0,0,0.2);
+        display:flex;align-items:center;gap:12px;max-width:230px;
+    }
+    .float-card.top{top:-22px;left:-30px;}
+    .float-card.bottom{bottom:-24px;right:-20px;}
+    .float-card .ic{
+        width:38px;height:38px;border-radius:10px;background:rgba(0,176,255,0.15);
+        color:var(--accent-hover);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .float-card h5{font-size:13px;font-weight:600;margin-bottom:2px;}
+    .float-card p{font-size:11px;color:var(--text-muted);line-height:1.3;}
+
+    /* ---------- STATS ---------- */
+    .stats{background:var(--surface);border-bottom:1px solid var(--border);}
+    .stats-inner{
+        display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+        padding:36px 24px;max-width:1180px;margin:0 auto;
+    }
+    .stat h3{font-size:30px;font-weight:800;color:var(--primary);}
+    .stat p{font-size:12.5px;color:var(--text-muted);margin-top:4px;}
+
+    /* ---------- SECTION HEADS ---------- */
+    .section{padding:90px 24px;}
+    .section-head{max-width:620px;margin:0 auto 56px;text-align:center;}
+    .section-head .eyebrow{background:rgba(74,0,140,0.08);color:var(--primary);border-color:rgba(74,0,140,0.2);}
+    .section-head h2{font-size:32px;font-weight:800;margin-bottom:14px;}
+    .section-head p{font-size:15px;color:var(--text-muted);line-height:1.7;font-weight:300;}
+
+    /* ---------- FEATURES (alternating) ---------- */
+    .feature-row{
+        display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+        max-width:1180px;margin:0 auto;padding:50px 24px;
+    }
+    .feature-row.reverse .feature-media{order:2;}
+    .feature-row.reverse .feature-text{order:1;}
+    .feature-media img{border-radius:22px;width:100%;height:340px;object-fit:cover;box-shadow:0 20px 45px rgba(28,19,48,0.12);}
+    .feature-tag{
+        display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+        color:var(--primary);background:rgba(74,0,140,0.08);padding:6px 14px;border-radius:30px;margin-bottom:16px;
+    }
+    .feature-text h3{font-size:26px;font-weight:700;margin-bottom:14px;line-height:1.3;}
+    .feature-text p{font-size:14.5px;color:var(--text-muted);line-height:1.75;font-weight:300;margin-bottom:20px;}
+    .feature-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+    .feature-list li{display:flex;gap:10px;font-size:13.5px;color:var(--text-dark);}
+    .feature-list li i{color:var(--accent-hover);margin-top:3px;}
+
+    /* ---------- HOW IT WORKS TRACKER ---------- */
+    .tracker-wrap{background:var(--surface);}
+    .tracker{
+        max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;
+        position:relative;padding:0 24px;
+    }
+    .tracker::before{
+        content:"";position:absolute;top:26px;left:60px;right:60px;height:2px;
+        background:var(--border);z-index:0;
+    }
+    .track-step{position:relative;z-index:1;flex:1;text-align:center;padding:0 10px;}
+    .track-dot{
+        width:52px;height:52px;border-radius:50%;background:var(--primary);color:#fff;
+        display:flex;align-items:center;justify-content:center;font-size:18px;
+        margin:0 auto 16px;box-shadow:0 8px 20px rgba(74,0,140,0.25);
+    }
+    .track-step h4{font-size:14.5px;font-weight:600;margin-bottom:6px;}
+    .track-step p{font-size:12.5px;color:var(--text-muted);line-height:1.5;}
+
+    /* ---------- PLANS ---------- */
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1180px;margin:0 auto;padding:0 24px;}
+    .plan-card{
+        background:var(--surface);border:1px solid var(--border);border-radius:22px;
+        padding:32px 26px;display:flex;flex-direction:column;
+    }
+    .plan-card.featured{background:linear-gradient(160deg,var(--primary),var(--primary-dark));color:#fff;border:none;transform:translateY(-10px);box-shadow:0 25px 50px rgba(74,0,140,0.3);}
+    .plan-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,176,255,0.12);color:var(--accent-hover);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:18px;}
+    .plan-card.featured .plan-icon{background:rgba(255,255,255,0.15);color:var(--accent);}
+    .plan-card h4{font-size:18px;font-weight:700;margin-bottom:8px;}
+    .plan-card > p{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;font-weight:300;}
+    .plan-card.featured > p{color:rgba(255,255,255,0.75);}
+    .plan-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px;flex:1;}
+    .plan-card li{display:flex;gap:9px;font-size:13px;}
+    .plan-card li i{color:var(--accent-hover);margin-top:2px;}
+    .plan-card.featured li i{color:var(--accent);}
+    .plan-badge{
+        align-self:flex-start;background:var(--warm);color:#241300;font-size:11px;font-weight:700;
+        padding:4px 12px;border-radius:20px;margin-bottom:14px;
+    }
+
+    /* ---------- TESTIMONIALS ---------- */
+    .testi-wrap{background:linear-gradient(150deg,var(--primary),var(--primary-dark));color:#fff;}
+    .testi-wrap .section-head p{color:rgba(255,255,255,0.7);}
+    .testi-wrap .section-head .eyebrow{background:rgba(0,176,255,0.15);color:var(--accent);border-color:rgba(0,176,255,0.35);}
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1180px;margin:0 auto;padding:0 24px;}
+    .testi-card{
+        background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);
+        border-radius:20px;padding:26px;backdrop-filter:blur(6px);
+    }
+    .testi-stars{color:var(--warm);font-size:13px;margin-bottom:14px;}
+    .testi-card p{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.85);font-weight:300;margin-bottom:20px;}
+    .testi-person{display:flex;align-items:center;gap:12px;}
+    .testi-person img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);}
+    .testi-person h5{font-size:13px;font-weight:600;}
+    .testi-person span{font-size:11.5px;color:rgba(255,255,255,0.6);}
+
+    /* ---------- CTA BANNER ---------- */
+    .cta-banner{
+        max-width:1180px;margin:0 auto;background:var(--surface);border:1px solid var(--border);
+        border-radius:28px;padding:56px 40px;display:flex;align-items:center;justify-content:space-between;gap:30px;
+        box-shadow:0 20px 45px rgba(28,19,48,0.06);
+    }
+    .cta-banner h3{font-size:26px;font-weight:800;margin-bottom:10px;}
+    .cta-banner p{font-size:14px;color:var(--text-muted);font-weight:300;max-width:420px;}
+    .cta-banner .actions{display:flex;gap:12px;flex-shrink:0;}
+
+    /* ---------- FOOTER ---------- */
+    footer{background:var(--primary-dark);color:rgba(255,255,255,0.75);padding:60px 24px 26px;}
+    .footer-grid{
+        max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;
+        padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .footer-grid h5{font-size:13px;color:#fff;font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px;}
+    .footer-grid a{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;}
+    .footer-grid a:hover{color:var(--accent);}
+    .footer-about p{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.6);font-weight:300;margin:14px 0 18px;max-width:280px;}
+    .social-row{display:flex;gap:10px;}
+    .social-row a{
+        width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,0.08);
+        display:flex;align-items:center;justify-content:center;margin:0;
+    }
+    .social-row a:hover{background:var(--accent);color:#fff;}
+    .footer-bottom{
+        max-width:1180px;margin:0 auto;padding-top:22px;display:flex;justify-content:space-between;
+        font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width:920px){
+        .hero-inner{grid-template-columns:1fr;padding-top:40px;}
+        .hero-media{order:-1;}
+        .hero h1{font-size:32px;}
+        .feature-row{grid-template-columns:1fr;gap:30px;}
+        .feature-row.reverse .feature-media{order:0;}
+        .feature-row.reverse .feature-text{order:1;}
+        .plans{grid-template-columns:1fr;}
+        .plan-card.featured{transform:none;}
+        .testimonials{grid-template-columns:1fr;}
+        .stats-inner{grid-template-columns:repeat(2,1fr);}
+        .footer-grid{grid-template-columns:1fr 1fr;}
+        .cta-banner{flex-direction:column;text-align:center;}
+        .tracker{flex-direction:column;gap:26px;}
+        .tracker::before{display:none;}
+    }
+    @media (max-width:720px){
+        .nav-links{display:none;}
+        .menu-toggle{display:flex;align-items:center;justify-content:center;}
+    }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <div class="logo"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
+        <div class="nav-links">
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="#planos">Planos</a>
+            <a href="#depoimentos">Depoimentos</a>
+        </div>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-ghost desktop-only">Entrar</a>
+            <a href="cadastro.html" class="btn btn-accent desktop-only">Cadastrar condomínio</a>
+            <button class="menu-toggle" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+    <div class="drawer-top">
+        <div class="logo" style="font-size:19px;"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
+        <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <a href="#funcionalidades"><i class="fa-solid fa-layer-group"></i> Funcionalidades</a>
+    <a href="#como-funciona"><i class="fa-solid fa-route"></i> Como funciona</a>
+    <a href="#planos"><i class="fa-solid fa-tags"></i> Planos</a>
+    <a href="#depoimentos"><i class="fa-solid fa-comments"></i> Depoimentos</a>
+    <a href="#contato"><i class="fa-solid fa-envelope"></i> Contato</a>
+    <div class="drawer-cta">
+        <a href="login.html" class="btn btn-accent"><i class="fa-solid fa-right-to-bracket"></i> Entrar</a>
+        <a href="cadastro.html" class="btn btn-ghost"><i class="fa-solid fa-building-user"></i> Cadastrar</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <div class="eyebrow"><i class="fa-solid fa-box"></i> Gestão de encomendas para condomínios</div>
+            <h1>Nenhuma encomenda perdida na <span class="hl">portaria</span> outra vez.</h1>
+            <p>O ZibBox conecta portaria e moradores em um só app: registre a chegada de cada pacote, avise o morador na hora e mantenha um histórico completo de tudo o que já foi retirado.</p>
+            <div class="hero-actions">
+                <a href="login.html" class="btn btn-accent"><i class="fa-solid fa-right-to-bracket"></i> Entrar na minha conta</a>
+                <a href="cadastro.html" class="btn btn-ghost"><i class="fa-solid fa-building-user"></i> Cadastrar meu condomínio</a>
+            </div>
+            <div class="hero-note"><i class="fa-solid fa-circle-check"></i> Sem custo de instalação &middot; Suporte em português &middot; Comece hoje mesmo</div>
+        </div>
+        <div class="hero-media">
+            <img src="https://i0.wp.com/catagua.com.br/wp-content/uploads/2021/08/ok-saiba-como-um-condominio-fechado-pode-aumentar-sua-qualidade-de-vida.jpg" alt="Encomendas organizadas na portaria do condomínio">
+            <div class="float-card top">
+                <div class="ic"><i class="fa-solid fa-bell"></i></div>
+                <div><h5>Nova encomenda</h5><p>O condomínio recebeu 1 pacote agora</p></div>
+            </div>
+            <div class="float-card bottom">
+                <div class="ic"><i class="fa-solid fa-check-double"></i></div>
+                <div><h5>Retirada confirmada</h5><p>Assinatura digital registrada</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="stats-inner">
+        <div class="stat"><h3>+1.200</h3><p>Condomínios usando o ZibBox</p></div>
+        <div class="stat"><h3>+80 mil</h3><p>Encomendas registradas por mês</p></div>
+        <div class="stat"><h3>98%</h3><p>De satisfação dos síndicos</p></div>
+        <div class="stat"><h3>3 min</h3><p>Tempo médio de implantação</p></div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="funcionalidades">
+    <div class="section-head">
+        <div class="eyebrow"><i class="fa-solid fa-layer-group"></i> Funcionalidades</div>
+        <h2>Tudo que a portaria e os moradores precisam</h2>
+        <p>Um único sistema para substituir cadernos, planilhas e grupos de WhatsApp lotados de fotos de encomendas.</p>
+    </div>
+
+    <div class="feature-row">
+        <div class="feature-media">
+            <img src="https://transportescardoso.com.br/medias/Empresa-de-Transporte-45.jpg" alt="Porteiro registrando encomenda no sistema">
+        </div>
+        <div class="feature-text">
+            <span class="feature-tag"><i class="fa-solid fa-box-open"></i> Registro na portaria</span>
+            <h3>Cadastro de encomendas em segundos</h3>
+            <p>O porteiro digita os dados do pacote e do morador diretamente no tablet ou celular da portaria — sem papelada e sem depender de anotações manuais.</p>
+            <ul class="feature-list">
+                <li><i class="fa-solid fa-check"></i> Busca rápida por apartamento, bloco ou nome</li>
+                <li><i class="fa-solid fa-check"></i> Foto do pacote anexada ao registro</li>
+                <li><i class="fa-solid fa-check"></i> Funciona em qualquer dispositivo com internet</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="feature-row reverse">
+        <div class="feature-media">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=700&q=80" alt="Morador recebendo notificação no celular">
+        </div>
+        <div class="feature-text">
+            <span class="feature-tag"><i class="fa-solid fa-bell"></i> Notificação instantânea</span>
+            <h3>O morador fica sabendo na hora</h3>
+            <p>Assim que a encomenda é registrada, uma notificação chega ao celular do morador — sem esperar aviso na portaria ou mensagem perdida no grupo do condomínio.</p>
+            <ul class="feature-list">
+                <li><i class="fa-solid fa-check"></i> Notificações push e por e-mail</li>
+                <li><i class="fa-solid fa-check"></i> Lembretes automáticos para quem não retirou</li>
+                <li><i class="fa-solid fa-check"></i> Aviso também para procuradores autorizados</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="feature-row">
+        <div class="feature-media">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPx0ciPMRdxjql9lBM3hDyxDSFGEesKxCsTa-_NUH5V5YX57NXDj4FV-8&s=10" alt="Painel do síndico com histórico de encomendas">
+        </div>
+        <div class="feature-text">
+            <span class="feature-tag"><i class="fa-solid fa-chart-line"></i> Painel de gestão</span>
+            <h3>Histórico e relatórios para o síndico</h3>
+            <p>Acompanhe volume de encomendas, tempo médio de retirada e pacotes parados na portaria — tudo em um painel simples, sem precisar de planilhas paralelas.</p>
+            <ul class="feature-list">
+                <li><i class="fa-solid fa-check"></i> Exportação de relatórios em PDF</li>
+                <li><i class="fa-solid fa-check"></i> Controle de acesso por perfil (síndico, porteiro, morador)</li>
+                <li><i class="fa-solid fa-check"></i> Assinatura digital na retirada</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section tracker-wrap" id="como-funciona">
+    <div class="section-head">
+        <div class="eyebrow"><i class="fa-solid fa-route"></i> Como funciona</div>
+        <h2>Da chegada à retirada, em 4 etapas</h2>
+        <p>Um fluxo simples o bastante para qualquer porteiro usar no primeiro dia.</p>
+    </div>
+    <div class="tracker">
+        <div class="track-step">
+            <div class="track-dot"><i class="fa-solid fa-truck"></i></div>
+            <h4>Encomenda chega</h4>
+            <p>A transportadora entrega na portaria.</p>
+        </div>
+        <div class="track-step">
+            <div class="track-dot"><i class="fa-solid fa-clipboard-list"></i></div>
+            <h4>Registro no ZibBox</h4>
+            <p>Porteiro registra apartamento e destinatário.</p>
+        </div>
+        <div class="track-step">
+            <div class="track-dot"><i class="fa-solid fa-bell"></i></div>
+            <h4>Morador é avisado</h4>
+            <p>Notificação automática enviada na hora.</p>
+        </div>
+        <div class="track-step">
+            <div class="track-dot"><i class="fa-solid fa-check-double"></i></div>
+            <h4>Retirada confirmada</h4>
+            <p>Assinatura digital fecha o histórico.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PLANOS -->
+<section class="section" id="planos" style="background:var(--surface);">
+    <div class="section-head">
+        <div class="eyebrow"><i class="fa-solid fa-tags"></i> Planos</div>
+        <h2>Um plano para cada tipo de estabelecimento</h2>
+        <p>Escolha o formato que combina com o seu condomínio ou empresa. Sem taxa de adesão.</p>
+    </div>
+    <div class="plans">
+        <div class="plan-card">
+            <div class="plan-icon"><i class="fa-solid fa-house"></i></div>
+            <h4>Residencial</h4>
+            <p>Ideal para condomínios de pequeno e médio porte.</p>
+            <ul>
+                <li><i class="fa-solid fa-check"></i> Até 150 unidades</li>
+                <li><i class="fa-solid fa-check"></i> 1 usuário de portaria</li>
+                <li><i class="fa-solid fa-check"></i> Notificações ilimitadas</li>
+            </ul>
+            <a href="cadastro.html" class="btn btn-dark">Cadastrar condomínio</a>
+        </div>
+        <div class="plan-card featured">
+            <span class="plan-badge">Mais escolhido</span>
+            <div class="plan-icon"><i class="fa-solid fa-building"></i></div>
+            <h4>Residencial Plus</h4>
+            <p>Para condomínios grandes e com múltiplos blocos.</p>
+            <ul>
+                <li><i class="fa-solid fa-check"></i> Unidades ilimitadas</li>
+                <li><i class="fa-solid fa-check"></i> Múltiplos usuários de portaria</li>
+                <li><i class="fa-solid fa-check"></i> Relatórios e exportação em PDF</li>
+                <li><i class="fa-solid fa-check"></i> Suporte prioritário</li>
+            </ul>
+            <a href="cadastro.html" class="btn btn-accent">Cadastrar condomínio</a>
+        </div>
+        <div class="plan-card">
+            <div class="plan-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <h4>Comercial / Empresas</h4>
+            <p>Para empresas, escritórios e centros comerciais.</p>
+            <ul>
+                <li><i class="fa-solid fa-check"></i> Controle por setor ou sala</li>
+                <li><i class="fa-solid fa-check"></i> Perfis de acesso personalizados</li>
+                <li><i class="fa-solid fa-check"></i> Integração com recepção</li>
+            </ul>
+            <a href="cadastro.html" class="btn btn-dark">Cadastrar empresa</a>
+        </div>
+    </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section testi-wrap" id="depoimentos">
+    <div class="section-head">
+        <div class="eyebrow"><i class="fa-solid fa-comments"></i> Depoimentos</div>
+        <h2>Quem usa, recomenda</h2>
+        <p>Síndicos e porteiros que trocaram o caderno de anotações pelo ZibBox.</p>
+    </div>
+    <div class="testimonials">
+        <div class="testi-card">
+            <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>"Acabaram as filas na portaria e os moradores reclamando que não foram avisados. Hoje é tudo pelo celular."</p>
+            <div class="testi-person">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&q=80" alt="Síndico">
+                <div><h5>Jardelisson Silva</h5><span>Síndico, Recife - PE</span></div>
+            </div>
+        </div>
+        <div class="testi-card">
+            <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>"A equipe da portaria aprendeu a usar em um dia. O relatório mensal facilita muito a prestação de contas."</p>
+            <div class="testi-person">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&q=80" alt="Síndica">
+                <div><h5>Camila Rocha</h5><span>Síndica, Natal - RN</span></div>
+            </div>
+        </div>
+        <div class="testi-card">
+            <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            <p>"Uso no escritório para controlar entregas por sala. Simples, rápido e sem custo escondido."</p>
+            <div class="testi-person">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80" alt="Gestor predial">
+                <div><h5>Rafael Torres</h5><span>Gestor predial, Fortaleza - CE</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:0;">
+    <div class="cta-banner">
+        <div>
+            <h3>Pronto para organizar as encomendas do seu condomínio?</h3>
+            <p>Crie o cadastro do seu condomínio ou empresa em poucos minutos e comece a usar hoje mesmo.</p>
+        </div>
+        <div class="actions">
+            <a href="criar-login.html" class="btn btn-accent"><i class="fa-solid fa-building-user"></i> Cadastrar agora</a>
+            <a href="login.html" class="btn btn-dark"><i class="fa-solid fa-right-to-bracket"></i> Já tenho conta</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contato">
+    <div class="footer-grid">
+        <div class="footer-about">
+            <div class="logo"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
+            <p>Plataforma de gestão de encomendas para condomínios e empresas, conectando portaria e moradores em um só lugar.</p>
+            <div class="social-row">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div>
+            <h5>Produto</h5>
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="#planos">Planos</a>
+        </div>
+        <div>
+            <h5>Conta</h5>
+            <a href="login.html">Entrar</a>
+            <a href="cadastro.html">Cadastrar condomínio</a>
+            <a href="criar-login.html">Criar login de administrador</a>
+        </div>
+        <div>
+            <h5>Contato</h5>
+            <a href="mailto:contato@zibbox.com.br">contato@zibbox.com.br</a>
+            <a href="tel:+558400000000">(84) 0000-0000</a>
+            <a href="#">Central de ajuda</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 ZibBox. Todos os direitos reservados.</span>
+        <span>Feito para simplificar a rotina de condomínios e empresas.</span>
+    </div>
+</footer>
+
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const drawerClose = document.getElementById('drawerClose');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    function openMenu(){drawer.classList.add('open');overlay.classList.add('open');}
+    function closeMenu(){drawer.classList.remove('open');overlay.classList.remove('open');}
+    menuBtn.addEventListener('click', openMenu);
+    drawerClose.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.drawer a').forEach(a => a.addEventListener('click', closeMenu));
+</script>
+</body>
+</html>
