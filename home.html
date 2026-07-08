@@ -6,7 +6,7 @@
 <title>ZibBox - Encomendas do seu condomínio, sob controle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root{
@@ -61,31 +61,38 @@
     .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
     .btn-dark{background:var(--primary);color:#fff;}
     .btn-dark:hover{background:var(--primary-dark);}
+    
+    /* MENU HAMBÚRGUER */
     .menu-toggle{
-        display:none;background:rgba(255,255,255,0.1);border:none;color:#fff;
-        width:40px;height:40px;border-radius:10px;font-size:16px;cursor:pointer;
+        display:none;background:rgba(255,255,255,0.15);border:none;color:#fff;
+        width:42px;height:42px;border-radius:10px;font-size:18px;cursor:pointer;
+        align-items:center;justify-content:center;
     }
 
-    /* mobile drawer */
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:150;}
+    /* MOBILE DRAWER & OVERLAY */
+    .overlay{
+        position:fixed;inset:0;background:rgba(0,0,0,0.6);opacity:0;
+        pointer-events:none;transition:opacity .3s ease;z-index:998;
+    }
     .overlay.open{opacity:1;pointer-events:auto;}
+    
     .drawer{
-        position:fixed;top:0;right:-85%;width:78%;max-width:320px;height:100%;
-        background:var(--primary-dark);z-index:200;padding:26px 24px;
-        display:flex;flex-direction:column;gap:6px;
-        transition:right .32s cubic-bezier(.4,0,.2,1);
-        box-shadow:-10px 0 30px rgba(0,0,0,0.35);
+        position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;
+        background:var(--primary-dark);z-index:999;padding:26px 24px;
+        display:flex;flex-direction:column;gap:8px;
+        transition:right .3s ease-in-out;
+        box-shadow:-10px 0 30px rgba(0,0,0,0.5);
     }
     .drawer.open{right:0;}
-    .drawer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
-    .drawer-close{background:rgba(255,255,255,0.08);border:none;color:#fff;width:34px;height:34px;border-radius:10px;cursor:pointer;}
+    .drawer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);}
+    .drawer-close{background:rgba(255,255,255,0.1);border:none;color:#fff;width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:16px;}
     .drawer a{
-        color:#fff;text-decoration:none;font-size:15px;padding:13px 8px;border-radius:10px;
-        display:flex;align-items:center;gap:12px;
+        color:#fff;text-decoration:none;font-size:15px;padding:12px;border-radius:10px;
+        display:flex;align-items:center;gap:12px;transition:background 0.2s;
     }
-    .drawer a i{width:18px;color:var(--accent);}
+    .drawer a i{width:20px;color:var(--accent);text-align:center;}
     .drawer a:hover{background:rgba(255,255,255,0.08);}
-    .drawer-cta{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:16px;}
+    .drawer-cta{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:20px;}
 
     /* ---------- HERO ---------- */
     .hero{
@@ -150,7 +157,7 @@
     .section-head h2{font-size:32px;font-weight:800;margin-bottom:14px;}
     .section-head p{font-size:15px;color:var(--text-muted);line-height:1.7;font-weight:300;}
 
-    /* ---------- FEATURES (alternating) ---------- */
+    /* ---------- FEATURES ---------- */
     .feature-row{
         display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
         max-width:1180px;margin:0 auto;padding:50px 24px;
@@ -168,7 +175,7 @@
     .feature-list li{display:flex;gap:10px;font-size:13.5px;color:var(--text-dark);}
     .feature-list li i{color:var(--accent-hover);margin-top:3px;}
 
-    /* ---------- HOW IT WORKS TRACKER ---------- */
+    /* ---------- HOW IT WORKS ---------- */
     .tracker-wrap{background:var(--surface);}
     .tracker{
         max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;
@@ -255,14 +262,23 @@
         font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;
     }
 
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width:920px){
+    /* ---------- REGRAS RESPONSIVAS AJUSTADAS ---------- */
+    @media (max-width:850px){
+        /* Oculta os links e botões do topo no mobile */
+        .nav-links, .desktop-only {
+            display: none !important;
+        }
+        
+        /* Mostra o ícone de menu */
+        .menu-toggle {
+            display: flex !important;
+        }
+
         .section{padding:50px 24px;}
         .hero-inner{grid-template-columns:1fr;padding-top:40px;gap:30px;}
         .hero-media{order:-1;max-width:480px;margin:0 auto 20px;width:100%;}
-        .hero-media img{height:280px;} /* Reduzido a altura estática no celular */
+        .hero-media img{height:280px;}
         
-        /* Ajuste fino dos cards flutuantes para não vazarem na tela do celular */
         .float-card.top{top:-15px;left:-10px;max-width:180px;}
         .float-card.bottom{bottom:-15px;right:-10px;max-width:180px;}
         
@@ -273,12 +289,12 @@
         .feature-row{grid-template-columns:1fr;gap:30px;padding:30px 24px;}
         .feature-row.reverse .feature-media{order:0;}
         .feature-row.reverse .feature-text{order:1;}
-        .feature-media img{height:240px;} /* Altura proporcional para mobile */
+        .feature-media img{height:240px;}
         
         .plans{grid-template-columns:1fr;gap:30px;}
         .plan-card.featured{transform:none;}
         .testimonials{grid-template-columns:1fr;gap:20px;}
-        .stats-inner{grid-template-columns:repeat(2,1fr);gap:30px 15px;text-align:center;}
+        .stats-inner{grid-template-columns:repeat(2,1fr);gap:25px 15px;text-align:center;}
         .footer-grid{grid-template-columns:1fr 1fr;}
         
         .cta-banner{flex-direction:column;text-align:center;padding:40px 24px;}
@@ -288,14 +304,9 @@
         .tracker{flex-direction:column;gap:35px;}
         .tracker::before{display:none;}
     }
-    
-    @media (max-width:720px) {
-        .desktop-only {display:none !important;} /* Oculta elementos restritos ao desktop corretamente */
-        .menu-toggle {display:flex;align-items:center;justify-content:center;}
-    }
 
     @media (max-width:480px){
-        .stats-inner{grid-template-columns:1fr;} /* Unica coluna de dados em telas muito pequenas */
+        .stats-inner{grid-template-columns:1fr;}
         .footer-grid{grid-template-columns:1fr;}
         .footer-bottom{flex-direction:column;text-align:center;}
     }
@@ -316,7 +327,7 @@
         <div class="nav-actions">
             <a href="login.html" class="btn btn-ghost desktop-only">Entrar</a>
             <a href="cadastro.html" class="btn btn-accent desktop-only">Cadastrar condomínio</a>
-            <button class="menu-toggle" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+            <button class="menu-toggle" id="menuBtn" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
 </nav>
@@ -326,7 +337,7 @@
 <div class="drawer" id="drawer">
     <div class="drawer-top">
         <div class="logo" style="font-size:19px;"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
-        <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+        <button class="drawer-close" id="drawerClose" aria-label="Fechar menu"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <a href="#funcionalidades"><i class="fa-solid fa-layer-group"></i> Funcionalidades</a>
     <a href="#como-funciona"><i class="fa-solid fa-route"></i> Como funciona</a>
@@ -550,7 +561,7 @@
     <div class="cta-banner">
         <div>
             <h3>Pronto para organizar as encomendas do seu condomínio?</h3>
-            <p>Crie o cadastro do seu condomínio ou empresa in poucos minutos e comece a usar hoje mesmo.</p>
+            <p>Crie o cadastro do seu condomínio ou empresa em poucos minutos e comece a usar hoje mesmo.</p>
         </div>
         <div class="actions">
             <a href="criar-login.html" class="btn btn-accent"><i class="fa-solid fa-building-user"></i> Cadastrar agora</a>
@@ -596,17 +607,37 @@
     </div>
 </footer>
 
+<!-- SCRIPT DE INTERAÇÃO DO MENU -->
 <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const drawerClose = document.getElementById('drawerClose');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('overlay');
-    function openMenu(){drawer.classList.add('open');overlay.classList.add('open');}
-    function closeMenu(){drawer.classList.remove('open');overlay.classList.remove('open');}
-    menuBtn.addEventListener('click', openMenu);
-    drawerClose.addEventListener('click', closeMenu);
-    overlay.addEventListener('click', closeMenu);
-    document.querySelectorAll('.drawer a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuBtn = document.getElementById('menuBtn');
+        const drawerClose = document.getElementById('drawerClose');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+
+        function openMenu(e) {
+            if (e) e.preventDefault();
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Impede o scroll do fundo com o menu aberto
+        }
+
+        function closeMenu() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = ''; // Libera o scroll
+        }
+
+        if (menuBtn) menuBtn.addEventListener('click', openMenu);
+        if (drawerClose) drawerClose.addEventListener('click', closeMenu);
+        if (overlay) overlay.addEventListener('click', closeMenu);
+
+        // Fecha o menu automaticamente ao clicar em qualquer link interno
+        const drawerLinks = document.querySelectorAll('.drawer a');
+        drawerLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    });
 </script>
 </body>
 </html>
