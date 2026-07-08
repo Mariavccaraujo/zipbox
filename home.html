@@ -6,7 +6,7 @@
 <title>ZibBox - Encomendas do seu condomínio, sob controle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root{
@@ -24,7 +24,7 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
     html{scroll-behavior:smooth;}
     body{background:var(--bg);color:var(--text-dark);overflow-x:hidden;}
-    img{max-width:100%;display:block;}
+    img{max-width:100%;display:block;height:auto;}
     a{color:inherit;}
     .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
 
@@ -111,8 +111,8 @@
     .hero h1 .hl{color:var(--accent);}
     .hero p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.78);font-weight:300;max-width:480px;margin-bottom:30px;}
     .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
-    .hero-note{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.65);}
-    .hero-note i{color:var(--accent);}
+    .hero-note{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.65);line-height:1.4;}
+    .hero-note i{color:var(--accent);flex-shrink:0;}
 
     .hero-media{position:relative;}
     .hero-media img{
@@ -123,6 +123,7 @@
         position:absolute;background:#fff;color:var(--text-dark);border-radius:16px;
         padding:14px 16px;box-shadow:0 12px 30px rgba(0,0,0,0.2);
         display:flex;align-items:center;gap:12px;max-width:230px;
+        z-index:2;
     }
     .float-card.top{top:-22px;left:-30px;}
     .float-card.bottom{bottom:-24px;right:-20px;}
@@ -256,24 +257,47 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width:920px){
-        .hero-inner{grid-template-columns:1fr;padding-top:40px;}
-        .hero-media{order:-1;}
-        .hero h1{font-size:32px;}
-        .feature-row{grid-template-columns:1fr;gap:30px;}
+        .section{padding:50px 24px;}
+        .hero-inner{grid-template-columns:1fr;padding-top:40px;gap:30px;}
+        .hero-media{order:-1;max-width:480px;margin:0 auto 20px;width:100%;}
+        .hero-media img{height:280px;} /* Reduzido a altura estática no celular */
+        
+        /* Ajuste fino dos cards flutuantes para não vazarem na tela do celular */
+        .float-card.top{top:-15px;left:-10px;max-width:180px;}
+        .float-card.bottom{bottom:-15px;right:-10px;max-width:180px;}
+        
+        .hero h1{font-size:30px;}
+        .hero-actions{flex-direction:column;gap:10px;}
+        .hero-actions .btn{width:100%;}
+        
+        .feature-row{grid-template-columns:1fr;gap:30px;padding:30px 24px;}
         .feature-row.reverse .feature-media{order:0;}
         .feature-row.reverse .feature-text{order:1;}
-        .plans{grid-template-columns:1fr;}
+        .feature-media img{height:240px;} /* Altura proporcional para mobile */
+        
+        .plans{grid-template-columns:1fr;gap:30px;}
         .plan-card.featured{transform:none;}
-        .testimonials{grid-template-columns:1fr;}
-        .stats-inner{grid-template-columns:repeat(2,1fr);}
+        .testimonials{grid-template-columns:1fr;gap:20px;}
+        .stats-inner{grid-template-columns:repeat(2,1fr);gap:30px 15px;text-align:center;}
         .footer-grid{grid-template-columns:1fr 1fr;}
-        .cta-banner{flex-direction:column;text-align:center;}
-        .tracker{flex-direction:column;gap:26px;}
+        
+        .cta-banner{flex-direction:column;text-align:center;padding:40px 24px;}
+        .cta-banner .actions{flex-direction:column;width:100%;gap:10px;}
+        .cta-banner .actions .btn{width:100%;}
+        
+        .tracker{flex-direction:column;gap:35px;}
         .tracker::before{display:none;}
     }
-    @media (max-width:720px){
-        .nav-links{display:none;}
-        .menu-toggle{display:flex;align-items:center;justify-content:center;}
+    
+    @media (max-width:720px) {
+        .desktop-only {display:none !important;} /* Oculta elementos restritos ao desktop corretamente */
+        .menu-toggle {display:flex;align-items:center;justify-content:center;}
+    }
+
+    @media (max-width:480px){
+        .stats-inner{grid-template-columns:1fr;} /* Unica coluna de dados em telas muito pequenas */
+        .footer-grid{grid-template-columns:1fr;}
+        .footer-bottom{flex-direction:column;text-align:center;}
     }
 </style>
 </head>
@@ -526,7 +550,7 @@
     <div class="cta-banner">
         <div>
             <h3>Pronto para organizar as encomendas do seu condomínio?</h3>
-            <p>Crie o cadastro do seu condomínio ou empresa em poucos minutos e comece a usar hoje mesmo.</p>
+            <p>Crie o cadastro do seu condomínio ou empresa in poucos minutos e comece a usar hoje mesmo.</p>
         </div>
         <div class="actions">
             <a href="criar-login.html" class="btn btn-accent"><i class="fa-solid fa-building-user"></i> Cadastrar agora</a>
