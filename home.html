@@ -40,7 +40,7 @@
     }
     .logo{
         font-size:22px;font-weight:800;color:#fff;
-        display:flex;align-items:center;gap:8px;
+        display:flex;align-items:center;
         font-family:'Franklin Gothic Medium',Arial,sans-serif;
     }
     .logo span{color:var(--accent);}
@@ -310,6 +310,22 @@
         .footer-grid{grid-template-columns:1fr;}
         .footer-bottom{flex-direction:column;text-align:center;}
     }
+
+    /* ---------- REVEAL AO ROLAR A PÁGINA ---------- */
+    .reveal{
+        opacity:0;
+        transform:translateY(36px);
+        transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+        will-change:opacity, transform;
+    }
+    .reveal.reveal-left{transform:translateX(-40px);}
+    .reveal.reveal-right{transform:translateX(40px);}
+    .reveal.reveal-scale{transform:translateY(20px) scale(.94);}
+.reveal.is-visible { opacity: 1; transform: translate(0,0) scale(1); }
+    /* Usuários que preferem menos movimento não recebem a animação */
+    @media (prefers-reduced-motion: reduce){
+        .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+    }
 </style>
 </head>
 <body>
@@ -363,7 +379,7 @@
             </div>
             <div class="hero-note"><i class="fa-solid fa-circle-check"></i> Sem custo de instalação &middot; Suporte em português &middot; Comece hoje mesmo</div>
         </div>
-        <div class="hero-media">
+        <div class="hero-media reveal reveal-right">
             <img src="https://i0.wp.com/catagua.com.br/wp-content/uploads/2021/08/ok-saiba-como-um-condominio-fechado-pode-aumentar-sua-qualidade-de-vida.jpg" alt="Encomendas organizadas na portaria do condomínio">
             <div class="float-card top">
                 <div class="ic"><i class="fa-solid fa-bell"></i></div>
@@ -378,28 +394,46 @@
 </section>
 
 <!-- STATS -->
+<!-- STATS -->
 <section class="stats">
     <div class="stats-inner">
-        <div class="stat"><h3>+1.200</h3><p>Condomínios usando o ZibBox</p></div>
-        <div class="stat"><h3>+80 mil</h3><p>Encomendas registradas por mês</p></div>
-        <div class="stat"><h3>98%</h3><p>De satisfação dos síndicos</p></div>
-        <div class="stat"><h3>3 min</h3><p>Tempo médio de implantação</p></div>
+
+        <div class="stat reveal">
+            <h3>24h</h3>
+            <p>Controle de acesso funcionando todos os dias, garantindo mais segurança para moradores e visitantes.</p>
+        </div>
+
+        <div class="stat reveal">
+            <h3>100%</h3>
+            <p>Registro de entradas, saídas e encomendas em um único sistema, com histórico completo.</p>
+        </div>
+
+        <div class="stat reveal">
+            <h3>+ Rápido</h3>
+            <p>Liberação de visitantes por QR Code, aplicativo ou autorização do morador em poucos segundos.</p>
+        </div>
+
+        <div class="stat reveal">
+            <h3>Suporte</h3>
+            <p>Equipe preparada para auxiliar na implantação, treinamento e suporte técnico quando necessário.</p>
+        </div>
+
     </div>
 </section>
 
 <!-- FEATURES -->
 <section class="section" id="funcionalidades">
-    <div class="section-head">
+    <div class="section-head reveal">
         <div class="eyebrow"><i class="fa-solid fa-layer-group"></i> Funcionalidades</div>
         <h2>Tudo que a portaria e os moradores precisam</h2>
         <p>Um único sistema para substituir cadernos, planilhas e grupos de WhatsApp lotados de fotos de encomendas.</p>
     </div>
 
     <div class="feature-row">
-        <div class="feature-media">
+        <div class="feature-media reveal reveal-left">
             <img src="https://transportescardoso.com.br/medias/Empresa-de-Transporte-45.jpg" alt="Porteiro registrando encomenda no sistema">
         </div>
-        <div class="feature-text">
+        <div class="feature-text reveal reveal-right">
             <span class="feature-tag"><i class="fa-solid fa-box-open"></i> Registro na portaria</span>
             <h3>Cadastro de encomendas em segundos</h3>
             <p>O porteiro digita os dados do pacote e do morador diretamente no tablet ou celular da portaria — sem papelada e sem depender de anotações manuais.</p>
@@ -412,10 +446,10 @@
     </div>
 
     <div class="feature-row reverse">
-        <div class="feature-media">
+        <div class="feature-media reveal reveal-right">
             <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=700&q=80" alt="Morador recebendo notificação no celular">
         </div>
-        <div class="feature-text">
+        <div class="feature-text reveal reveal-left">
             <span class="feature-tag"><i class="fa-solid fa-bell"></i> Notificação instantânea</span>
             <h3>O morador fica sabendo na hora</h3>
             <p>Assim que a encomenda é registrada, uma notificação chega ao celular do morador — sem esperar aviso na portaria ou mensagem perdida no grupo do condomínio.</p>
@@ -428,10 +462,10 @@
     </div>
 
     <div class="feature-row">
-        <div class="feature-media">
+        <div class="feature-media reveal reveal-left">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPx0ciPMRdxjql9lBM3hDyxDSFGEesKxCsTa-_NUH5V5YX57NXDj4FV-8&s=10" alt="Painel do síndico com histórico de encomendas">
         </div>
-        <div class="feature-text">
+        <div class="feature-text reveal reveal-right">
             <span class="feature-tag"><i class="fa-solid fa-chart-line"></i> Painel de gestão</span>
             <h3>Histórico e relatórios para o síndico</h3>
             <p>Acompanhe volume de encomendas, tempo médio de retirada e pacotes parados na portaria — tudo em um painel simples, sem precisar de planilhas paralelas.</p>
@@ -446,28 +480,28 @@
 
 <!-- COMO FUNCIONA -->
 <section class="section tracker-wrap" id="como-funciona">
-    <div class="section-head">
+    <div class="section-head reveal">
         <div class="eyebrow"><i class="fa-solid fa-route"></i> Como funciona</div>
         <h2>Da chegada à retirada, em 4 etapas</h2>
         <p>Um fluxo simples o bastante para qualquer porteiro usar no primeiro dia.</p>
     </div>
     <div class="tracker">
-        <div class="track-step">
+        <div class="track-step reveal">
             <div class="track-dot"><i class="fa-solid fa-truck"></i></div>
             <h4>Encomenda chega</h4>
             <p>A transportadora entrega na portaria.</p>
         </div>
-        <div class="track-step">
+        <div class="track-step reveal">
             <div class="track-dot"><i class="fa-solid fa-clipboard-list"></i></div>
             <h4>Registro no ZibBox</h4>
             <p>Porteiro registra apartamento e destinatário.</p>
         </div>
-        <div class="track-step">
+        <div class="track-step reveal">
             <div class="track-dot"><i class="fa-solid fa-bell"></i></div>
             <h4>Morador é avisado</h4>
             <p>Notificação automática enviada na hora.</p>
         </div>
-        <div class="track-step">
+        <div class="track-step reveal">
             <div class="track-dot"><i class="fa-solid fa-check-double"></i></div>
             <h4>Retirada confirmada</h4>
             <p>Assinatura digital fecha o histórico.</p>
@@ -477,13 +511,13 @@
 
 <!-- PLANOS -->
 <section class="section" id="planos" style="background:var(--surface);">
-    <div class="section-head">
+    <div class="section-head reveal">
         <div class="eyebrow"><i class="fa-solid fa-tags"></i> Planos</div>
         <h2>Um plano para cada tipo de estabelecimento</h2>
         <p>Escolha o formato que combina com o seu condomínio ou empresa. Sem taxa de adesão.</p>
     </div>
     <div class="plans">
-        <div class="plan-card">
+        <div class="plan-card reveal reveal-scale">
             <div class="plan-icon"><i class="fa-solid fa-house"></i></div>
             <h4>Residencial</h4>
             <p>Ideal para condomínios de pequeno e médio porte.</p>
@@ -494,7 +528,7 @@
             </ul>
             <a href="cadastro.html" class="btn btn-dark">Cadastrar condomínio</a>
         </div>
-        <div class="plan-card featured">
+        <div class="plan-card featured reveal reveal-scale">
             <span class="plan-badge">Mais escolhido</span>
             <div class="plan-icon"><i class="fa-solid fa-building"></i></div>
             <h4>Residencial Plus</h4>
@@ -507,7 +541,7 @@
             </ul>
             <a href="cadastro.html" class="btn btn-accent">Cadastrar condomínio</a>
         </div>
-        <div class="plan-card">
+        <div class="plan-card reveal reveal-scale">
             <div class="plan-icon"><i class="fa-solid fa-briefcase"></i></div>
             <h4>Comercial / Empresas</h4>
             <p>Para empresas, escritórios e centros comerciais.</p>
@@ -523,13 +557,13 @@
 
 <!-- DEPOIMENTOS -->
 <section class="section testi-wrap" id="depoimentos">
-    <div class="section-head">
+    <div class="section-head reveal">
         <div class="eyebrow"><i class="fa-solid fa-comments"></i> Depoimentos</div>
         <h2>Quem usa, recomenda</h2>
         <p>Síndicos e porteiros que trocaram o caderno de anotações pelo ZibBox.</p>
     </div>
     <div class="testimonials">
-        <div class="testi-card">
+        <div class="testi-card reveal">
             <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>"Acabaram as filas na portaria e os moradores reclamando que não foram avisados. Hoje é tudo pelo celular."</p>
             <div class="testi-person">
@@ -537,7 +571,7 @@
                 <div><h5>Jardelisson Silva</h5><span>Síndico, Recife - PE</span></div>
             </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card reveal">
             <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>"A equipe da portaria aprendeu a usar em um dia. O relatório mensal facilita muito a prestação de contas."</p>
             <div class="testi-person">
@@ -545,7 +579,7 @@
                 <div><h5>Camila Rocha</h5><span>Síndica, Natal - RN</span></div>
             </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card reveal">
             <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
             <p>"Uso no escritório para controlar entregas por sala. Simples, rápido e sem custo escondido."</p>
             <div class="testi-person">
@@ -558,7 +592,7 @@
 
 <!-- CTA -->
 <section class="section" style="padding-top:0;">
-    <div class="cta-banner">
+    <div class="cta-banner reveal reveal-scale">
         <div>
             <h3>Pronto para organizar as encomendas do seu condomínio?</h3>
             <p>Crie o cadastro do seu condomínio ou empresa em poucos minutos e comece a usar hoje mesmo.</p>
@@ -637,6 +671,47 @@
         drawerLinks.forEach(link => {
             link.addEventListener('click', closeMenu);
         });
+    });
+</script>
+
+<!-- SCRIPT: ANIMAÇÃO "APARECER AO ROLAR" -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const items = document.querySelectorAll('.reveal');
+
+        // Escalona o delay quando vários itens "reveal" estão dentro do mesmo
+        // contêiner (ex: os 4 cards de estatísticas, os 3 planos, etc.)
+        const groups = [
+            '.stats-inner', '.tracker', '.plans', '.testimonials'
+        ];
+        groups.forEach(sel => {
+            const container = document.querySelector(sel);
+            if (!container) return;
+            const children = container.querySelectorAll('.reveal');
+            children.forEach((el, i) => {
+                el.style.transitionDelay = (i * 0.12) + 's';
+            });
+        });
+
+        // Se o navegador não suportar IntersectionObserver, apenas mostra tudo
+        if (!('IntersectionObserver' in window)) {
+            items.forEach(el => el.classList.add('is-visible'));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // anima só uma vez
+                }
+            });
+        }, {
+            threshold: 0.15,          // dispara quando 15% do elemento aparece
+            rootMargin: '0px 0px -60px 0px' // aparece um pouco antes de chegar ao fim da tela
+        });
+
+        items.forEach(el => observer.observe(el));
     });
 </script>
 </body>
