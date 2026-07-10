@@ -96,14 +96,16 @@ button{font-family:inherit;cursor:pointer;}
 .action-card{
     background:var(--surface);border:1px solid var(--border);border-radius:18px;
     padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;
-    text-align:center;transition:transform .18s ease,border-color .18s ease,background .18s ease;
+    text-align:center;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+    box-shadow:0 6px 18px rgba(0,0,0,0.18);
 }
-.action-card:hover{transform:translateY(-3px);border-color:var(--accent);background:var(--surface-2);}
+.action-card:hover{transform:translateY(-3px);border-color:var(--accent);background:var(--surface-2);box-shadow:0 10px 24px rgba(0,176,255,0.16);}
 .action-card:active{transform:translateY(0px) scale(.98);}
 .action-card .ic{
     width:48px;height:48px;border-radius:14px;background:rgba(0,176,255,0.12);color:var(--accent);
-    display:flex;align-items:center;justify-content:center;font-size:19px;
+    display:flex;align-items:center;justify-content:center;font-size:19px;transition:transform .18s ease;
 }
+.action-card:hover .ic{transform:scale(1.08);}
 .action-card.warm .ic{background:rgba(255,177,0,0.14);color:var(--warm);}
 .action-card.danger .ic{background:rgba(255,84,112,0.14);color:var(--danger);}
 .action-card p{font-size:12.5px;font-weight:600;}
@@ -111,6 +113,7 @@ button{font-family:inherit;cursor:pointer;}
 /* ---------- TIMELINE ---------- */
 .timeline-card{
     background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 18px 6px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.18);
 }
 .timeline-item{display:flex;gap:12px;padding-bottom:16px;position:relative;}
 .timeline-item::before{
@@ -126,10 +129,15 @@ button{font-family:inherit;cursor:pointer;}
 .t-ic.entregue{background:rgba(46,213,115,0.16);color:#2ed573;}
 .t-body h5{font-size:13px;font-weight:600;}
 .t-body p{font-size:11.5px;color:var(--text-muted);margin-top:2px;}
+.empty-state{
+    text-align:center;color:var(--text-muted);font-size:12.5px;padding:26px 14px;
+    border:1.5px dashed var(--border);border-radius:14px;line-height:1.5;
+}
+.empty-state i{display:block;font-size:20px;margin-bottom:8px;color:var(--accent);opacity:.7;}
 .t-empty{padding:20px 0;text-align:center;color:var(--text-muted);font-size:13px;}
 
 /* ---------- STATS ---------- */
-.stats-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;}
+.stats-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:0 6px 18px rgba(0,0,0,0.18);}
 .chart-row{display:flex;align-items:flex-end;gap:16px;height:150px;padding:0 4px 4px;}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
 .bar-val{font-size:12px;font-weight:700;margin-bottom:6px;}
@@ -178,11 +186,14 @@ button{font-family:inherit;cursor:pointer;}
 .btn{
     display:inline-flex;align-items:center;gap:8px;justify-content:center;
     padding:12px 20px;border-radius:12px;font-size:13.5px;font-weight:600;border:none;
+    transition:background .18s ease,transform .12s ease,box-shadow .18s ease;
 }
-.btn-accent{background:var(--accent);color:#fff;}
-.btn-accent:hover{background:var(--accent-hover);}
+.btn-accent{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(0,176,255,0.25);}
+.btn-accent:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,176,255,0.32);}
+.btn-accent:active{transform:translateY(0);}
 .btn-block{width:100%;}
 .btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.25);color:#fff;}
+.btn-outline:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.4);}
 
 /* ---------- CONTATO ---------- */
 .contact-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:6px 18px;}
@@ -255,6 +266,7 @@ button{font-family:inherit;cursor:pointer;}
     background:var(--surface);width:100%;max-width:520px;border-radius:22px 22px 0 0;
     padding:20px 20px 26px;max-height:88vh;overflow-y:auto;
     transform:translateY(30px);transition:transform .3s cubic-bezier(.2,.9,.25,1);
+    box-shadow:0 -12px 40px rgba(0,0,0,0.4);
 }
 .modal-overlay.open .modal-sheet{transform:translateY(0);}
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
@@ -341,6 +353,83 @@ button{font-family:inherit;cursor:pointer;}
 .empty-note{font-size:12px;color:var(--text-muted);text-align:center;padding:10px 0 4px;}
 ::-webkit-scrollbar{width:6px;height:6px;}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:10px;}
+
+/* ---------- NOVA ENCOMENDA (tela cheia) ---------- */
+.nv-screen{
+    position:fixed;inset:0;background:var(--bg);z-index:300;
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+}
+.nv-screen.open{transform:translateX(0);}
+.nv-top{
+    background:linear-gradient(150deg,var(--primary),var(--primary-dark));
+    padding:16px 18px;display:flex;align-items:center;gap:14px;flex-shrink:0;
+}
+.nv-top h3{flex:1;font-size:15.5px;font-weight:700;}
+.nv-top .icon-btn{background:rgba(255,255,255,0.1);border-color:transparent;}
+.nv-body{flex:1;overflow-y:auto;padding:16px 18px 90px;}
+.nv-search{
+    display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:12px 15px;margin-bottom:14px;
+}
+.nv-search input{flex:1;background:transparent;border:none;color:var(--text);font-size:13.5px;}
+.nv-search input:focus{outline:none;}
+.nv-search i{color:var(--text-muted);}
+.nv-userrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.nv-userrow h4{font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;}
+.nv-userrow .count{font-size:13px;font-weight:700;color:var(--accent);}
+.nv-add-btn{
+    width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;border:none;
+    display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;
+    box-shadow:0 6px 16px rgba(0,176,255,0.35);
+}
+.nv-add-form{
+    background:var(--surface);border:1px solid var(--accent);border-radius:14px;padding:14px;margin-bottom:14px;
+    display:none;
+}
+.nv-add-form.show{display:block;}
+.nv-morador-card{
+    background:var(--surface);border-radius:14px;padding:11px 14px;margin-bottom:10px;
+    display:flex;align-items:center;gap:12px;border-left:4px solid var(--accent);
+    transition:background .2s;
+}
+.nv-morador-card:active{background:var(--surface-2);}
+.nv-morador-card img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);flex-shrink:0;}
+.nv-morador-card .m-info{flex:1;min-width:0;}
+.nv-morador-card .m-info h6{font-size:12.5px;color:var(--text-muted);font-weight:500;}
+.nv-morador-card .m-info p{font-size:13.5px;font-weight:600;margin-top:1px;}
+.nv-badge{
+    min-width:24px;height:24px;padding:0 7px;border-radius:20px;background:var(--accent);color:#fff;
+    display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;font-weight:700;flex-shrink:0;
+}
+
+/* Etapa 2 — leitura da etiqueta */
+.nv-selected-chip{
+    display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:12px 14px;margin-bottom:16px;
+}
+.nv-selected-chip img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.nv-selected-chip .info{flex:1;}
+.nv-selected-chip .info b{font-size:13px;display:block;}
+.nv-selected-chip .info span{font-size:11px;color:var(--text-muted);}
+.nv-etiqueta-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.nv-preview{width:100%;border-radius:14px;margin-top:14px;border:1px solid var(--border);display:none;}
+.nv-preview.show{display:block;}
+.nv-ai-status{
+    display:none;align-items:center;gap:10px;background:rgba(0,176,255,0.1);border:1px solid rgba(0,176,255,0.3);
+    border-radius:12px;padding:12px 14px;margin-top:14px;font-size:12.5px;color:var(--accent);font-weight:500;
+}
+.nv-ai-status.show{display:flex;}
+.nv-ai-status.err{background:rgba(255,84,112,0.1);border-color:rgba(255,84,112,0.3);color:var(--danger);}
+.nv-ai-status.ok{background:rgba(46,213,115,0.1);border-color:rgba(46,213,115,0.3);color:#2ed573;}
+.nv-foot{
+    position:sticky;bottom:0;background:var(--bg);padding:14px 18px 20px;border-top:1px solid var(--border);
+    flex-shrink:0;
+}
+.nv-link-btn{
+    display:block;text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px;text-decoration:underline;
+    background:none;border:none;width:100%;
+}
 </style>
 </head>
 <body>
@@ -350,7 +439,7 @@ button{font-family:inherit;cursor:pointer;}
     <div class="topbar-inner">
         <button class="icon-btn" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
         <div class="logo"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
-        <button class="icon-btn" id="notifBtn"><i class="fa-solid fa-bell"></i><span class="badge" id="notifBadge">3</span></button>
+        <button class="icon-btn" id="notifBtn"><i class="fa-solid fa-bell"></i><span class="badge" id="notifBadge" style="display:none;">0</span></button>
     </div>
 </div>
 
@@ -363,13 +452,13 @@ button{font-family:inherit;cursor:pointer;}
 <!-- HERO BANNER -->
 <div class="hero-banner">
     <div class="hero-banner-inner">
-        <p class="greeting">Bem-vindo de volta, <b>Jardelisson</b> 👋</p>
+        <p class="greeting">Bem-vindo de volta, <b id="greetingName">Usuário</b> 👋</p>
         <div class="condo-select" id="condoSelect">
             <div class="info">
                 <div class="ic"><i class="fa-solid fa-building"></i></div>
                 <div>
-                    <h4>Condomínio YBY Natureza</h4>
-                    <span>Residencial &middot; Admin</span>
+                    <h4 id="condoNome">Meu condomínio</h4>
+                    <span id="condoTipo">Residencial &middot; Admin</span>
                 </div>
             </div>
             <i class="fa-solid fa-chevron-down chev"></i>
@@ -394,9 +483,9 @@ button{font-family:inherit;cursor:pointer;}
             <div class="ic"><i class="fa-solid fa-code"></i></div>
             <p>Retirada por código</p>
         </button>
-        <button class="action-card warm" data-modal="modalCamera">
-            <div class="ic"><i class="fa-solid fa-camera"></i></div>
-            <p>Câmera IA</p>
+        <button class="action-card warm" id="abrirNovaEncomenda">
+            <div class="ic"><i class="fa-solid fa-box-open"></i></div>
+            <p>Nova encomenda</p>
         </button>
         <button class="action-card" data-modal="modalSepara">
             <div class="ic"><i class="fa-solid fa-people-group"></i></div>
@@ -424,7 +513,7 @@ button{font-family:inherit;cursor:pointer;}
     <div id="pendList"></div>
 
     <!-- NOVIDADES -->
-    <div class="section-title">Novidades para você!!!</div>
+    <div class="section-title">Novidades para você</div>
     <div class="promo-card">
         <i class="fa-solid fa-hand-holding-heart"></i>
         <p>Tenha todo o controle das suas encomendas na sua mão.</p>
@@ -461,8 +550,8 @@ button{font-family:inherit;cursor:pointer;}
         <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="drawer-profile">
-        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&q=80" alt="Perfil">
-        <div><h5>Jardelisson Silva</h5><span>jardelissonsilva@gmail.com &middot; Admin</span></div>
+        <img src="" alt="Perfil" id="drawerAvatar">
+        <div><h5 id="drawerNome">Usuário</h5><span id="drawerEmail">Admin</span></div>
     </div>
     <div class="drawer-body">
         <div class="drawer-cat">Cadastros</div>
@@ -478,7 +567,7 @@ button{font-family:inherit;cursor:pointer;}
         <a href="#"><i class="fa-solid fa-gear"></i> Configurações</a>
     </div>
     <div class="drawer-foot">
-        <a href="#" style="padding:0;color:#ffb0b0;"><i class="fa-solid fa-right-from-bracket" style="color:#ffb0b0;"></i> Sair</a>
+        <a href="#" id="logoutBtn" style="padding:0;color:#ffb0b0;"><i class="fa-solid fa-right-from-bracket" style="color:#ffb0b0;"></i> Sair</a>
     </div>
 </div>
 
@@ -515,21 +604,80 @@ button{font-family:inherit;cursor:pointer;}
     </div>
 </div>
 
-<!-- CÂMERA IA -->
-<div class="modal-overlay" id="modalCamera">
-    <div class="modal-sheet">
-        <div class="modal-head"><h3><i class="fa-solid fa-camera" style="color:var(--warm);"></i> Câmera IA</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
-        <div class="cam-view" id="camView">
-            <img src="https://images.unsplash.com/photo-1553413077-190083ec01ff?w=700&q=80" alt="Câmera">
-            <div class="scan-line" id="scanLine"></div>
-            <div class="cam-frame"></div>
-            <div class="cam-result" id="camResult">
-                <h6><i class="fa-solid fa-circle-check"></i> Pacote identificado</h6>
-                <p id="camResultText">Etiqueta lida: Unidade 204 — Mercado Livre</p>
-            </div>
+<!-- ===================== NOVA ENCOMENDA (tela cheia, 3 etapas) ===================== -->
+<div class="nv-screen" id="nvScreen">
+
+    <!-- ETAPA 1 — Encomenda para quem? -->
+    <div id="nvEtapa1" style="display:flex;flex-direction:column;height:100%;">
+        <div class="nv-top">
+            <button class="icon-btn" id="nvVoltar1"><i class="fa-solid fa-arrow-left"></i></button>
+            <h3>Encomenda para quem?</h3>
+            <button class="icon-btn" id="nvRefresh"><i class="fa-solid fa-arrows-rotate"></i></button>
         </div>
-        <button class="btn btn-accent btn-block" id="scanBtn"><i class="fa-solid fa-camera"></i> Escanear etiqueta</button>
+        <div class="nv-body">
+            <div class="nv-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="nvBusca" placeholder="Digite a unidade ou nome do morador">
+            </div>
+            <div class="nv-userrow">
+                <h4><button class="nv-add-btn" id="nvAddBtn" title="Cadastrar novo morador"><i class="fa-solid fa-plus"></i></button> Usuários cadastrados</h4>
+                <span class="count" id="nvCount">0</span>
+            </div>
+            <div class="nv-add-form" id="nvAddForm">
+                <div class="field"><label>Unidade</label><input id="nvNovaUnidade" placeholder="Ex: 205" /></div>
+                <div class="field"><label>Nome do morador</label><input id="nvNovoNome" placeholder="Nome completo" /></div>
+                <button class="btn btn-accent btn-block" id="nvSalvarMorador"><i class="fa-solid fa-user-plus"></i> Cadastrar morador</button>
+            </div>
+            <div id="nvMoradoresList"></div>
+        </div>
     </div>
+
+    <!-- ETAPA 2 — Leitura da etiqueta com IA -->
+    <div id="nvEtapa2" style="display:none;flex-direction:column;height:100%;">
+        <div class="nv-top">
+            <button class="icon-btn" id="nvVoltar2"><i class="fa-solid fa-arrow-left"></i></button>
+            <h3>Leitura da etiqueta</h3>
+            <div style="width:40px;"></div>
+        </div>
+        <div class="nv-body">
+            <div class="nv-selected-chip">
+                <img id="nvChipFoto" src="" alt="">
+                <div class="info"><b id="nvChipNome"></b><span id="nvChipUnidade"></span></div>
+            </div>
+            <p class="empty-note" style="text-align:left;">Fotografe a etiqueta ou o código de barras da encomenda. Nossa IA lê a foto e preenche transportadora e código de rastreio automaticamente.</p>
+            <div class="nv-etiqueta-actions">
+                <button class="btn btn-accent btn-block" id="nvTirarFoto"><i class="fa-solid fa-camera"></i> Tirar foto</button>
+                <button class="btn btn-outline btn-block" id="nvEnviarGaleria"><i class="fa-solid fa-image"></i> Da galeria</button>
+            </div>
+            <input type="file" accept="image/*" capture="environment" id="nvInputCamera" style="display:none;">
+            <input type="file" accept="image/*" id="nvInputGaleria" style="display:none;">
+            <img class="nv-preview" id="nvPreview" alt="Etiqueta capturada">
+            <div class="nv-ai-status" id="nvAiStatus"><i class="fa-solid fa-spinner fa-spin"></i> <span id="nvAiStatusText">Lendo etiqueta com IA...</span></div>
+            <button class="nv-link-btn" id="nvPularIa">Preencher manualmente sem escanear</button>
+        </div>
+    </div>
+
+    <!-- ETAPA 3 — Confirmar dados -->
+    <div id="nvEtapa3" style="display:none;flex-direction:column;height:100%;">
+        <div class="nv-top">
+            <button class="icon-btn" id="nvVoltar3"><i class="fa-solid fa-arrow-left"></i></button>
+            <h3>Confirmar encomenda</h3>
+            <div style="width:40px;"></div>
+        </div>
+        <div class="nv-body">
+            <div class="nv-selected-chip">
+                <img id="nvChipFoto3" src="" alt="">
+                <div class="info"><b id="nvChipNome3"></b><span id="nvChipUnidade3"></span></div>
+            </div>
+            <div class="field"><label>Transportadora</label><input id="nvTransp" placeholder="Ex: Correios, Shopee, Amazon..."></div>
+            <div class="field"><label>Código de rastreio</label><input id="nvCodigoRastreio" placeholder="Ex: BR123456789BR"></div>
+            <img class="nv-preview show" id="nvPreview3" style="display:none;" alt="Etiqueta capturada">
+        </div>
+        <div class="nv-foot">
+            <button class="btn btn-accent btn-block" id="nvRegistrar"><i class="fa-solid fa-check"></i> Registrar encomenda</button>
+        </div>
+    </div>
+
 </div>
 
 <!-- SEPARA ENCOMENDA -->
@@ -569,30 +717,116 @@ button{font-family:inherit;cursor:pointer;}
 <!-- TOAST -->
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastText"></span></div>
 
+<!-- OCR local para leitura de etiquetas na "Nova encomenda" (sem backend) -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script>
+/* ---------------- SESSÃO (dados vindos do login.html / cadastro.html) ---------------- */
+/*
+   O login.html, após autenticar no backend (/api/login), salva a resposta em:
+       localStorage.setItem('usuario_logado', JSON.stringify(dados.usuario));
+   Aqui a gente lê esse mesmo item para popular o painel com o usuário/condomínio
+   que realmente fez login — em vez dos dados fixos de exemplo.
+
+   Como não sei o formato exato que o seu backend devolve em "dados.usuario",
+   a função pick() tenta vários nomes de campo comuns (nome/name, condominio/
+   nomeCondominio, etc). Se o seu backend usar outro nome de campo, é só ajustar
+   a lista de chaves abaixo.
+*/
+/* Gera um avatar com as iniciais do nome (em vez de usar foto de banco de
+   imagens de uma pessoa qualquer para representar um usuário real). */
+function initialsAvatar(nome){
+    const base = (nome || '?').trim();
+    const iniciais = base.split(/\s+/).slice(0,2).map(p=>p[0]).join('').toUpperCase() || '?';
+    const cores = ['#4a008c','#00b0ff','#ffb100','#ff5470','#7b2ff7'];
+    let hash = 0;
+    for(let i=0;i<base.length;i++) hash = base.charCodeAt(i) + ((hash<<5) - hash);
+    const cor = cores[Math.abs(hash) % cores.length];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+        <rect width="100" height="100" rx="50" fill="${cor}"/>
+        <text x="50" y="59" font-family="Poppins,Arial,sans-serif" font-size="36" font-weight="700" fill="#ffffff" text-anchor="middle">${iniciais}</text>
+    </svg>`;
+    return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+}
+
+function pick(obj, keys, fallback){
+    if(!obj) return fallback;
+    for(const k of keys){
+        if(obj[k] !== undefined && obj[k] !== null && obj[k] !== '') return obj[k];
+    }
+    return fallback;
+}
+
+const sessaoRaw = localStorage.getItem('usuario_logado');
+let usuarioLogado = null;
+
+if(sessaoRaw){
+    try{
+        usuarioLogado = JSON.parse(sessaoRaw);
+    }catch(e){
+        console.error('Sessão inválida em localStorage:', e);
+        localStorage.removeItem('usuario_logado');
+    }
+}
+// Observação: se não houver sessão salva (ex.: acessando este arquivo direto,
+// fora do fluxo login.html -> painel.html), o painel não redireciona mais
+// sozinho — ele simplesmente carrega com os dados padrão abaixo. Isso evita
+// a tela "quebrar"/travar em branco quando não existe uma login.html no
+// mesmo lugar. Quando o login realmente acontecer antes de abrir esta
+// página, os dados reais do usuário substituem os padrões normalmente.
+
+function aplicarDadosDaSessao(){
+    const nomeCompleto = pick(usuarioLogado, ['nome','name','usuario','login'], 'Usuário');
+    const primeiroNome = String(nomeCompleto).trim().split(' ')[0];
+    const email = pick(usuarioLogado, ['email','e-mail'], '');
+    const foto = pick(usuarioLogado, ['foto','avatar','imagem'], initialsAvatar(nomeCompleto));
+
+    const condominio = pick(usuarioLogado, ['condominio','nomeCondominio','condominioNome'], 'Meu condomínio');
+    const tipoRaw = pick(usuarioLogado, ['tipo','tipoCondominio'], 'condominio_residencial');
+    const tipoLabelMap = {
+        condominio_residencial:'Residencial',
+        condominio_comercial:'Condomínio Comercial',
+        predio_comercial:'Prédio Comercial',
+        empresa:'Empresa / Escritório',
+        loja_comercio:'Loja / Comércio',
+        hotel_pousada:'Hotel / Pousada',
+        coworking:'Coworking',
+        clinica_consultorio:'Clínica / Consultório',
+        outro:'Estabelecimento'
+    };
+    // Se vier um tipo que ainda não está no mapa, mostra algo legível em vez de sumir com a info
+    const tipoLabel = tipoLabelMap[tipoRaw] || String(tipoRaw).replace(/_/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+    const perfil = pick(usuarioLogado, ['perfil','role','cargo'], 'Admin');
+
+    const greetingEl = document.getElementById('greetingName');
+    const condoNomeEl = document.getElementById('condoNome');
+    const condoTipoEl = document.getElementById('condoTipo');
+    const drawerNomeEl = document.getElementById('drawerNome');
+    const drawerEmailEl = document.getElementById('drawerEmail');
+    const drawerAvatarEl = document.getElementById('drawerAvatar');
+
+    if(greetingEl) greetingEl.textContent = primeiroNome;
+    if(condoNomeEl) condoNomeEl.textContent = condominio;
+    if(condoTipoEl) condoTipoEl.textContent = `${tipoLabel} · ${perfil}`;
+    if(drawerNomeEl) drawerNomeEl.textContent = nomeCompleto;
+    if(drawerEmailEl) drawerEmailEl.textContent = email ? `${email} · ${perfil}` : perfil;
+    if(drawerAvatarEl && foto) drawerAvatarEl.src = foto;
+}
+aplicarDadosDaSessao();
+
+/* Logout: limpa a sessão salva pelo login.html e volta para a tela de login */
+document.getElementById('logoutBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    localStorage.removeItem('usuario_logado');
+    window.location.href = 'login.html';
+});
+
 /* ---------------- STATE ---------------- */
-let seq = 1026;
-let encomendas = [
-    {codigo:1020, unidade:'Nº 305', nome:'Fernanda Alves', transp:'Correios', status:'entregue', ts:'16/09 10:12', por:'Paulo Henrique'},
-    {codigo:1021, unidade:'Nº 108', nome:'Ricardo Melo', transp:'Shopee', status:'rota', ts:'16/09 14:20', por:'Paulo Henrique'},
-    {codigo:1022, unidade:'Nº 402', nome:'Ana Beatriz', transp:'Amazon', status:'aguardando', ts:'16/09 15:40', por:'Paulo Henrique'},
-    {codigo:1023, unidade:'Nº 204', nome:'Marcos Lima', transp:'Mercado Livre', status:'aguardando', ts:'16/09 15:55', por:'Paulo Henrique'},
-    {codigo:1024, unidade:'Nº 201', nome:'Juliana Costa', transp:'Correios', status:'recebido', ts:'16/09 16:30', por:'Paulo Henrique'},
-    {codigo:1025, unidade:'Nº 102', nome:'Jardelisson', transp:'TimeX', status:'recebido', ts:'16/09 16:47', por:'Paulo Henrique'},
-];
+let seq = 1001;
+let encomendas = [];
 
-let timeline = [
-    {tipo:'recebido', unidade:'Nº 102', texto:'Recebido pelo condomínio', ts:'16/09/2024 às 16:47', por:'Paulo Henrique'},
-    {tipo:'aguardando', unidade:'Nº 102', texto:'Aguardando retirada', ts:'16/09/2024 às 16:56', por:'Paulo Henrique'},
-    {tipo:'rota', unidade:'Nº 108', texto:'Em rota', ts:'16/09/2024 às 17:00', por:'Paulo Henrique'},
-    {tipo:'entregue', unidade:'Nº 305', texto:'Entregue', ts:'16/09/2024 às 17:26', por:'Jardelisson'},
-];
+let timeline = [];
 
-let notifications = [
-    {title:'Nova encomenda — Unidade 102', time:'agora', body:'TimeX entregou 1 pacote na portaria.'},
-    {title:'Encomenda aguardando há 2 dias', time:'1h atrás', body:'Unidade 402 ainda não retirou o pacote.'},
-    {title:'Rota concluída', time:'ontem', body:'Todas as entregas do bloco B foram feitas.'},
-];
+let notifications = [];
 
 const statusMeta = {
     recebido:{label:'Recebido', icon:'fa-warehouse', color:'#c9a6ff'},
@@ -602,12 +836,6 @@ const statusMeta = {
 };
 
 let currentFilter = 'todos';
-let routeStops = [
-    {unidade:'Nº 108', nome:'Ricardo Melo', done:false},
-    {unidade:'Nº 201', nome:'Juliana Costa', done:false},
-    {unidade:'Nº 204', nome:'Marcos Lima', done:false},
-    {unidade:'Nº 402', nome:'Ana Beatriz', done:false},
-];
 
 /* ---------------- HELPERS ---------------- */
 function toast(msg){
@@ -634,7 +862,7 @@ function addNotif(title, body){
 /* ---------------- RENDER: TIMELINE ---------------- */
 function renderTimeline(){
     const el = document.getElementById('timelineCard');
-    if(!timeline.length){ el.innerHTML = '<p class="t-empty">Nenhuma movimentação ainda.</p>'; return; }
+    if(!timeline.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-clock-rotate-left"></i>Nenhuma movimentação ainda.<br>Assim que uma encomenda for registrada, ela aparece aqui.</div>'; return; }
     el.innerHTML = timeline.slice(0,6).map(t=>{
         const m = statusMeta[t.tipo];
         return `<div class="timeline-item">
@@ -689,7 +917,7 @@ function renderPendentes(){
     const pend = encomendas.filter(e=> e.status==='recebido' || e.status==='aguardando');
     document.getElementById('pendCount').textContent = pend.length;
     const el = document.getElementById('pendList');
-    if(!pend.length){ el.innerHTML = '<p class="pend-empty">Nenhuma encomenda pendente 🎉</p>'; return; }
+    if(!pend.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-champagne-glasses"></i>Nenhuma encomenda pendente no momento.</div>'; return; }
     el.innerHTML = pend.map(e=>{
         const m = statusMeta[e.status];
         return `<div class="pend-card">
@@ -721,7 +949,7 @@ function renderNotifs(){
     document.getElementById('notifBadge').textContent = notifications.length;
     document.getElementById('notifBadge').style.display = notifications.length ? 'flex' : 'none';
     const el = document.getElementById('notifList');
-    if(!notifications.length){ el.innerHTML = '<div class="notif-empty">Sem notificações novas</div>'; return; }
+    if(!notifications.length){ el.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash" style="display:block;font-size:16px;margin-bottom:6px;color:var(--text-muted);"></i>Sem notificações novas</div>'; return; }
     el.innerHTML = notifications.map(n=>`<div class="notif-item"><b>${n.title}</b>${n.body}<br><span>${n.time}</span></div>`).join('');
 }
 
@@ -739,7 +967,7 @@ function renderEncomendasList(){
     let list = encomendas.slice().reverse();
     if(currentFilter!=='todos') list = list.filter(e=>e.status===currentFilter);
     const el = document.getElementById('encomendasList');
-    if(!list.length){ el.innerHTML = '<p class="empty-note">Nenhuma encomenda nesse filtro.</p>'; return; }
+    if(!list.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-box-open"></i>Nenhuma encomenda nesse filtro ainda.</div>'; return; }
     el.innerHTML = list.map(e=>{
         const m = statusMeta[e.status];
         return `<div class="mini-item">
@@ -763,21 +991,21 @@ function renderSeparaSelect(){
 /* ---------------- RENDER: ROTA ---------------- */
 function renderRoute(){
     const el = document.getElementById('routeList');
-    if(!routeStops.length){ el.innerHTML = '<p class="empty-note">Nenhuma parada na rota.</p>'; return; }
-    el.innerHTML = routeStops.map((s,i)=>`
-        <div class="route-item ${s.done?'done':''}" data-i="${i}">
-            ${s.done ? '<div class="route-check"><i class="fa-solid fa-check"></i></div>' : `<div class="route-num">${i+1}</div>`}
-            <div class="route-info"><h6>Unidade ${s.unidade}</h6><span>${s.nome}</span></div>
-            ${!s.done ? '<button class="confirm-btn" data-done><i class="fa-solid fa-check"></i> Entregar</button>' : ''}
+    const stops = encomendas.filter(e=> e.status==='rota');
+    if(!stops.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-route"></i>Nenhuma parada na rota no momento.</div>'; return; }
+    el.innerHTML = stops.map((s,i)=>`
+        <div class="route-item" data-codigo="${s.codigo}">
+            <div class="route-num">${i+1}</div>
+            <div class="route-info"><h6>Unidade ${s.unidade}</h6><span>${s.nome} &middot; Cód. ${s.codigo}</span></div>
+            <button class="confirm-btn" data-done><i class="fa-solid fa-check"></i> Entregar</button>
         </div>`).join('');
     el.querySelectorAll('[data-done]').forEach(btn=>{
         btn.addEventListener('click', ()=>{
-            const idx = parseInt(btn.closest('.route-item').dataset.i);
-            routeStops[idx].done = true;
-            const enc = encomendas.find(e=>e.unidade===routeStops[idx].unidade && e.status==='rota');
+            const codigo = parseInt(btn.closest('.route-item').dataset.codigo);
+            const enc = encomendas.find(e=>e.codigo===codigo);
             if(enc){ enc.status='entregue'; addTimeline('entregue', enc.unidade, 'Entregue'); }
             renderRoute(); renderAll();
-            toast(`Entrega na unidade ${routeStops[idx].unidade} concluída!`);
+            toast(`Entrega na unidade ${enc ? enc.unidade : ''} concluída!`);
         });
     });
 }
@@ -852,27 +1080,258 @@ document.getElementById('confirmarCodigo').addEventListener('click', ()=>{
     toast(`Retirada confirmada para unidade ${enc.unidade}!`);
 });
 
-/* Câmera IA */
-document.getElementById('scanBtn').addEventListener('click', function(){
-    const btn = this;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analisando etiqueta...';
-    document.getElementById('camResult').classList.remove('show');
-    setTimeout(()=>{
-        const unidades = ['Nº 204','Nº 301','Nº 108','Nº 402'];
-        const transp = ['Mercado Livre','Shopee','Amazon','Correios'];
-        const u = unidades[Math.floor(Math.random()*unidades.length)];
-        const t = transp[Math.floor(Math.random()*transp.length)];
-        document.getElementById('camResultText').textContent = `Etiqueta lida: Unidade ${u} — ${t}`;
-        document.getElementById('camResult').classList.add('show');
-        const codigo = seq++;
-        encomendas.push({codigo, unidade:u, nome:'Morador identificado', transp:t, status:'recebido', ts:nowStamp(), por:'Câmera IA'});
-        addTimeline('recebido', u, 'Recebido via Câmera IA');
-        renderAll();
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-camera"></i> Escanear outra etiqueta';
-        toast('Pacote registrado automaticamente!');
-    }, 1600);
+/* ==================================================================
+   NOVA ENCOMENDA — seleciona morador + lê etiqueta da foto
+   ==================================================================
+   A leitura acontece direto no navegador com OCR (Tesseract.js), sem
+   depender de nenhum backend — por isso funciona assim que a foto é
+   tirada ou escolhida na galeria. O texto reconhecido na etiqueta é
+   varrido em busca do nome da transportadora e de um código de
+   rastreio, preenchendo os campos da etapa 3 automaticamente.
+
+   Se no futuro você tiver um backend próprio com leitura por IA (ex:
+   Claude com visão, via API da Anthropic), é só apontar
+   AI_LABEL_ENDPOINT para essa rota — se ela responder, o resultado dela
+   é usado; se não existir/  falhar, o OCR local assume automaticamente.
+------------------------------------------------------------------- */
+const AI_LABEL_ENDPOINT = null; // ex: '/api/ler-etiqueta' — deixe null para usar só o OCR local
+
+const TRANSPORTADORAS_CONHECIDAS = [
+    'Correios','Amazon','Shopee','Mercado Livre','MercadoLivre','AliExpress','Magalu',
+    'Magazine Luiza','DHL','FedEx','UPS','Jadlog','Loggi','Total Express','TimeX','J&T',
+    'Sequoia','Azul Cargo','Uber Flash'
+];
+
+function extrairDadosDaEtiqueta(texto){
+    const linhas = texto.replace(/\r/g,'').split('\n').map(l=>l.trim()).filter(Boolean);
+    const textoUpper = texto.toUpperCase();
+
+    let transportadora = '';
+    for(const t of TRANSPORTADORAS_CONHECIDAS){
+        if(textoUpper.includes(t.toUpperCase())){ transportadora = t; break; }
+    }
+
+    // Tenta primeiro um padrão de rastreio dos Correios (ex: BR123456789BR)
+    let codigoRastreio = '';
+    const padraoCorreios = texto.match(/[A-Z]{2}\d{9}[A-Z]{2}/);
+    if(padraoCorreios){
+        codigoRastreio = padraoCorreios[0];
+    } else {
+        // Senão, procura o maior token alfanumérico "parecido com código"
+        // (mistura de letras e números, 8+ caracteres) em qualquer linha.
+        const candidatos = texto.match(/\b[A-Z0-9]{8,25}\b/g) || [];
+        const bons = candidatos.filter(c => /[0-9]/.test(c) && /[A-Z]/.test(c));
+        if(bons.length) codigoRastreio = bons.sort((a,b)=>b.length-a.length)[0];
+    }
+
+    return { transportadora, codigoRastreio, linhas };
+}
+
+async function lerEtiquetaComOCR(imagemBase64, onProgresso){
+    if(!window.Tesseract) throw new Error('OCR indisponível');
+    const { data } = await Tesseract.recognize(imagemBase64, 'por+eng', {
+        logger: info=>{
+            if(onProgresso && info.status === 'recognizing text'){
+                onProgresso(Math.round(info.progress*100));
+            }
+        }
+    });
+    const { transportadora, codigoRastreio } = extrairDadosDaEtiqueta(data.text || '');
+    if(!transportadora && !codigoRastreio){
+        throw new Error('Não foi possível identificar transportadora/código na etiqueta');
+    }
+    return { sucesso:true, transportadora, codigoRastreio };
+}
+
+let moradores = [];
+let moradorSeq = 1;
+const nvCores = ['#4a008c','#00b0ff','#ffb100','#ff5470'];
+
+let nvMoradorSelecionado = null;
+let nvFotoBase64 = null;
+
+const nvScreen = document.getElementById('nvScreen');
+const nvEtapa1 = document.getElementById('nvEtapa1');
+const nvEtapa2 = document.getElementById('nvEtapa2');
+const nvEtapa3 = document.getElementById('nvEtapa3');
+
+function contarEncomendasDoMorador(unidade){
+    return encomendas.filter(e => e.unidade === `Nº ${unidade}`).length;
+}
+
+function renderMoradoresList(filtro=''){
+    const f = filtro.trim().toLowerCase();
+    const lista = moradores.filter(m =>
+        !f || m.nome.toLowerCase().includes(f) || m.unidade.toLowerCase().includes(f)
+    );
+    document.getElementById('nvCount').textContent = moradores.length;
+    const el = document.getElementById('nvMoradoresList');
+    if(!lista.length){
+        el.innerHTML = f
+            ? '<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i>Nenhum morador encontrado para essa busca.</div>'
+            : '<div class="empty-state"><i class="fa-solid fa-users"></i>Nenhum morador cadastrado ainda.<br>Toque no botão + acima para cadastrar o primeiro.</div>';
+        return;
+    }
+    el.innerHTML = lista.map((m,i)=>{
+        const cor = nvCores[i % nvCores.length];
+        const qtd = contarEncomendasDoMorador(m.unidade);
+        return `<div class="nv-morador-card" style="border-left-color:${cor};" data-id="${m.id}">
+            <img src="${m.foto}" alt="${m.nome}" style="border-color:${cor};">
+            <div class="m-info">
+                <h6>Unidade: ${m.unidade}</h6>
+                <p>${m.nome}</p>
+            </div>
+            ${qtd>0 ? `<div class="nv-badge" style="background:${cor};"><i class="fa-solid fa-box"></i>${qtd}</div>` : ''}
+        </div>`;
+    }).join('');
+    el.querySelectorAll('.nv-morador-card').forEach(card=>{
+        card.addEventListener('click', ()=>{
+            const m = moradores.find(x=>x.id===parseInt(card.dataset.id));
+            if(m) selecionarMoradorParaEncomenda(m);
+        });
+    });
+}
+
+function abrirNovaEncomendaScreen(){
+    nvMoradorSelecionado = null; nvFotoBase64 = null;
+    document.getElementById('nvBusca').value = '';
+    document.getElementById('nvAddForm').classList.remove('show');
+    mostrarEtapaNv(1);
+    renderMoradoresList();
+    nvScreen.classList.add('open');
+}
+function fecharNovaEncomendaScreen(){ nvScreen.classList.remove('open'); }
+function mostrarEtapaNv(n){
+    nvEtapa1.style.display = n===1 ? 'flex' : 'none';
+    nvEtapa2.style.display = n===2 ? 'flex' : 'none';
+    nvEtapa3.style.display = n===3 ? 'flex' : 'none';
+}
+
+document.getElementById('abrirNovaEncomenda').addEventListener('click', abrirNovaEncomendaScreen);
+document.getElementById('nvVoltar1').addEventListener('click', fecharNovaEncomendaScreen);
+document.getElementById('nvRefresh').addEventListener('click', ()=>{ document.getElementById('nvBusca').value=''; renderMoradoresList(); });
+document.getElementById('nvBusca').addEventListener('input', e=> renderMoradoresList(e.target.value));
+
+/* Cadastrar novo morador rapidamente */
+document.getElementById('nvAddBtn').addEventListener('click', ()=>{
+    document.getElementById('nvAddForm').classList.toggle('show');
+});
+document.getElementById('nvSalvarMorador').addEventListener('click', ()=>{
+    const unidade = document.getElementById('nvNovaUnidade').value.trim();
+    const nome = document.getElementById('nvNovoNome').value.trim();
+    if(!unidade || !nome){ toast('Preencha unidade e nome do morador.'); return; }
+    moradores.push({id: moradorSeq++, unidade, nome, foto:initialsAvatar(nome)});
+    document.getElementById('nvNovaUnidade').value='';
+    document.getElementById('nvNovoNome').value='';
+    document.getElementById('nvAddForm').classList.remove('show');
+    renderMoradoresList(document.getElementById('nvBusca').value);
+    toast('Morador cadastrado!');
+});
+
+/* Etapa 1 -> Etapa 2 */
+function selecionarMoradorParaEncomenda(m){
+    nvMoradorSelecionado = m;
+    nvFotoBase64 = null;
+    document.getElementById('nvChipFoto').src = m.foto;
+    document.getElementById('nvChipNome').textContent = m.nome;
+    document.getElementById('nvChipUnidade').textContent = `Unidade ${m.unidade}`;
+    document.getElementById('nvPreview').classList.remove('show');
+    document.getElementById('nvAiStatus').classList.remove('show','ok','err');
+    mostrarEtapaNv(2);
+}
+document.getElementById('nvVoltar2').addEventListener('click', ()=> mostrarEtapaNv(1));
+
+/* Etapa 2 — captura/upload de foto e leitura por IA */
+document.getElementById('nvTirarFoto').addEventListener('click', ()=> document.getElementById('nvInputCamera').click());
+document.getElementById('nvEnviarGaleria').addEventListener('click', ()=> document.getElementById('nvInputGaleria').click());
+document.getElementById('nvInputCamera').addEventListener('change', e=> processarFotoEtiqueta(e.target.files[0]));
+document.getElementById('nvInputGaleria').addEventListener('change', e=> processarFotoEtiqueta(e.target.files[0]));
+
+function processarFotoEtiqueta(file){
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async ()=>{
+        nvFotoBase64 = reader.result;
+        const preview = document.getElementById('nvPreview');
+        preview.src = nvFotoBase64;
+        preview.classList.add('show');
+
+        const status = document.getElementById('nvAiStatus');
+        const statusText = document.getElementById('nvAiStatusText');
+        status.classList.remove('err','ok');
+        status.classList.add('show');
+        statusText.textContent = 'Lendo etiqueta...';
+
+        let dadosLidos = null;
+
+        // Se um backend próprio estiver configurado, tenta usá-lo primeiro.
+        if(AI_LABEL_ENDPOINT){
+            try{
+                const resp = await fetch(AI_LABEL_ENDPOINT, {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({ imagem_base64: nvFotoBase64, unidade: nvMoradorSelecionado.unidade })
+                });
+                if(resp.ok){
+                    const data = await resp.json();
+                    if(data.sucesso) dadosLidos = data;
+                }
+            }catch(err){ /* sem backend disponível, cai para o OCR local abaixo */ }
+        }
+
+        // OCR local no navegador (funciona sem nenhum servidor).
+        if(!dadosLidos){
+            try{
+                dadosLidos = await lerEtiquetaComOCR(nvFotoBase64, pct=>{
+                    statusText.textContent = `Lendo etiqueta... ${pct}%`;
+                });
+                status.classList.add('ok');
+                statusText.textContent = 'Etiqueta lida com sucesso!';
+            }catch(err){
+                status.classList.add('err');
+                statusText.textContent = 'Não conseguimos ler a etiqueta automaticamente. Preencha os dados manualmente.';
+            }
+        } else {
+            status.classList.add('ok');
+            statusText.textContent = 'Etiqueta lida com sucesso!';
+        }
+
+        setTimeout(()=> irParaConfirmacao(dadosLidos), dadosLidos ? 500 : 900);
+    };
+    reader.readAsDataURL(file);
+}
+
+document.getElementById('nvPularIa').addEventListener('click', ()=> irParaConfirmacao(null));
+
+function irParaConfirmacao(dadosLidos){
+    document.getElementById('nvChipFoto3').src = nvMoradorSelecionado.foto;
+    document.getElementById('nvChipNome3').textContent = nvMoradorSelecionado.nome;
+    document.getElementById('nvChipUnidade3').textContent = `Unidade ${nvMoradorSelecionado.unidade}`;
+    document.getElementById('nvTransp').value = dadosLidos ? (dadosLidos.transportadora || '') : '';
+    document.getElementById('nvCodigoRastreio').value = dadosLidos ? (dadosLidos.codigoRastreio || '') : '';
+    const preview3 = document.getElementById('nvPreview3');
+    if(nvFotoBase64){ preview3.src = nvFotoBase64; preview3.style.display = 'block'; }
+    else { preview3.style.display = 'none'; }
+    mostrarEtapaNv(3);
+}
+document.getElementById('nvVoltar3').addEventListener('click', ()=> mostrarEtapaNv(2));
+
+/* Etapa 3 — registrar encomenda */
+document.getElementById('nvRegistrar').addEventListener('click', ()=>{
+    if(!nvMoradorSelecionado){ toast('Selecione um morador.'); return; }
+    const transp = document.getElementById('nvTransp').value.trim() || 'Transportadora';
+    const codigoRastreio = document.getElementById('nvCodigoRastreio').value.trim();
+    const unidade = `Nº ${nvMoradorSelecionado.unidade}`;
+    const codigo = seq++;
+    encomendas.push({
+        codigo, unidade, nome: nvMoradorSelecionado.nome, transp,
+        codigoRastreio, status:'recebido', ts:nowStamp(), por:'Nova encomenda (IA)'
+    });
+    addTimeline('recebido', unidade, 'Recebido pelo condomínio (leitura por IA)');
+    addNotif(`Nova encomenda — Unidade ${nvMoradorSelecionado.unidade}`, `${transp} entregou um pacote para ${nvMoradorSelecionado.nome}.`);
+    renderAll();
+    fecharNovaEncomendaScreen();
+    toast(`Encomenda registrada — código ${codigo}`);
 });
 
 /* Separa encomenda */
