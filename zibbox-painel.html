@@ -430,6 +430,147 @@ button{font-family:inherit;cursor:pointer;}
     display:block;text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px;text-decoration:underline;
     background:none;border:none;width:100%;
 }
+
+/* Etapa 3 — cadastrar encomenda completo */
+.nv-label{font-size:12.5px;font-weight:600;margin:18px 0 10px;display:flex;align-items:center;justify-content:space-between;}
+.nv-fornecedores{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
+.nv-forn-btn{
+    flex-shrink:0;width:58px;height:58px;border-radius:14px;background:#fff;border:2px solid transparent;
+    display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#222;
+    text-align:center;line-height:1.1;padding:4px;overflow:hidden;transition:border-color .15s,transform .15s;
+}
+.nv-forn-btn.mercadolivre{background:#fff159;}
+.nv-forn-btn.americanas{background:#e60014;color:#fff;}
+.nv-forn-btn.correios{background:#003399;color:#ffcc00;}
+.nv-forn-btn.boticario{background:#ffd400;}
+.nv-forn-btn.leroy{background:#78be20;color:#fff;}
+.nv-forn-btn.outros{background:var(--surface-2);color:var(--text-muted);border:1.5px solid var(--border);}
+.nv-forn-btn.selected{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,176,255,0.35);}
+.nv-tipo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.nv-tipo-btn{
+    background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:12px 4px;
+    display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--text-muted);
+    transition:border-color .15s,color .15s,background .15s;
+}
+.nv-tipo-btn i{font-size:16px;}
+.nv-tipo-btn.selected{border-color:var(--accent);color:var(--accent);background:rgba(0,176,255,0.1);}
+.nv-grupo-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
+.nv-grupo-row span.lbl{font-size:12.5px;font-weight:600;}
+.nv-stepper{display:flex;align-items:center;gap:12px;}
+.nv-stepper button{width:28px;height:28px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);font-size:13px;}
+.nv-stepper span{font-size:14px;font-weight:700;min-width:18px;text-align:center;}
+.nv-codigo-badge{background:var(--primary);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;}
+.nv-input-icon{position:relative;}
+.nv-input-icon input{padding-right:38px;}
+.nv-input-icon i{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;}
+.nv-photo-box{
+    width:100%;height:110px;border-radius:14px;border:1.5px dashed var(--border);background:var(--surface);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:10px;
+}
+.nv-photo-box img{width:100%;height:100%;object-fit:cover;display:none;}
+.nv-photo-box img.show{display:block;}
+.nv-photo-box .ph-empty{color:var(--text-muted);font-size:11px;text-align:center;}
+.nv-photo-box .ph-remove{
+    position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--danger);color:#fff;
+    display:none;align-items:center;justify-content:center;font-size:10px;border:none;
+}
+.nv-photo-box .ph-remove.show{display:flex;}
+
+/* ---------- CONFIGURAÇÕES (redesenho) ---------- */
+.cfg-tabs{
+    display:flex;gap:4px;margin-bottom:20px;background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:4px;position:sticky;top:0;z-index:5;
+}
+.cfg-tab{flex:1;text-align:center;padding:11px 4px;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--text-muted);border:none;background:none;transition:background .18s,color .18s;}
+.cfg-tab.active{background:var(--accent);color:#fff;box-shadow:0 6px 14px rgba(0,176,255,0.3);}
+.cfg-pane{display:none;}
+.cfg-pane.active{display:block;animation:cfgFade .25s ease;}
+@keyframes cfgFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+.cfg-group-title{
+    font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--accent);font-weight:700;
+    margin:22px 2px 10px;display:flex;align-items:center;gap:8px;
+}
+.cfg-group-title:first-child{margin-top:2px;}
+.cfg-group-title::after{content:"";flex:1;height:1px;background:var(--border);}
+
+.cfg-switch-row{
+    display:flex;align-items:flex-start;gap:13px;
+    background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:14px 15px;margin-bottom:10px;
+    transition:border-color .2s,background .2s;
+}
+.cfg-switch-row.active{border-color:rgba(0,176,255,0.45);background:linear-gradient(180deg,rgba(0,176,255,0.07),transparent 60%),var(--surface);}
+.cfg-icon{
+    width:36px;height:36px;border-radius:11px;background:rgba(0,176,255,0.12);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:background .2s,color .2s;
+}
+.cfg-switch-row.active .cfg-icon{background:var(--accent);color:#fff;}
+.cfg-switch-row .txt{flex:1;min-width:0;}
+.cfg-switch-row .txt h6{font-size:13px;font-weight:600;margin-bottom:3px;}
+.cfg-switch-row .txt p{font-size:11px;color:var(--text-muted);line-height:1.4;}
+.cfg-switch-row .switch{margin-top:2px;}
+
+.switch{position:relative;width:42px;height:24px;flex-shrink:0;}
+.switch input{opacity:0;width:0;height:0;}
+.switch .slider{position:absolute;inset:0;background:var(--surface-2);border:1px solid var(--border);border-radius:20px;transition:.2s;cursor:pointer;}
+.switch .slider::before{content:"";position:absolute;width:18px;height:18px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 2px 4px rgba(0,0,0,.25);}
+.switch input:checked + .slider{background:var(--accent);border-color:var(--accent);}
+.switch input:checked + .slider::before{transform:translateX(18px);}
+
+.cfg-sub{
+    max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .28s ease,opacity .22s ease,margin-top .28s ease;
+}
+.cfg-sub.show{max-height:600px;opacity:1;margin-top:12px;}
+.cfg-sub-inner{
+    background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 13px;
+}
+.cfg-time-row{display:flex;align-items:center;gap:10px;}
+.cfg-unit-pills{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:3px;}
+.cfg-unit-pill{padding:6px 11px;font-size:11px;font-weight:600;color:var(--text-muted);border-radius:8px;border:none;background:none;}
+.cfg-unit-pill.active{background:var(--accent);color:#fff;}
+.cfg-msg-preview{
+    display:flex;gap:8px;align-items:flex-start;background:rgba(46,213,115,0.08);border:1px solid rgba(46,213,115,0.25);
+    border-radius:10px;padding:9px 11px;margin-top:8px;font-size:10.5px;color:#8fe3ab;line-height:1.5;
+}
+.cfg-msg-preview i{margin-top:1px;flex-shrink:0;}
+
+.cfg-radio-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
+.cfg-radio-pill{
+    display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:12px;
+    background:var(--surface);border:1.5px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;
+}
+.cfg-radio-pill input{display:none;}
+.cfg-radio-pill i{font-size:15px;color:var(--text-muted);}
+.cfg-radio-pill span{font-size:10.5px;font-weight:600;color:var(--text-muted);text-align:center;}
+.cfg-radio-pill.checked{border-color:var(--accent);background:rgba(0,176,255,0.1);}
+.cfg-radio-pill.checked i,.cfg-radio-pill.checked span{color:var(--accent);}
+.cfg-check-row{display:flex;align-items:center;gap:10px;margin-bottom:4px;font-size:12.5px;color:var(--text-muted);}
+.cfg-check-row input{accent-color:var(--accent);width:16px;height:16px;}
+.cfg-check-inline{display:flex;gap:18px;margin-bottom:12px;flex-wrap:wrap;}
+.cfg-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cfg-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;}
+.cfg-card-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.cfg-card-head i{color:var(--accent);font-size:14px;}
+.cfg-card-head h6{font-size:12.5px;font-weight:700;}
+.cfg-pw-wrap{position:relative;}
+.cfg-pw-wrap input{padding-right:38px;}
+.cfg-pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);font-size:13px;}
+.cfg-test-status{
+    display:none;align-items:center;gap:9px;margin-top:12px;padding:10px 12px;border-radius:11px;font-size:11.5px;font-weight:500;
+}
+.cfg-test-status.show{display:flex;}
+.cfg-test-status.pending{background:rgba(0,176,255,0.1);border:1px solid rgba(0,176,255,0.3);color:var(--accent);}
+.cfg-test-status.ok{background:rgba(46,213,115,0.1);border:1px solid rgba(46,213,115,0.3);color:#2ed573;}
+.cfg-test-status.err{background:rgba(255,84,112,0.1);border:1px solid rgba(255,84,112,0.3);color:var(--danger);}
+.cfg-foot-row{display:flex;gap:10px;}
+.cfg-foot-row .btn-outline{flex:0 0 auto;padding:12px 16px;}
+.cfg-foot-row .btn-accent{flex:1;}
+.cfg-saved-hint{text-align:center;font-size:10.5px;color:var(--text-muted);margin-top:10px;}
+.retirada-toggle{
+    display:flex;align-items:center;justify-content:space-between;background:rgba(255,84,112,0.08);
+    border:1.5px solid var(--danger);border-radius:12px;padding:11px 14px;margin-top:10px;cursor:pointer;
+}
+.retirada-toggle span{font-size:12.5px;font-weight:600;color:var(--danger);}
 </style>
 </head>
 <body>
@@ -501,6 +642,12 @@ button{font-family:inherit;cursor:pointer;}
     <div class="section-title">Timeline</div>
     <div class="timeline-card" id="timelineCard"></div>
 
+    <div class="stats-card" style="margin-top:12px;">
+        <p style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:14px;">Movimentações por tipo de evento</p>
+        <div class="chart-row" id="timelineChartRow"></div>
+        <div class="legend" id="timelineLegendRow"></div>
+    </div>
+
     <!-- ESTATÍSTICAS -->
     <div class="section-title">Estatísticas de encomendas</div>
     <div class="stats-card">
@@ -564,7 +711,7 @@ button{font-family:inherit;cursor:pointer;}
         <a href="#"><i class="fa-solid fa-file-lines"></i> Relatório de encomendas</a>
         <a href="#"><i class="fa-solid fa-eye"></i> Monitoramento</a>
         <div class="drawer-cat">Configuração</div>
-        <a href="#"><i class="fa-solid fa-gear"></i> Configurações</a>
+        <a href="#" id="abrirConfig"><i class="fa-solid fa-gear"></i> Configurações</a>
     </div>
     <div class="drawer-foot">
         <a href="#" id="logoutBtn" style="padding:0;color:#ffb0b0;"><i class="fa-solid fa-right-from-bracket" style="color:#ffb0b0;"></i> Sair</a>
@@ -597,10 +744,18 @@ button{font-family:inherit;cursor:pointer;}
 <!-- RETIRADA POR CÓDIGO -->
 <div class="modal-overlay" id="modalCodigo">
     <div class="modal-sheet">
-        <div class="modal-head"><h3><i class="fa-solid fa-code" style="color:var(--accent);"></i> Retirada por código</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="modal-head"><h3><i class="fa-solid fa-code" style="color:var(--accent);"></i> Informe o código da encomenda</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
         <p class="empty-note" style="margin-bottom:14px;text-align:left;">Digite o código informado ao morador para confirmar a retirada da encomenda.</p>
-        <div class="field"><label>Código da encomenda</label><input id="codigoInput" placeholder="Ex: 1025" inputmode="numeric" /></div>
-        <button class="btn btn-accent btn-block" id="confirmarCodigo"><i class="fa-solid fa-check-double"></i> Confirmar retirada</button>
+        <div class="field" id="codigoFieldWrap"><label>Código</label><input id="codigoInput" placeholder="Digite o código para retirar a encomenda" inputmode="numeric" /></div>
+        <div class="retirada-toggle" id="retiradaSemCodigoToggle">
+            <span>Retirada sem código</span>
+            <i class="fa-solid fa-code" style="color:var(--danger);"></i>
+        </div>
+        <div class="field" id="semCodigoSelectWrap" style="display:none;margin-top:14px;">
+            <label>Selecione a encomenda</label>
+            <select id="semCodigoSelect"></select>
+        </div>
+        <button class="btn btn-accent btn-block" id="confirmarCodigo" style="margin-top:16px;"><i class="fa-solid fa-check-double"></i> OK</button>
     </div>
 </div>
 
@@ -657,11 +812,11 @@ button{font-family:inherit;cursor:pointer;}
         </div>
     </div>
 
-    <!-- ETAPA 3 — Confirmar dados -->
+    <!-- ETAPA 3 — Cadastrar encomenda (completo) -->
     <div id="nvEtapa3" style="display:none;flex-direction:column;height:100%;">
         <div class="nv-top">
             <button class="icon-btn" id="nvVoltar3"><i class="fa-solid fa-arrow-left"></i></button>
-            <h3>Confirmar encomenda</h3>
+            <h3>Cadastrar encomenda</h3>
             <div style="width:40px;"></div>
         </div>
         <div class="nv-body">
@@ -669,15 +824,238 @@ button{font-family:inherit;cursor:pointer;}
                 <img id="nvChipFoto3" src="" alt="">
                 <div class="info"><b id="nvChipNome3"></b><span id="nvChipUnidade3"></span></div>
             </div>
-            <div class="field"><label>Transportadora</label><input id="nvTransp" placeholder="Ex: Correios, Shopee, Amazon..."></div>
-            <div class="field"><label>Código de rastreio</label><input id="nvCodigoRastreio" placeholder="Ex: BR123456789BR"></div>
-            <img class="nv-preview show" id="nvPreview3" style="display:none;" alt="Etiqueta capturada">
+
+            <div class="nv-label">Fornecedores</div>
+            <div class="nv-fornecedores" id="nvFornecedores">
+                <button type="button" class="nv-forn-btn mercadolivre" data-forn="Mercado Livre">mercado<br>livre</button>
+                <button type="button" class="nv-forn-btn americanas" data-forn="Americanas">a</button>
+                <button type="button" class="nv-forn-btn correios" data-forn="Correios">Correios</button>
+                <button type="button" class="nv-forn-btn boticario" data-forn="Boticário">b</button>
+                <button type="button" class="nv-forn-btn leroy" data-forn="Leroy Merlin">Leroy<br>Merlin</button>
+                <button type="button" class="nv-forn-btn outros" data-forn="">Outros<br><i class="fa-solid fa-arrow-right" style="font-size:9px;"></i></button>
+            </div>
+
+            <div class="field" style="margin-top:12px;"><label>Transportadora</label><input id="nvTransp" placeholder="Ex: Correios, Shopee, Amazon..."></div>
+
+            <div class="nv-label">Tipo da encomenda</div>
+            <div class="nv-tipo-grid" id="nvTipoGrid">
+                <button type="button" class="nv-tipo-btn" data-tipo="Caixa"><i class="fa-solid fa-box"></i>Caixa</button>
+                <button type="button" class="nv-tipo-btn" data-tipo="Envelope"><i class="fa-regular fa-envelope"></i>Envelope</button>
+                <button type="button" class="nv-tipo-btn" data-tipo="Pacote"><i class="fa-solid fa-cube"></i>Pacote</button>
+                <button type="button" class="nv-tipo-btn" data-tipo="Outros"><i class="fa-solid fa-ellipsis"></i>Outros</button>
+            </div>
+
+            <div class="nv-label">Grupo</div>
+            <div class="nv-grupo-row">
+                <span class="lbl">Quantidade de volumes</span>
+                <div class="nv-stepper">
+                    <button type="button" id="nvGrupoMenos"><i class="fa-solid fa-minus"></i></button>
+                    <span id="nvGrupoQtd">1</span>
+                    <button type="button" id="nvGrupoMais"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="nv-label">Número de registro <span class="nv-codigo-badge" id="nvCodigoBadge">Código: —</span></div>
+            <div class="field nv-input-icon">
+                <input id="nvCodigoRastreio" placeholder="Digite o número de registro">
+                <i class="fa-solid fa-barcode"></i>
+            </div>
+
+            <div class="nv-label">Informações do entregador</div>
+            <div class="field"><label>Nome</label><input id="nvEntregadorNome" placeholder="Nome do entregador"></div>
+            <div class="field"><label>Documento</label><input id="nvEntregadorDoc" placeholder="RG, CPF ou crachá"></div>
+
+            <div class="nv-label">Observação</div>
+            <div class="field"><textarea id="nvObservacao" rows="2" placeholder="Observação (opcional)" style="width:100%;background:var(--surface-2);border:1px solid var(--border);color:var(--text);padding:12px 13px;border-radius:11px;font-size:13.5px;resize:vertical;"></textarea></div>
+
+            <div class="nv-label">Foto</div>
+            <div class="nv-photo-box" id="nvPhotoBox">
+                <img id="nvPreview3" alt="Foto da encomenda">
+                <span class="ph-empty" id="nvPhotoEmpty">Nenhuma foto adicionada</span>
+                <button type="button" class="ph-remove" id="nvPhotoRemove"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <button class="btn btn-outline btn-block" id="nvAdicionarFoto" style="margin-bottom:6px;"><i class="fa-solid fa-camera"></i> Adicionar foto</button>
+            <input type="file" accept="image/*" id="nvInputFoto3" style="display:none;">
         </div>
         <div class="nv-foot">
-            <button class="btn btn-accent btn-block" id="nvRegistrar"><i class="fa-solid fa-check"></i> Registrar encomenda</button>
+            <button class="btn btn-accent btn-block" id="nvRegistrar"><i class="fa-solid fa-arrow-right"></i> Registra encomenda</button>
         </div>
     </div>
 
+</div>
+
+<!-- SUCESSO AO PROTOCOLAR -->
+<div class="modal-overlay" id="modalSucesso">
+    <div class="modal-sheet" style="text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:rgba(46,213,115,0.14);color:#2ed573;
+            display:flex;align-items:center;justify-content:center;font-size:26px;margin:6px auto 16px;">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:6px;">Parabéns encomenda<br>protocolada com sucesso</h3>
+        <p class="empty-note" id="modalSucessoCodigo" style="margin-bottom:18px;"></p>
+        <button class="btn btn-accent btn-block" data-close><i class="fa-solid fa-check"></i> OK</button>
+    </div>
+</div>
+
+<!-- ===================== CONFIGURAÇÕES (tela cheia) ===================== -->
+<div class="nv-screen" id="cfgScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="cfgVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Configuração</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="cfg-tabs">
+            <button type="button" class="cfg-tab active" data-tab="notif"><i class="fa-solid fa-bell" style="margin-right:6px;"></i>Notificações</button>
+            <button type="button" class="cfg-tab" data-tab="email"><i class="fa-solid fa-envelope" style="margin-right:6px;"></i>E-mail / SMTP</button>
+        </div>
+
+        <!-- ABA NOTIFICAÇÕES -->
+        <div class="cfg-pane active" id="cfgPaneNotif">
+
+            <div class="cfg-group-title">Canais de envio</div>
+            <div class="cfg-switch-row" data-row="cfgWhats">
+                <div class="cfg-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="txt"><h6>Notificação por WhatsApp</h6><p>Envia uma mensagem automática para o morador cadastrado assim que a encomenda é registrada.</p></div>
+                <label class="switch"><input type="checkbox" id="cfgWhats"><span class="slider"></span></label>
+            </div>
+            <div class="cfg-switch-row" data-row="cfgEmailNotif">
+                <div class="cfg-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="txt"><h6>Notificação por E-mail</h6><p>Envia um e-mail automático — configure a conta na aba "E-mail / SMTP".</p></div>
+                <label class="switch"><input type="checkbox" id="cfgEmailNotif"><span class="slider"></span></label>
+            </div>
+
+            <div class="cfg-group-title">Automação de status</div>
+            <div class="cfg-switch-row" data-row="cfgStatusAuto">
+                <div class="cfg-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="txt"><h6>Status automático</h6><p>Assim que registrada, a encomenda já muda sozinha para "aguardando retirada".</p></div>
+                <label class="switch"><input type="checkbox" id="cfgStatusAuto"><span class="slider"></span></label>
+            </div>
+            <div class="cfg-switch-row" data-row="cfgTempoAtivo">
+                <div class="cfg-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                <div class="txt">
+                    <h6>Tempo para mudança automática</h6>
+                    <p>Define quanto tempo depois do registro o status muda sozinho.</p>
+                    <div class="cfg-sub" id="cfgTempoSub">
+                        <div class="cfg-sub-inner cfg-time-row">
+                            <div class="nv-stepper" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px 8px;">
+                                <button type="button" id="cfgTempoMenos"><i class="fa-solid fa-minus"></i></button>
+                                <span id="cfgTempoValorTxt">0</span>
+                                <button type="button" id="cfgTempoMais"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <input type="hidden" id="cfgTempoValor" value="0">
+                            <div class="cfg-unit-pills">
+                                <button type="button" class="cfg-unit-pill active" data-unit="segundos">Segundos</button>
+                                <button type="button" class="cfg-unit-pill" data-unit="minutos">Minutos</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label class="switch"><input type="checkbox" id="cfgTempoAtivo"><span class="slider"></span></label>
+            </div>
+            <div class="cfg-switch-row" data-row="cfgAgendamento">
+                <div class="cfg-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <div class="txt">
+                    <h6>Agendamento de entrega</h6>
+                    <p>Restringe o período em que a portaria aceita entregas de correspondência.</p>
+                    <div class="cfg-sub" id="cfgAgendSub">
+                        <div class="cfg-sub-inner cfg-2col">
+                            <div class="field" style="margin-bottom:0;"><label>Data início</label><input type="date" id="cfgAgendInicio"></div>
+                            <div class="field" style="margin-bottom:0;"><label>Data fim</label><input type="date" id="cfgAgendFim"></div>
+                        </div>
+                    </div>
+                </div>
+                <label class="switch"><input type="checkbox" id="cfgAgendamento"><span class="slider"></span></label>
+            </div>
+
+            <div class="cfg-group-title">Mensagem</div>
+            <div class="cfg-switch-row" data-row="cfgMsgPersonalizada">
+                <div class="cfg-icon"><i class="fa-solid fa-message"></i></div>
+                <div class="txt">
+                    <h6>Mensagem personalizada</h6>
+                    <p>Personalize o texto enviado por WhatsApp/e-mail. Deixe desativado para usar a mensagem padrão do sistema.</p>
+                    <div class="cfg-sub" id="cfgMsgSub">
+                        <div class="cfg-sub-inner">
+                            <textarea id="cfgMensagem" rows="3" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:11px 12px;border-radius:10px;font-size:12.5px;resize:vertical;">Sua encomenda se encontra-se na portaria para retirada!! Obrigado.</textarea>
+                            <div class="cfg-msg-preview"><i class="fa-brands fa-whatsapp"></i><span id="cfgMsgPreviewTxt">Sua encomenda se encontra-se na portaria para retirada!! Obrigado.</span></div>
+                        </div>
+                    </div>
+                </div>
+                <label class="switch"><input type="checkbox" id="cfgMsgPersonalizada"><span class="slider"></span></label>
+            </div>
+        </div>
+
+        <!-- ABA E-MAIL / SMTP -->
+        <div class="cfg-pane" id="cfgPaneEmail">
+
+            <div class="cfg-group-title">Relatórios</div>
+            <div class="cfg-switch-row" data-row="cfgRelatAuto">
+                <div class="cfg-icon"><i class="fa-solid fa-file-lines"></i></div>
+                <div class="txt">
+                    <h6>Envio de relatório automático</h6>
+                    <p>Envia por e-mail um resumo periódico das encomendas movimentadas.</p>
+                    <div class="cfg-sub" id="cfgRelatSub">
+                        <div class="cfg-sub-inner cfg-2col">
+                            <div class="field" style="margin-bottom:0;"><label>Data início</label><input type="date" id="cfgRelatInicio"></div>
+                            <div class="field" style="margin-bottom:0;"><label>Data fim</label><input type="date" id="cfgRelatFim"></div>
+                        </div>
+                    </div>
+                </div>
+                <label class="switch"><input type="checkbox" id="cfgRelatAuto"><span class="slider"></span></label>
+            </div>
+
+            <div class="cfg-group-title">Conta de envio</div>
+            <div class="cfg-switch-row" data-row="cfgSmtpAtivo">
+                <div class="cfg-icon"><i class="fa-solid fa-at"></i></div>
+                <div class="txt"><h6>Ativar notificação por e-mail</h6><p>Configure abaixo a conta usada para enviar e-mails aos moradores.</p></div>
+                <label class="switch"><input type="checkbox" id="cfgSmtpAtivo"><span class="slider"></span></label>
+            </div>
+
+            <div class="cfg-sub" id="cfgSmtpSub">
+                <div class="cfg-card" style="margin-top:0;">
+                    <div class="cfg-card-head"><i class="fa-solid fa-user-shield"></i><h6>Tipo de conta</h6></div>
+                    <div class="cfg-radio-row">
+                        <label class="cfg-radio-pill" data-preset="gmail"><input type="radio" name="cfgContaTipo" value="gmail"><i class="fa-brands fa-google"></i><span>Gmail</span></label>
+                        <label class="cfg-radio-pill" data-preset="microsoft"><input type="radio" name="cfgContaTipo" value="microsoft"><i class="fa-brands fa-microsoft"></i><span>Microsoft</span></label>
+                        <label class="cfg-radio-pill checked" data-preset="outra"><input type="radio" name="cfgContaTipo" value="outra" checked><i class="fa-solid fa-server"></i><span>Outra conta</span></label>
+                    </div>
+
+                    <div class="cfg-card-head"><i class="fa-solid fa-plug"></i><h6>Servidor SMTP</h6></div>
+                    <div class="cfg-2col">
+                        <div class="field"><label>Hoste SMTP</label><input id="cfgSmtpHost" placeholder="smtp.exemplo.com"></div>
+                        <div class="field"><label>Porta SMTP</label><input id="cfgSmtpPorta" placeholder="587"></div>
+                    </div>
+                    <div class="field"><label>Nome do remetente</label><input id="cfgSmtpNome" placeholder="ZibBox Portaria"></div>
+                    <div class="field"><label>E-mail do remetente</label><input id="cfgSmtpEmail" placeholder="portaria@condominio.com"></div>
+                    <div class="cfg-check-inline">
+                        <label class="cfg-radio"><input type="checkbox" id="cfgSmtpSsl"> Usar SSL</label>
+                        <label class="cfg-radio"><input type="checkbox" id="cfgSmtpTls"> Usar TLS</label>
+                    </div>
+
+                    <div class="cfg-card-head"><i class="fa-solid fa-key"></i><h6>Autenticação</h6></div>
+                    <div class="cfg-check-row"><label class="cfg-radio"><input type="checkbox" id="cfgSmtpAuth" checked> Realizar autenticação no servidor</label></div>
+                    <div class="cfg-2col">
+                        <div class="field"><label>Usuário</label><input id="cfgSmtpUser" placeholder="usuário SMTP"></div>
+                        <div class="field cfg-pw-wrap">
+                            <label>Senha</label>
+                            <input type="password" id="cfgSmtpSenha" placeholder="senha SMTP">
+                            <button type="button" class="cfg-pw-toggle" id="cfgSmtpSenhaToggle"><i class="fa-solid fa-eye"></i></button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline btn-block" id="cfgTestarSmtp"><i class="fa-solid fa-plug-circle-check"></i> Teste de autenticação</button>
+                    <div class="cfg-test-status" id="cfgTestStatus"><i class="fa-solid fa-spinner fa-spin"></i><span id="cfgTestStatusTxt">Testando conexão...</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nv-foot">
+        <div class="cfg-foot-row">
+            <button class="btn btn-outline" id="cfgRestaurar" title="Restaurar padrão"><i class="fa-solid fa-rotate-left"></i></button>
+            <button class="btn btn-accent" id="cfgSalvar"><i class="fa-solid fa-floppy-disk"></i> Salvar configurações</button>
+        </div>
+        <p class="cfg-saved-hint" id="cfgSavedHint"></p>
+    </div>
 </div>
 
 <!-- SEPARA ENCOMENDA -->
@@ -813,6 +1191,11 @@ function aplicarDadosDaSessao(){
 }
 aplicarDadosDaSessao();
 
+/* ID do administrador logado — usado para gravar/consultar os dados dele no
+   banco (moradores, encomendas, histórico). Se não houver sessão (acesso
+   direto ao painel, fora do fluxo de login), cai no id 0 como "modo demo". */
+const USUARIO_ID = (usuarioLogado && usuarioLogado.id) ? usuarioLogado.id : 0;
+
 /* Logout: limpa a sessão salva pelo login.html e volta para a tela de login */
 document.getElementById('logoutBtn').addEventListener('click', function(e){
     e.preventDefault();
@@ -851,12 +1234,59 @@ function nowStamp(){
     return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} às ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function addTimeline(tipo, unidade, texto, por='Jardelisson'){
-    timeline.unshift({tipo, unidade, texto, ts:nowStamp(), por});
+    const ts = nowStamp();
+    timeline.unshift({tipo, unidade, texto, ts, por});
     renderTimeline();
+    // Persiste o evento no banco (não bloqueia a interface)
+    fetch('/api/timeline', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ usuario_id:USUARIO_ID, tipo, unidade, texto, ts, por })
+    }).catch(e=> console.error('Erro ao salvar histórico no banco:', e));
 }
 function addNotif(title, body){
     notifications.unshift({title, time:'agora', body});
     renderNotifs();
+}
+
+/* ---------------- BANCO DE DADOS: carregamento inicial ---------------- */
+async function carregarEncomendasDoBanco(){
+    try{
+        const resp = await fetch(`/api/encomendas/${USUARIO_ID}`);
+        const data = await resp.json();
+        if(data.sucesso){
+            encomendas = data.encomendas;
+            const maiorCodigo = encomendas.reduce((max,e)=> Math.max(max, e.codigo), 1000);
+            seq = maiorCodigo + 1;
+        }
+    }catch(e){ console.error('Erro ao carregar encomendas do banco:', e); }
+}
+async function carregarMoradoresDoBanco(){
+    try{
+        const resp = await fetch(`/api/moradores/${USUARIO_ID}`);
+        const data = await resp.json();
+        if(data.sucesso){
+            moradores = data.moradores;
+            const maiorId = moradores.reduce((max,m)=> Math.max(max, m.id), 0);
+            moradorSeq = maiorId + 1;
+        }
+    }catch(e){ console.error('Erro ao carregar moradores do banco:', e); }
+}
+async function carregarTimelineDoBanco(){
+    try{
+        const resp = await fetch(`/api/timeline/${USUARIO_ID}`);
+        const data = await resp.json();
+        if(data.sucesso){ timeline = data.timeline; }
+    }catch(e){ console.error('Erro ao carregar histórico do banco:', e); }
+}
+async function atualizarEncomendaNoBanco(codigo, patch){
+    try{
+        await fetch(`/api/encomendas/${codigo}`, {
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(patch)
+        });
+    }catch(e){ console.error('Erro ao atualizar encomenda no banco:', e); }
 }
 
 /* ---------------- RENDER: TIMELINE ---------------- */
@@ -873,6 +1303,29 @@ function renderTimeline(){
             </div>
         </div>`;
     }).join('');
+}
+
+/* ---------------- RENDER: GRÁFICO DA TIMELINE (por tipo de evento) ---------------- */
+function renderTimelineChart(){
+    const c = {recebido:0, aguardando:0, rota:0, entregue:0};
+    timeline.forEach(t=>{ if(c[t.tipo] !== undefined) c[t.tipo]++; });
+
+    const defs = Object.keys(statusMeta).map(k=> ({key:k, label:statusMeta[k].label, color:statusMeta[k].color}));
+    const max = Math.max(1, ...defs.map(d=>c[d.key]));
+
+    document.getElementById('timelineChartRow').innerHTML = defs.map(d=>{
+        const val = c[d.key];
+        const h = Math.round((val/max)*118) + 8;
+        return `<div class="bar-col"><span class="bar-val">${val}</span><div class="bar" style="background:${d.color};" data-h="${h}"></div></div>`;
+    }).join('');
+    document.getElementById('timelineLegendRow').innerHTML = defs.map(d=>
+        `<div class="legend-item"><span class="dot" style="background:${d.color};"></span>${d.label}</div>`
+    ).join('');
+    requestAnimationFrame(()=>{
+        document.querySelectorAll('#timelineChartRow .bar').forEach(bar=>{
+            bar.style.height = bar.dataset.h + 'px';
+        });
+    });
 }
 
 /* ---------------- RENDER: CHART ---------------- */
@@ -938,6 +1391,7 @@ function confirmarRetirada(codigo){
     const enc = encomendas.find(e=>e.codigo===codigo);
     if(!enc) return;
     enc.status = 'entregue';
+    atualizarEncomendaNoBanco(enc.codigo, {status:'entregue'});
     addTimeline('entregue', enc.unidade, 'Entregue');
     addNotif(`Retirada confirmada — Unidade ${enc.unidade}`, `Encomenda ${enc.codigo} foi entregue ao morador.`);
     renderAll();
@@ -1003,7 +1457,7 @@ function renderRoute(){
         btn.addEventListener('click', ()=>{
             const codigo = parseInt(btn.closest('.route-item').dataset.codigo);
             const enc = encomendas.find(e=>e.codigo===codigo);
-            if(enc){ enc.status='entregue'; addTimeline('entregue', enc.unidade, 'Entregue'); }
+            if(enc){ enc.status='entregue'; atualizarEncomendaNoBanco(enc.codigo, {status:'entregue'}); addTimeline('entregue', enc.unidade, 'Entregue'); }
             renderRoute(); renderAll();
             toast(`Entrega na unidade ${enc ? enc.unidade : ''} concluída!`);
         });
@@ -1011,7 +1465,7 @@ function renderRoute(){
 }
 
 function renderAll(){
-    renderTimeline(); renderChart(); renderPendentes(); renderNotifs();
+    renderTimeline(); renderTimelineChart(); renderChart(); renderPendentes(); renderNotifs();
     renderEncomendasList(); renderSeparaSelect();
 }
 
@@ -1048,13 +1502,24 @@ document.getElementById('condoSelect').addEventListener('click', ()=> toast('Voc
 /* ---------------- ACTIONS ---------------- */
 
 /* Encomenda privada */
-document.getElementById('salvarPrivada').addEventListener('click', ()=>{
+document.getElementById('salvarPrivada').addEventListener('click', async ()=>{
     const unidade = document.getElementById('privUnidade').value.trim();
     const nome = document.getElementById('privNome').value.trim();
     const transp = document.getElementById('privTransp').value.trim() || 'Transportadora';
     if(!unidade || !nome){ toast('Preencha unidade e destinatário.'); return; }
-    const codigo = seq++;
-    encomendas.push({codigo, unidade, nome, transp, status:'recebido', privada:true, ts:nowStamp(), por:'Jardelisson'});
+
+    const nova = {usuario_id:USUARIO_ID, unidade, nome, transp, status:'recebido', privada:true, ts:nowStamp(), por:'Jardelisson'};
+    let codigo;
+    try{
+        const resp = await fetch('/api/encomendas', {
+            method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(nova)
+        });
+        const data = await resp.json();
+        if(!data.sucesso){ toast('Erro ao salvar encomenda no banco.'); return; }
+        codigo = data.codigo;
+    }catch(e){ console.error('Erro ao registrar encomenda privada:', e); toast('Erro de conexão com o servidor.'); return; }
+
+    encomendas.push({...nova, codigo});
     addTimeline('recebido', unidade, 'Recebido pelo condomínio (privada)');
     addNotif(`Encomenda privada — Unidade ${unidade}`, `${transp} entregou um pacote privado.`);
     document.getElementById('privUnidade').value='';
@@ -1066,19 +1531,54 @@ document.getElementById('salvarPrivada').addEventListener('click', ()=>{
 });
 
 /* Retirada por código */
+let retiradaSemCodigo = false;
+
+function renderSemCodigoSelect(){
+    const pend = encomendas.filter(e=> e.status!=='entregue');
+    const sel = document.getElementById('semCodigoSelect');
+    if(!pend.length){ sel.innerHTML = '<option value="">Nenhuma encomenda pendente</option>'; return; }
+    sel.innerHTML = pend.map(e=>`<option value="${e.codigo}">Unidade ${e.unidade} — ${e.nome} (Cód. ${e.codigo})</option>`).join('');
+}
+
+document.getElementById('retiradaSemCodigoToggle').addEventListener('click', ()=>{
+    retiradaSemCodigo = !retiradaSemCodigo;
+    document.getElementById('retiradaSemCodigoToggle').style.background = retiradaSemCodigo ? 'rgba(255,84,112,0.22)' : 'rgba(255,84,112,0.08)';
+    document.getElementById('codigoFieldWrap').style.display = retiradaSemCodigo ? 'none' : 'block';
+    document.getElementById('semCodigoSelectWrap').style.display = retiradaSemCodigo ? 'block' : 'none';
+    if(retiradaSemCodigo) renderSemCodigoSelect();
+});
+
 document.getElementById('confirmarCodigo').addEventListener('click', ()=>{
-    const val = document.getElementById('codigoInput').value.trim();
-    if(!val){ toast('Digite um código.'); return; }
-    const enc = encomendas.find(e=> String(e.codigo)===val);
-    if(!enc){ toast('Código não encontrado.'); return; }
+    let enc = null;
+    if(retiradaSemCodigo){
+        const val = document.getElementById('semCodigoSelect').value;
+        if(!val){ toast('Nenhuma encomenda disponível para retirar.'); return; }
+        enc = encomendas.find(e=> String(e.codigo)===val);
+    } else {
+        const val = document.getElementById('codigoInput').value.trim();
+        if(!val){ toast('Digite um código.'); return; }
+        enc = encomendas.find(e=> String(e.codigo)===val);
+        if(!enc){ toast('Código não encontrado.'); return; }
+    }
+    if(!enc) return;
     if(enc.status==='entregue'){ toast('Essa encomenda já foi retirada.'); return; }
     enc.status='entregue';
-    addTimeline('entregue', enc.unidade, 'Entregue (retirada por código)');
+    atualizarEncomendaNoBanco(enc.codigo, {status:'entregue'});
+    addTimeline('entregue', enc.unidade, retiradaSemCodigo ? 'Entregue (retirada sem código)' : 'Entregue (retirada por código)');
     document.getElementById('codigoInput').value='';
     document.getElementById('modalCodigo').classList.remove('open');
     renderAll();
     toast(`Retirada confirmada para unidade ${enc.unidade}!`);
 });
+
+document.getElementById('modalCodigo').addEventListener('click', e=>{ /* reset ao fechar via overlay */ });
+document.querySelectorAll('[data-modal="modalCodigo"]').forEach(b=> b.addEventListener('click', ()=>{
+    retiradaSemCodigo = false;
+    document.getElementById('retiradaSemCodigoToggle').style.background = 'rgba(255,84,112,0.08)';
+    document.getElementById('codigoFieldWrap').style.display = 'block';
+    document.getElementById('semCodigoSelectWrap').style.display = 'none';
+    document.getElementById('codigoInput').value = '';
+}));
 
 /* ==================================================================
    NOVA ENCOMENDA — seleciona morador + lê etiqueta da foto
@@ -1216,11 +1716,24 @@ document.getElementById('nvBusca').addEventListener('input', e=> renderMoradores
 document.getElementById('nvAddBtn').addEventListener('click', ()=>{
     document.getElementById('nvAddForm').classList.toggle('show');
 });
-document.getElementById('nvSalvarMorador').addEventListener('click', ()=>{
+document.getElementById('nvSalvarMorador').addEventListener('click', async ()=>{
     const unidade = document.getElementById('nvNovaUnidade').value.trim();
     const nome = document.getElementById('nvNovoNome').value.trim();
     if(!unidade || !nome){ toast('Preencha unidade e nome do morador.'); return; }
-    moradores.push({id: moradorSeq++, unidade, nome, foto:initialsAvatar(nome)});
+    const foto = initialsAvatar(nome);
+
+    let id;
+    try{
+        const resp = await fetch('/api/moradores', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({usuario_id:USUARIO_ID, unidade, nome, foto})
+        });
+        const data = await resp.json();
+        if(!data.sucesso){ toast('Erro ao salvar morador no banco.'); return; }
+        id = data.id;
+    }catch(e){ console.error('Erro ao cadastrar morador:', e); toast('Erro de conexão com o servidor.'); return; }
+
+    moradores.push({id, unidade, nome, foto});
     document.getElementById('nvNovaUnidade').value='';
     document.getElementById('nvNovoNome').value='';
     document.getElementById('nvAddForm').classList.remove('show');
@@ -1303,35 +1816,127 @@ function processarFotoEtiqueta(file){
 
 document.getElementById('nvPularIa').addEventListener('click', ()=> irParaConfirmacao(null));
 
+let nvFornecedorSelecionado = '';
+let nvTipoSelecionado = '';
+let nvGrupoQtd = 1;
+
 function irParaConfirmacao(dadosLidos){
     document.getElementById('nvChipFoto3').src = nvMoradorSelecionado.foto;
     document.getElementById('nvChipNome3').textContent = nvMoradorSelecionado.nome;
     document.getElementById('nvChipUnidade3').textContent = `Unidade ${nvMoradorSelecionado.unidade}`;
     document.getElementById('nvTransp').value = dadosLidos ? (dadosLidos.transportadora || '') : '';
     document.getElementById('nvCodigoRastreio').value = dadosLidos ? (dadosLidos.codigoRastreio || '') : '';
+    document.getElementById('nvEntregadorNome').value = '';
+    document.getElementById('nvEntregadorDoc').value = '';
+    document.getElementById('nvObservacao').value = '';
+    document.getElementById('nvCodigoBadge').textContent = `Código: ${seq}`;
+
+    nvFornecedorSelecionado = dadosLidos && dadosLidos.transportadora ? dadosLidos.transportadora : '';
+    document.querySelectorAll('.nv-forn-btn').forEach(b=> b.classList.toggle('selected', b.dataset.forn && b.dataset.forn===nvFornecedorSelecionado));
+    nvTipoSelecionado = '';
+    document.querySelectorAll('.nv-tipo-btn').forEach(b=> b.classList.remove('selected'));
+    nvGrupoQtd = 1;
+    document.getElementById('nvGrupoQtd').textContent = nvGrupoQtd;
+
     const preview3 = document.getElementById('nvPreview3');
-    if(nvFotoBase64){ preview3.src = nvFotoBase64; preview3.style.display = 'block'; }
-    else { preview3.style.display = 'none'; }
+    const phEmpty = document.getElementById('nvPhotoEmpty');
+    const phRemove = document.getElementById('nvPhotoRemove');
+    if(nvFotoBase64){ preview3.src = nvFotoBase64; preview3.classList.add('show'); phEmpty.style.display='none'; phRemove.classList.add('show'); }
+    else { preview3.classList.remove('show'); phEmpty.style.display='block'; phRemove.classList.remove('show'); }
     mostrarEtapaNv(3);
 }
 document.getElementById('nvVoltar3').addEventListener('click', ()=> mostrarEtapaNv(2));
 
+/* Fornecedores */
+document.getElementById('nvFornecedores').addEventListener('click', e=>{
+    const btn = e.target.closest('.nv-forn-btn');
+    if(!btn) return;
+    if(!btn.dataset.forn){ toast('Digite a transportadora manualmente no campo abaixo.'); document.getElementById('nvTransp').focus(); return; }
+    nvFornecedorSelecionado = btn.dataset.forn;
+    document.querySelectorAll('.nv-forn-btn').forEach(b=> b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('nvTransp').value = nvFornecedorSelecionado;
+});
+
+/* Tipo da encomenda */
+document.getElementById('nvTipoGrid').addEventListener('click', e=>{
+    const btn = e.target.closest('.nv-tipo-btn');
+    if(!btn) return;
+    nvTipoSelecionado = btn.dataset.tipo;
+    document.querySelectorAll('.nv-tipo-btn').forEach(b=> b.classList.remove('selected'));
+    btn.classList.add('selected');
+});
+
+/* Grupo (quantidade de volumes) */
+document.getElementById('nvGrupoMenos').addEventListener('click', ()=>{
+    nvGrupoQtd = Math.max(1, nvGrupoQtd-1);
+    document.getElementById('nvGrupoQtd').textContent = nvGrupoQtd;
+});
+document.getElementById('nvGrupoMais').addEventListener('click', ()=>{
+    nvGrupoQtd = Math.min(99, nvGrupoQtd+1);
+    document.getElementById('nvGrupoQtd').textContent = nvGrupoQtd;
+});
+
+/* Foto da encomenda (etapa 3) */
+document.getElementById('nvAdicionarFoto').addEventListener('click', ()=> document.getElementById('nvInputFoto3').click());
+document.getElementById('nvInputFoto3').addEventListener('change', e=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ()=>{
+        nvFotoBase64 = reader.result;
+        const preview3 = document.getElementById('nvPreview3');
+        preview3.src = nvFotoBase64;
+        preview3.classList.add('show');
+        document.getElementById('nvPhotoEmpty').style.display='none';
+        document.getElementById('nvPhotoRemove').classList.add('show');
+    };
+    reader.readAsDataURL(file);
+});
+document.getElementById('nvPhotoRemove').addEventListener('click', ()=>{
+    nvFotoBase64 = null;
+    const preview3 = document.getElementById('nvPreview3');
+    preview3.classList.remove('show'); preview3.src='';
+    document.getElementById('nvPhotoEmpty').style.display='block';
+    document.getElementById('nvPhotoRemove').classList.remove('show');
+});
+
 /* Etapa 3 — registrar encomenda */
-document.getElementById('nvRegistrar').addEventListener('click', ()=>{
+document.getElementById('nvRegistrar').addEventListener('click', async ()=>{
     if(!nvMoradorSelecionado){ toast('Selecione um morador.'); return; }
-    const transp = document.getElementById('nvTransp').value.trim() || 'Transportadora';
+    const transp = document.getElementById('nvTransp').value.trim() || nvFornecedorSelecionado || 'Transportadora';
     const codigoRastreio = document.getElementById('nvCodigoRastreio').value.trim();
+    const entregadorNome = document.getElementById('nvEntregadorNome').value.trim();
+    const entregadorDoc = document.getElementById('nvEntregadorDoc').value.trim();
+    const observacao = document.getElementById('nvObservacao').value.trim();
+    const tipo = nvTipoSelecionado || 'Pacote';
+    const grupo = nvGrupoQtd;
     const unidade = `Nº ${nvMoradorSelecionado.unidade}`;
-    const codigo = seq++;
-    encomendas.push({
-        codigo, unidade, nome: nvMoradorSelecionado.nome, transp,
-        codigoRastreio, status:'recebido', ts:nowStamp(), por:'Nova encomenda (IA)'
-    });
-    addTimeline('recebido', unidade, 'Recebido pelo condomínio (leitura por IA)');
+
+    const nova = {
+        usuario_id:USUARIO_ID, unidade, nome: nvMoradorSelecionado.nome, transp, tipo, grupo,
+        codigoRastreio, entregadorNome, entregadorDoc, observacao, foto:nvFotoBase64,
+        status:'recebido', privada:false, ts:nowStamp(), por:'Nova encomenda (IA)'
+    };
+
+    let codigo;
+    try{
+        const resp = await fetch('/api/encomendas', {
+            method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(nova)
+        });
+        const data = await resp.json();
+        if(!data.sucesso){ toast('Erro ao salvar encomenda no banco.'); return; }
+        codigo = data.codigo;
+    }catch(e){ console.error('Erro ao registrar encomenda:', e); toast('Erro de conexão com o servidor.'); return; }
+
+    encomendas.push({...nova, codigo});
+    addTimeline('recebido', unidade, `Recebido pelo condomínio (${tipo})`);
     addNotif(`Nova encomenda — Unidade ${nvMoradorSelecionado.unidade}`, `${transp} entregou um pacote para ${nvMoradorSelecionado.nome}.`);
     renderAll();
     fecharNovaEncomendaScreen();
-    toast(`Encomenda registrada — código ${codigo}`);
+    document.getElementById('modalSucessoCodigo').textContent = `Código: ${codigo} · Unidade ${nvMoradorSelecionado.unidade}`;
+    document.getElementById('modalSucesso').classList.add('open');
+    aplicarNotificacaoEnvio(nvMoradorSelecionado, codigo);
 });
 
 /* Separa encomenda */
@@ -1344,6 +1949,7 @@ document.getElementById('salvarSepara').addEventListener('click', ()=>{
     if(!enc) return;
     enc.status = 'aguardando';
     enc.escaninho = escaninho;
+    atualizarEncomendaNoBanco(codigo, {status:'aguardando', escaninho});
     addTimeline('aguardando', enc.unidade, `Separado em ${escaninho}`);
     document.getElementById('modalSepara').classList.remove('open');
     renderAll();
@@ -1363,8 +1969,286 @@ document.getElementById('enviarConvite').addEventListener('click', ()=>{
     toast(`Convite enviado para ${nome}!`);
 });
 
+/* ==================================================================
+   CONFIGURAÇÕES — notificações automáticas e SMTP
+   ================================================================== */
+const cfgScreen = document.getElementById('cfgScreen');
+const CFG_STORAGE_KEY = 'zibbox_configuracoes';
+
+const SMTP_PRESETS = {
+    gmail:{host:'smtp.gmail.com', porta:'587', ssl:false, tls:true},
+    microsoft:{host:'smtp.office365.com', porta:'587', ssl:false, tls:true},
+    outra:{host:'', porta:'', ssl:false, tls:false}
+};
+
+const cfgDefaults = {
+    whats:false, emailNotif:false, statusAuto:false,
+    tempoAtivo:false, tempoValor:0, tempoUnidade:'segundos',
+    agendamento:false, agendInicio:'', agendFim:'',
+    msgPersonalizada:false, mensagem:'Sua encomenda se encontra-se na portaria para retirada!! Obrigado.',
+    relatAuto:false, relatInicio:'', relatFim:'',
+    smtpAtivo:false, contaTipo:'outra', smtpHost:'', smtpPorta:'', smtpNome:'', smtpEmail:'',
+    smtpSsl:false, smtpTls:false, smtpAuth:true, smtpUser:'', smtpSenha:''
+};
+
+let cfgTempoValorAtual = 0;
+let cfgTempoUnidadeAtual = 'segundos';
+
+function carregarConfiguracoes(){
+    let cfg = {...cfgDefaults};
+    try{
+        const raw = localStorage.getItem(CFG_STORAGE_KEY);
+        if(raw) cfg = {...cfg, ...JSON.parse(raw)};
+    }catch(e){ /* ignora config inválida */ }
+
+    document.getElementById('cfgWhats').checked = cfg.whats;
+    document.getElementById('cfgEmailNotif').checked = cfg.emailNotif;
+    document.getElementById('cfgStatusAuto').checked = cfg.statusAuto;
+    document.getElementById('cfgTempoAtivo').checked = cfg.tempoAtivo;
+    cfgTempoValorAtual = cfg.tempoValor || 0;
+    cfgTempoUnidadeAtual = cfg.tempoUnidade || 'segundos';
+    document.getElementById('cfgTempoValor').value = cfgTempoValorAtual;
+    document.getElementById('cfgTempoValorTxt').textContent = cfgTempoValorAtual;
+    document.querySelectorAll('.cfg-unit-pill').forEach(p=> p.classList.toggle('active', p.dataset.unit===cfgTempoUnidadeAtual));
+    document.getElementById('cfgAgendamento').checked = cfg.agendamento;
+    document.getElementById('cfgAgendInicio').value = cfg.agendInicio;
+    document.getElementById('cfgAgendFim').value = cfg.agendFim;
+    document.getElementById('cfgMsgPersonalizada').checked = cfg.msgPersonalizada;
+    document.getElementById('cfgMensagem').value = cfg.mensagem;
+    document.getElementById('cfgRelatAuto').checked = cfg.relatAuto;
+    document.getElementById('cfgRelatInicio').value = cfg.relatInicio;
+    document.getElementById('cfgRelatFim').value = cfg.relatFim;
+    document.getElementById('cfgSmtpAtivo').checked = cfg.smtpAtivo;
+    document.querySelectorAll('[name="cfgContaTipo"]').forEach(r=> r.checked = r.value===cfg.contaTipo);
+    document.getElementById('cfgSmtpHost').value = cfg.smtpHost;
+    document.getElementById('cfgSmtpPorta').value = cfg.smtpPorta;
+    document.getElementById('cfgSmtpNome').value = cfg.smtpNome;
+    document.getElementById('cfgSmtpEmail').value = cfg.smtpEmail;
+    document.getElementById('cfgSmtpSsl').checked = cfg.smtpSsl;
+    document.getElementById('cfgSmtpTls').checked = cfg.smtpTls;
+    document.getElementById('cfgSmtpAuth').checked = cfg.smtpAuth;
+    document.getElementById('cfgSmtpUser').value = cfg.smtpUser;
+    document.getElementById('cfgSmtpSenha').value = cfg.smtpSenha;
+
+    document.getElementById('cfgTestStatus').classList.remove('show','ok','err','pending');
+    document.getElementById('cfgSavedHint').textContent = '';
+
+    atualizarRadioPills();
+    atualizarSubSecoesCfg();
+    atualizarPreviewMensagem();
+    return cfg;
+}
+
+function lerConfiguracoesDaTela(){
+    const contaTipoEl = document.querySelector('[name="cfgContaTipo"]:checked');
+    return {
+        whats: document.getElementById('cfgWhats').checked,
+        emailNotif: document.getElementById('cfgEmailNotif').checked,
+        statusAuto: document.getElementById('cfgStatusAuto').checked,
+        tempoAtivo: document.getElementById('cfgTempoAtivo').checked,
+        tempoValor: cfgTempoValorAtual,
+        tempoUnidade: cfgTempoUnidadeAtual,
+        agendamento: document.getElementById('cfgAgendamento').checked,
+        agendInicio: document.getElementById('cfgAgendInicio').value,
+        agendFim: document.getElementById('cfgAgendFim').value,
+        msgPersonalizada: document.getElementById('cfgMsgPersonalizada').checked,
+        mensagem: document.getElementById('cfgMensagem').value,
+        relatAuto: document.getElementById('cfgRelatAuto').checked,
+        relatInicio: document.getElementById('cfgRelatInicio').value,
+        relatFim: document.getElementById('cfgRelatFim').value,
+        smtpAtivo: document.getElementById('cfgSmtpAtivo').checked,
+        contaTipo: contaTipoEl ? contaTipoEl.value : 'outra',
+        smtpHost: document.getElementById('cfgSmtpHost').value.trim(),
+        smtpPorta: document.getElementById('cfgSmtpPorta').value.trim(),
+        smtpNome: document.getElementById('cfgSmtpNome').value.trim(),
+        smtpEmail: document.getElementById('cfgSmtpEmail').value.trim(),
+        smtpSsl: document.getElementById('cfgSmtpSsl').checked,
+        smtpTls: document.getElementById('cfgSmtpTls').checked,
+        smtpAuth: document.getElementById('cfgSmtpAuth').checked,
+        smtpUser: document.getElementById('cfgSmtpUser').value.trim(),
+        smtpSenha: document.getElementById('cfgSmtpSenha').value
+    };
+}
+
+/* Mostra/esconde os sub-blocos e realça o card quando o switch está ligado */
+function atualizarSubSecoesCfg(){
+    document.getElementById('cfgAgendSub').classList.toggle('show', document.getElementById('cfgAgendamento').checked);
+    document.getElementById('cfgMsgSub').classList.toggle('show', document.getElementById('cfgMsgPersonalizada').checked);
+    document.getElementById('cfgRelatSub').classList.toggle('show', document.getElementById('cfgRelatAuto').checked);
+    document.getElementById('cfgSmtpSub').classList.toggle('show', document.getElementById('cfgSmtpAtivo').checked);
+    document.getElementById('cfgTempoSub').classList.toggle('show', document.getElementById('cfgTempoAtivo').checked);
+
+    document.querySelectorAll('.cfg-switch-row[data-row]').forEach(row=>{
+        const chk = document.getElementById(row.dataset.row);
+        if(chk) row.classList.toggle('active', chk.checked);
+    });
+}
+['cfgWhats','cfgEmailNotif','cfgStatusAuto','cfgTempoAtivo','cfgAgendamento','cfgMsgPersonalizada','cfgRelatAuto','cfgSmtpAtivo'].forEach(id=>{
+    document.getElementById(id).addEventListener('change', atualizarSubSecoesCfg);
+});
+
+/* Preview ao vivo da mensagem personalizada */
+function atualizarPreviewMensagem(){
+    const txt = document.getElementById('cfgMensagem').value.trim() || 'Sua encomenda se encontra-se na portaria para retirada!! Obrigado.';
+    document.getElementById('cfgMsgPreviewTxt').textContent = txt;
+}
+document.getElementById('cfgMensagem').addEventListener('input', atualizarPreviewMensagem);
+
+/* Stepper do tempo automático (segundos/minutos) */
+document.getElementById('cfgTempoMenos').addEventListener('click', ()=>{
+    cfgTempoValorAtual = Math.max(0, cfgTempoValorAtual-1);
+    document.getElementById('cfgTempoValorTxt').textContent = cfgTempoValorAtual;
+    document.getElementById('cfgTempoValor').value = cfgTempoValorAtual;
+});
+document.getElementById('cfgTempoMais').addEventListener('click', ()=>{
+    cfgTempoValorAtual = Math.min(999, cfgTempoValorAtual+1);
+    document.getElementById('cfgTempoValorTxt').textContent = cfgTempoValorAtual;
+    document.getElementById('cfgTempoValor').value = cfgTempoValorAtual;
+});
+document.querySelectorAll('.cfg-unit-pill').forEach(pill=>{
+    pill.addEventListener('click', ()=>{
+        cfgTempoUnidadeAtual = pill.dataset.unit;
+        document.querySelectorAll('.cfg-unit-pill').forEach(p=> p.classList.toggle('active', p===pill));
+    });
+});
+
+/* Tipo de conta SMTP — realça o card escolhido e preenche presets automaticamente */
+function atualizarRadioPills(){
+    document.querySelectorAll('.cfg-radio-pill').forEach(pill=>{
+        const input = pill.querySelector('input');
+        pill.classList.toggle('checked', input.checked);
+    });
+}
+document.querySelectorAll('[name="cfgContaTipo"]').forEach(radio=>{
+    radio.addEventListener('change', ()=>{
+        atualizarRadioPills();
+        const preset = SMTP_PRESETS[radio.value];
+        const hostEl = document.getElementById('cfgSmtpHost');
+        const portaEl = document.getElementById('cfgSmtpPorta');
+        const sslEl = document.getElementById('cfgSmtpSsl');
+        const tlsEl = document.getElementById('cfgSmtpTls');
+        if(radio.value==='gmail' || radio.value==='microsoft'){
+            hostEl.value = preset.host; portaEl.value = preset.porta;
+            sslEl.checked = preset.ssl; tlsEl.checked = preset.tls;
+            hostEl.readOnly = true; portaEl.readOnly = true;
+        } else {
+            hostEl.readOnly = false; portaEl.readOnly = false;
+        }
+        document.getElementById('cfgTestStatus').classList.remove('show','ok','err');
+    });
+});
+
+/* Mostrar/ocultar senha SMTP */
+document.getElementById('cfgSmtpSenhaToggle').addEventListener('click', ()=>{
+    const input = document.getElementById('cfgSmtpSenha');
+    const icon = document.querySelector('#cfgSmtpSenhaToggle i');
+    const mostrando = input.type === 'text';
+    input.type = mostrando ? 'password' : 'text';
+    icon.className = mostrando ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+});
+
+/* Abrir/fechar tela de configurações */
+document.getElementById('abrirConfig').addEventListener('click', e=>{
+    e.preventDefault();
+    closeDrawer();
+    carregarConfiguracoes();
+    cfgScreen.classList.add('open');
+});
+document.getElementById('cfgVoltar').addEventListener('click', ()=> cfgScreen.classList.remove('open'));
+
+/* Abas Notificações / E-mail SMTP */
+document.querySelectorAll('.cfg-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+        document.querySelectorAll('.cfg-tab').forEach(t=> t.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('cfgPaneNotif').classList.toggle('active', tab.dataset.tab==='notif');
+        document.getElementById('cfgPaneEmail').classList.toggle('active', tab.dataset.tab==='email');
+    });
+});
+
+/* Teste de autenticação SMTP (simulado — sem backend de e-mail neste protótipo) */
+document.getElementById('cfgTestarSmtp').addEventListener('click', ()=>{
+    const host = document.getElementById('cfgSmtpHost').value.trim();
+    const email = document.getElementById('cfgSmtpEmail').value.trim();
+    const statusEl = document.getElementById('cfgTestStatus');
+    const statusTxt = document.getElementById('cfgTestStatusTxt');
+    if(!host || !email){ toast('Preencha ao menos o hoste SMTP e o e-mail do remetente.'); return; }
+    statusEl.classList.remove('ok','err');
+    statusEl.classList.add('show','pending');
+    statusEl.querySelector('i').className = 'fa-solid fa-spinner fa-spin';
+    statusTxt.textContent = `Testando conexão com ${host}...`;
+    setTimeout(()=>{
+        statusEl.classList.remove('pending');
+        statusEl.classList.add('ok');
+        statusEl.querySelector('i').className = 'fa-solid fa-circle-check';
+        statusTxt.textContent = `Conexão autenticada com sucesso em ${host}.`;
+        toast(`Conexão de teste enviada para ${email}.`);
+    }, 1300);
+});
+
+/* Restaurar padrão */
+document.getElementById('cfgRestaurar').addEventListener('click', ()=>{
+    localStorage.removeItem(CFG_STORAGE_KEY);
+    carregarConfiguracoes();
+    toast('Configurações restauradas para o padrão.');
+});
+
+/* Salvar configurações */
+document.getElementById('cfgSalvar').addEventListener('click', ()=>{
+    const cfg = lerConfiguracoesDaTela();
+    localStorage.setItem(CFG_STORAGE_KEY, JSON.stringify(cfg));
+    toast('Configurações salvas com sucesso!');
+    document.getElementById('cfgSavedHint').innerHTML = `<i class="fa-solid fa-circle-check" style="color:#2ed573;"></i> Salvo agora — ${nowStamp()}`;
+    setTimeout(()=> cfgScreen.classList.remove('open'), 500);
+});
+
+/* Aplica as notificações automáticas configuradas quando uma encomenda é registrada */
+function aplicarNotificacaoEnvio(morador, codigo){
+    let cfg = cfgDefaults;
+    try{
+        const raw = localStorage.getItem(CFG_STORAGE_KEY);
+        if(raw) cfg = {...cfgDefaults, ...JSON.parse(raw)};
+    }catch(e){ /* ignora */ }
+
+    const msg = cfg.msgPersonalizada && cfg.mensagem
+        ? cfg.mensagem
+        : `Sua encomenda (código ${codigo}) chegou e está na portaria para retirada!`;
+
+    if(cfg.whats){
+        addNotif(`WhatsApp enviado — Unidade ${morador.unidade}`, msg);
+    }
+    if(cfg.emailNotif && cfg.smtpAtivo){
+        addNotif(`E-mail enviado — Unidade ${morador.unidade}`, msg);
+    }
+    if(cfg.statusAuto){
+        const enc = encomendas.find(e=> e.codigo===codigo);
+        const aplicarStatusAuto = ()=>{
+            if(enc && enc.status==='recebido'){
+                enc.status='aguardando';
+                addTimeline('aguardando', enc.unidade, 'Status automático: aguardando retirada');
+                renderAll();
+            }
+        };
+        if(cfg.tempoAtivo && cfg.tempoValor>0){
+            const ms = cfg.tempoUnidade==='minutos' ? cfg.tempoValor*60000 : cfg.tempoValor*1000;
+            setTimeout(aplicarStatusAuto, ms);
+        } else {
+            aplicarStatusAuto();
+        }
+    }
+}
+
 /* ---------------- INIT ---------------- */
-renderAll();
+async function initPainel(){
+    carregarConfiguracoes();
+    await Promise.all([
+        carregarEncomendasDoBanco(),
+        carregarMoradoresDoBanco(),
+        carregarTimelineDoBanco()
+    ]);
+    renderAll();
+}
+initPainel();
 </script>
 </body>
 </html>
