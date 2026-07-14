@@ -458,3 +458,13 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando em: http://localhost:${PORT}`);
     console.log(`==========================================\n`);
 });
+
+
+
+fetch("database.json")
+.then(r => r.json())
+.then(data => {
+
+    console.log(data.usuarios);
+
+});g
