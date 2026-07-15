@@ -4,7 +4,8 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+// Usa a porta fornecida pelo ambiente (Render, etc.) ou 3000 para desenvolvimento local
+const PORT = process.env.PORT || 3000;
 
 // ============================
 // MIDDLEWARES
@@ -13,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configura o Express para servir os arquivos direto da raiz do projeto
+// Configura o Express para servir os arquivos estáticos
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -26,6 +27,7 @@ const db = new sqlite3.Database("./banco.sqlite", (err) => {
     } else {
         console.log("Banco de dados SQLite conectado com sucesso!");
 
+        // Criando as tabelas do sistema
         db.run(`
             CREATE TABLE IF NOT EXISTS usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,7 +38,6 @@ const db = new sqlite3.Database("./banco.sqlite", (err) => {
             )
         `);
 
-        // Nova tabela para os dados do condomínio/empresa cadastrado
         db.run(`
             CREATE TABLE IF NOT EXISTS condominios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,7 +53,6 @@ const db = new sqlite3.Database("./banco.sqlite", (err) => {
             )
         `);
 
-        // Moradores cadastrados por cada administrador/condomínio
         db.run(`
             CREATE TABLE IF NOT EXISTS moradores (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,7 +64,6 @@ const db = new sqlite3.Database("./banco.sqlite", (err) => {
             )
         `);
 
-        // Encomendas/pacotes registrados na portaria
         db.run(`
             CREATE TABLE IF NOT EXISTS encomendas (
                 codigo INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,7 +87,6 @@ const db = new sqlite3.Database("./banco.sqlite", (err) => {
             )
         `);
 
-        // Linha do tempo (histórico de movimentações) do painel
         db.run(`
             CREATE TABLE IF NOT EXISTS timeline (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -108,7 +106,7 @@ const db = new sqlite3.Database("./banco.sqlite", (err) => {
 // ROTAS DA API
 // ============================
 
-// 1. ROTA DE REGISTRO SIMPLES (mantida como estava, caso ainda seja usada em outro lugar)
+// 1. ROTA DE REGISTRO SIMPLES
 app.post("/api/registrar", (req, res) => {
     try {
         console.log("Dados de registro recebidos:", req.body);
@@ -147,7 +145,7 @@ app.post("/api/registrar", (req, res) => {
     }
 });
 
-// 2. ROTA DE CADASTRO COMPLETO (condomínio + conta do administrador)
+// 2. ROTA DE CADASTRO COMPLETO (condomínio + administrador)
 app.post("/api/cadastro", (req, res) => {
     try {
         console.log("Dados de cadastro recebidos:", req.body);
@@ -164,7 +162,6 @@ app.post("/api/cadastro", (req, res) => {
             senha
         } = req.body;
 
-        // Validação dos campos obrigatórios
         if (!nomeCondominio || !documento || !cep || !cidade || !endereco || !bairro || !tipo || !email || !senha) {
             return res.status(400).json({
                 sucesso: false,
@@ -172,7 +169,6 @@ app.post("/api/cadastro", (req, res) => {
             });
         }
 
-        // Usa o e-mail como login também, já que o formulário de cadastro não tem campo de "login" separado
         const login = email;
         const nomeAdministrador = nomeCondominio;
 
@@ -280,7 +276,6 @@ app.post("/api/login", (req, res) => {
 // ROTAS: MORADORES
 // ============================
 
-// Lista os moradores cadastrados por um administrador (usuario_id)
 app.get("/api/moradores/:usuario_id", (req, res) => {
     const { usuario_id } = req.params;
     db.all(
@@ -296,7 +291,6 @@ app.get("/api/moradores/:usuario_id", (req, res) => {
     );
 });
 
-// Cadastra um novo morador
 app.post("/api/moradores", (req, res) => {
     const { usuario_id, unidade, nome, foto } = req.body;
 
@@ -318,7 +312,6 @@ app.post("/api/moradores", (req, res) => {
 // ROTAS: ENCOMENDAS
 // ============================
 
-// Lista as encomendas de um administrador (usuario_id)
 app.get("/api/encomendas/:usuario_id", (req, res) => {
     const { usuario_id } = req.params;
     db.all(
@@ -335,7 +328,6 @@ app.get("/api/encomendas/:usuario_id", (req, res) => {
     );
 });
 
-// Registra uma nova encomenda
 app.post("/api/encomendas", (req, res) => {
     const {
         usuario_id, unidade, nome, transp, tipo, grupo,
@@ -372,7 +364,6 @@ app.post("/api/encomendas", (req, res) => {
     );
 });
 
-// Atualiza status/escaninho de uma encomenda (retirada, separação, rota etc.)
 app.patch("/api/encomendas/:codigo", (req, res) => {
     const { codigo } = req.params;
     const { status, escaninho } = req.body;
@@ -402,10 +393,9 @@ app.patch("/api/encomendas/:codigo", (req, res) => {
 });
 
 // ============================
-// ROTAS: TIMELINE (histórico)
+// ROTAS: TIMELINE
 // ============================
 
-// Lista o histórico de movimentações de um administrador (mais recentes primeiro)
 app.get("/api/timeline/:usuario_id", (req, res) => {
     const { usuario_id } = req.params;
     db.all(
@@ -421,7 +411,6 @@ app.get("/api/timeline/:usuario_id", (req, res) => {
     );
 });
 
-// Registra um evento no histórico
 app.post("/api/timeline", (req, res) => {
     const { usuario_id, tipo, unidade, texto, ts, por } = req.body;
 
@@ -435,12 +424,14 @@ app.post("/api/timeline", (req, res) => {
     });
 });
 
-// Rota raiz: redireciona para a tela de login
+// ============================
+// ROTAS DE NAVEGAÇÃO / FRONTEND
+// ============================
+
 app.get("/", (req, res) => {
     res.redirect("/login.html");
 });
 
-// Rota para garantir a entrega das páginas caso estejam soltas na raiz
 app.get("/:pagina", (req, res) => {
     res.sendFile(path.join(__dirname, req.params.pagina), (err) => {
         if (err) {
@@ -453,18 +444,12 @@ app.get("/:pagina", (req, res) => {
     });
 });
 
+// ============================
+// INICIALIZAÇÃO DO SERVIDOR
+// ============================
+
 app.listen(PORT, () => {
     console.log(`\n============= ZIBBOX BACKEND =============`);
-    console.log(`Servidor rodando em: http://localhost:${PORT}`);
+    console.log(`Servidor rodando na porta: ${PORT}`);
     console.log(`==========================================\n`);
-});
-
-
-
-fetch("database.json")
-.then(r => r.json())
-.then(data => {
-
-    console.log(data.usuarios);
-
 });
