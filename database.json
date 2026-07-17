@@ -1,11 +1,27 @@
 {
-  "usuarios": [],
-
-  "condominios": [],
-
+  "usuarios": [
+    {
+      "id": 1,
+      "nomeAdministrador": "Condomínio Vista Bela",
+      "login": "admin@vistabela.com",
+      "email": "admin@vistabela.com",
+      "senha": "123"
+    }
+  ],
+  "condominios": [
+    {
+      "id": 1,
+      "nome": "Condomínio Vista Bela",
+      "documento": "12.345.678/0001-90",
+      "cep": "12345-678",
+      "cidade": "São Paulo",
+      "endereco": "Av. Principal, 100",
+      "bairro": "Centro",
+      "tipo": "Residencial",
+      "usuario_id": 1
+    }
+  ],
   "moradores": [],
-
   "encomendas": [],
-
   "timeline": []
 }
