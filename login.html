@@ -27,6 +27,10 @@
             transition: all 0.3s ease;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             background-color: var(--bg);
             display: flex;
@@ -34,6 +38,22 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+        }
+
+        /* ===========================================================
+           SHELL — em telas pequenas é só um wrapper transparente;
+           em telas grandes vira o "cartão" de duas colunas (PC).
+        =========================================================== */
+        .shell {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Painel de marca (visível só em telas grandes) */
+        .brand-panel {
+            display: none;
         }
 
         /* Container Limitador do Celular */
@@ -52,12 +72,13 @@
             color: var(--text-white);
         }
 
-        @media (max-height: 740px) or (max-width: 400px) {
+        @media (max-height: 740px), (max-width: 400px) {
             .app-container {
                 height: 100vh;
                 max-height: 100vh;
                 border-radius: 0;
             }
+            body { padding: 0; }
         }
 
         /* Topo */
@@ -72,7 +93,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
             font-family: 'Franklin Gothic Medium', Arial, sans-serif;
         }
         .logo span { color: var(--accent); }
@@ -83,8 +103,8 @@
             background-image: linear-gradient(to bottom, rgba(42, 0, 84, 0.75) 0%, rgba(74, 0, 140, 0.95) 100%), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9RymbAi6sp4FNX-nP4ExkzlZatxGOhcsVn_dxMlQoqGpNv9o8A0m-8GeT&s=10');
             background-size: cover;
             background-position: center;
-            border-top-left-radius: 60px; 
-            padding: 25px 25px 30px 25px; /* Aumentado padding inferior para criar área de escape no scroll */
+            border-top-left-radius: 60px;
+            padding: 25px 25px 30px 25px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -141,7 +161,7 @@
             flex-direction: column;
             gap: 12px;
         }
-        
+
         .input-box {
             background-color: rgba(255, 255, 255, 0.1);
             border: 1.5px solid rgba(255, 255, 255, 0.15);
@@ -179,6 +199,8 @@
             align-items: center;
             font-size: 12px;
             margin-bottom: 5px;
+            flex-wrap: wrap;
+            gap: 6px;
         }
         .checkbox-container {
             display: flex;
@@ -247,7 +269,7 @@
         /* Rodapé Fixo Inferior */
         .footer {
             text-align: center;
-            padding: 2px 0; /* Aumentado sutilmente para manter o padrão das outras telas */
+            padding: 2px 0;
             background-color: #230046;
             flex-shrink: 0;
             width: 100%;
@@ -264,79 +286,238 @@
             opacity: 0.8;
         }
         .footer a:hover { opacity: 1; color: var(--accent); }
+
+        /* ===========================================================
+           TABLET — card um pouco maior, sem trocar o layout
+        =========================================================== */
+        @media (min-width: 600px) and (max-width: 899px) {
+            .shell { max-width: 420px; }
+            .app-container { max-width: 420px; height: 780px; }
+        }
+
+        /* ===========================================================
+           DESKTOP — layout de duas colunas: painel de marca + card
+        =========================================================== */
+        @media (min-width: 900px) {
+            body {
+                padding: 40px;
+                align-items: center;
+            }
+
+            .shell {
+                max-width: 980px;
+                width: 100%;
+                background: #ffffff;
+                border-radius: 32px;
+                box-shadow: 0 30px 60px rgba(42, 0, 84, 0.18);
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: 1.05fr 0.95fr;
+                min-height: 720px;
+            }
+
+            .brand-panel {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 56px 48px;
+                background:
+                    linear-gradient(160deg, rgba(42,0,84,0.88) 0%, rgba(74,0,140,0.92) 55%, rgba(0,176,255,0.55) 100%),
+                    url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9RymbAi6sp4FNX-nP4ExkzlZatxGOhcsVn_dxMlQoqGpNv9o8A0m-8GeT&s=10');
+                background-size: cover;
+                background-position: center;
+                color: var(--text-white);
+            }
+
+            .brand-panel .logo {
+                font-size: 30px;
+                justify-content: flex-start;
+            }
+
+            .brand-copy h1 {
+                font-size: 32px;
+                font-weight: 700;
+                line-height: 1.25;
+                margin-bottom: 16px;
+                max-width: 380px;
+            }
+
+            .brand-copy p {
+                font-size: 15px;
+                line-height: 1.6;
+                opacity: 0.85;
+                max-width: 360px;
+            }
+
+            .brand-stats {
+                display: flex;
+                gap: 32px;
+            }
+
+            .brand-stats div strong {
+                display: block;
+                font-size: 24px;
+                font-weight: 700;
+            }
+            .brand-stats div span {
+                font-size: 12px;
+                opacity: 0.75;
+            }
+
+            .app-container {
+                width: 100%;
+                max-width: none;
+                height: auto;
+                max-height: none;
+                border-radius: 0;
+                box-shadow: none;
+                background: #ffffff;
+                color: #221033;
+            }
+
+            .app-container .header { display: none; }
+
+            .main-content {
+                background-image: none;
+                border-top-left-radius: 0;
+                padding: 56px 56px 40px;
+                justify-content: center;
+            }
+
+            .login-title {
+                font-size: 26px;
+                color: #221033;
+            }
+
+            .profile-name { color: #4a008c; opacity: 1; font-weight: 500; }
+
+            .input-box {
+                background-color: #f5f3fb;
+                border: 1.5px solid #e4dcf3;
+            }
+            .input-box:focus-within {
+                border-color: var(--accent);
+                background-color: #f0f8ff;
+            }
+            .input-box i { color: #8a6bb0; }
+            .input-box input { color: #221033; }
+            .input-box input::placeholder { color: #9a8bb5; }
+
+            .extra-links a { color: #4a008c; opacity: 1; }
+            .checkbox-container { color: #4a4458; }
+
+            .news-section h3 { color: #221033; }
+            .news-card {
+                background: #f5f3fb;
+                border: 1px solid #e4dcf3;
+            }
+            .news-text { color: #4a4458; }
+
+            .footer {
+                background: #ffffff;
+                padding: 16px 0 20px;
+            }
+            .footer a { color: #4a008c; opacity: 0.85; }
+            .footer a:hover { opacity: 1; color: var(--accent-hover); }
+        }
+
+        @media (min-width: 1200px) {
+            .shell { max-width: 1080px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <div class="header">
-            <div class="logo">
-                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
-                <span>Zib</span>Box
+    <div class="shell">
+
+        <!-- Painel de marca — só aparece em telas de PC (min-width: 900px) -->
+        <div class="brand-panel">
+            <div>
+                <div class="logo">
+                    <i class="fa-solid fa-cube" style="color: var(--accent); margin-right:10px;"></i>
+                    <span>Zib</span>Box
+                </div>
+                <div class="brand-copy" style="margin-top: 60px;">
+                    <h1>Todo o controle das encomendas do seu condomínio, em um só lugar.</h1>
+                    <p>Acesse o painel administrativo para acompanhar entregas, moradores e notificações em tempo real.</p>
+                </div>
+            </div>
+            <div class="brand-stats">
+                <div><strong>+120</strong><span>Condomínios ativos</span></div>
+                <div><strong>24/7</strong><span>Monitoramento</span></div>
+                <div><strong>100%</strong><span>Rastreável</span></div>
             </div>
         </div>
 
-        <div class="main-content">
-            
-            <div class="profile-section">
-                <div class="profile-wrapper">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Foto de perfil" class="profile-img">
-                    <span class="profile-badge"></span>
+        <div class="app-container">
+
+            <div class="header">
+                <div class="logo">
+                    <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
+                    <span>Zib</span>Box
                 </div>
-                <div class="profile-name">Jardelisson Silva</div>
             </div>
 
-            <h2 class="login-title">Acessar Conta</h2>
+            <div class="main-content">
 
-            <form class="form-container" action="#" method="POST">
-                
-                <div class="input-box">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" placeholder="E-mail ou usuário" required>
+                <div class="profile-section">
+                    <div class="profile-wrapper">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Foto de perfil" class="profile-img">
+                        <span class="profile-badge"></span>
+                    </div>
+                    <div class="profile-name">Jardelisson Silva</div>
                 </div>
 
-                <div class="input-box">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="passwordField" placeholder="Digite sua senha" required>
-                    <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
-                </div>
+                <h2 class="login-title">Acessar Conta</h2>
 
-                <div class="extra-links">
-                    <label class="checkbox-container">
-                        <input type="checkbox"> Lembrar acesso
-                    </label>
-                    <a href="#">Esqueceu a senha?</a>
-                </div>
+                <form class="form-container" id="formLogin" method="POST">
 
-                <div class="news-section">
-                    <h3>Novidades</h3>
-                    <div class="news-card">
-                        <div class="news-icon">
-                            <i class="fa-solid fa-bell"></i>
-                        </div>
-                        <div class="news-text">
-                            Tenha todo o controle das encomendas do seu condomínio na palma da mão.
+                    <div class="input-box">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="emailAdmin" placeholder="E-mail ou usuário" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="passwordField" placeholder="Digite sua senha" required>
+                        <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+
+                    <div class="extra-links">
+                        <label class="checkbox-container">
+                            <input type="checkbox"> Lembrar acesso
+                        </label>
+                        <a href="#">Esqueceu a senha?</a>
+                    </div>
+
+                    <div class="news-section">
+                        <h3>Novidades</h3>
+                        <div class="news-card">
+                            <div class="news-icon">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                            <div class="news-text">
+                                Tenha todo o controle das encomendas do seu condomínio na palma da mão.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-<button type="submit" class="btn-submit" a href="zibbox-painel.html">Entrar</button>
-            </form>
+                    <button type="submit" class="btn-submit" id="btnEntrar">Entrar</button>
+                </form>
+            </div>
+
+            <!-- O link aponta para a primeira etapa do fluxo (cadastro.html) -->
+            <div class="footer">
+                <a href="cadastro.html"><i class="fa-solid fa-building-user"></i> Cadastrar meu condomínio</a>
+            </div>
+
         </div>
-
-        <!-- O link aponta para a primeira etapa do fluxo (cadastro.html) -->
-        <div class="footer">
-            <a href="cadastro.html"><i class="fa-solid fa-building-user"></i> Cadastrar meu condomínio</a>
-        </div>
-
     </div>
 
-    
 <script>
 // 1. Mostrar/Esconder Senha
 const togglePassword = document.querySelector('#togglePassword');
-const campoSenha = document.querySelector('#senhaUsuario'); // Verifique o ID do seu campo de senha no HTML
+const campoSenha = document.querySelector('#passwordField');
 
 if (togglePassword && campoSenha) {
     togglePassword.addEventListener('click', function () {
@@ -348,19 +529,21 @@ if (togglePassword && campoSenha) {
 }
 
 // 2. Lógica de Autenticação com o Servidor
-const formLogin = document.querySelector('#formLogin') || document.querySelector('form');
+const formLogin = document.querySelector('#formLogin');
+const btnEntrar = document.querySelector('#btnEntrar');
+const campoIdentificador = document.querySelector('#emailAdmin');
 
 formLogin.addEventListener('submit', function (evento) {
     evento.preventDefault();
 
-    // Verifique se os IDs abaixo batem exatamente com os id="" dos seus inputs no HTML
-    const identificadorDigitado = document.querySelector('#emailAdmin') ? document.querySelector('#emailAdmin').value : document.querySelector('input[type="text"]').value;
-    const senhaDigitada = campoSenha ? campoSenha.value : document.querySelector('input[type="password"]').value;
-
     const dadosLogin = {
-        login: identificadorDigitado, // O backend aceita o identificador aqui
-        senha: senhaDigitada
+        login: campoIdentificador.value, // O backend aceita e-mail ou login neste campo
+        senha: campoSenha.value
     };
+
+    btnEntrar.disabled = true;
+    const textoOriginalBtn = btnEntrar.innerHTML;
+    btnEntrar.innerHTML = "Entrando...";
 
     // Usando rota relativa limpa compatível com a pasta public
     fetch("/api/login", {
@@ -372,23 +555,23 @@ formLogin.addEventListener('submit', function (evento) {
     })
     .then(async response => {
         const dados = await response.json();
-        
+
         if (!response.ok) {
             // Se o status for 401 ou 400, extrai a mensagem de erro real vinda do banco
             throw new Error(dados.mensagem || 'Usuário ou senha incorretos.');
         }
-        
+
         return dados;
     })
     .then(dados => {
         if (dados.sucesso) {
             alert(dados.mensagem || "Login realizado com sucesso!");
-            
+
             // Salva a sessão do usuário logado
             localStorage.setItem('usuario_logado', JSON.stringify(dados.usuario));
-            
+
             // Redireciona para a tela inicial do sistema (ajuste o nome do arquivo se for diferente)
-            window.location.href = "home.html"; 
+            window.location.href = "zibbox-painel.html";
         } else {
             alert("Erro: " + dados.mensagem);
         }
@@ -400,6 +583,10 @@ formLogin.addEventListener('submit', function (evento) {
         } else {
             alert("Servidor indisponível. Certifique-se de que o Node está rodando no terminal na porta 3000.");
         }
+    })
+    .finally(() => {
+        btnEntrar.disabled = false;
+        btnEntrar.innerHTML = textoOriginalBtn;
     });
 });
 </script>
