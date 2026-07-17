@@ -245,7 +245,7 @@ app.post("/api/login", (req, res) => {
             (err, usuario) => {
                 if (err) {
                     console.error("Erro no banco:", err);
-                    return res.status(500).json({ sucesso: false, mensagem: "Erro no banco de dados." });
+                    return res.status(500).json({ sucesso: false, message: "Erro no banco de dados." });
                 }
 
                 if (!usuario) {
@@ -425,6 +425,17 @@ app.post("/api/timeline", (req, res) => {
 });
 
 // ============================
+// TRATAMENTO DE ROTAS /API NÃO ENCONTRADAS (GARANTE RETORNO JSON)
+// ============================
+// Se bater em qualquer rota começando com "/api" que não foi definida acima, retorna JSON amigável de erro
+app.use("/api", (req, res) => {
+    res.status(404).json({
+        sucesso: false,
+        mensagem: `Rota de API não encontrada: ${req.method} ${req.originalUrl}`
+    });
+});
+
+// ============================
 // ROTAS DE NAVEGAÇÃO / FRONTEND
 // ============================
 
@@ -433,11 +444,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:pagina", (req, res) => {
+    // Garante que tentativas de requisições de API que cheguem aqui não tentem carregar um HTML
+    if (req.params.pagina.startsWith("api")) {
+        return res.status(404).json({
+            sucesso: false,
+            mensagem: "Recurso de API não encontrado neste servidor."
+        });
+    }
+
     res.sendFile(path.join(__dirname, req.params.pagina), (err) => {
         if (err) {
             res.sendFile(path.join(__dirname, "public", req.params.pagina), (err2) => {
                 if (err2) {
-                    res.status(404).send("Página não encontrada.");
+                    res.status(404).send("<h1>Erro 404 - Página não encontrada.</h1>");
                 }
             });
         }
