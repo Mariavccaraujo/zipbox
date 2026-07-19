@@ -4,293 +4,418 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZibBox - Cadastro</title>
-    <!-- No arquivo cadastro.html altere a tag do botão ou o redirecionamento JS para: -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #4a008c;
-            --accent: #00b0ff;
-            --accent-hover: #0091ea;
-            --bg: #f5f6fa;
-            --text-dark: #1e1e24;
-            --text-light: #7f8c8d;
-            --border-color: #dcdde1;
+        :root{
+            --primary:#4a008c;
+            --primary-dark:#2a0054;
+            --accent:#00b0ff;
+            --accent-hover:#0091ea;
+            --bg:#f5f6fa;
+            --text-dark:#1e1e24;
+            --text-light:#7f8c8d;
+            --border-color:#e1dfe8;
+            --card-radius:26px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+        html{scroll-behavior:smooth;}
+        body{
+            background:linear-gradient(150deg,var(--primary) 0%,var(--primary-dark) 100%);
+            min-height:100vh;color:var(--text-dark);
+            justify-content:center;align-items:flex-start;
+            padding:0;position:relative;overflow-x:hidden;
+        }
+        /* Brilho de fundo — mesmo elemento de assinatura usado no hero da landing e do login */
+        body::before{
+            content:"";position:fixed;width:620px;height:620px;border-radius:50%;
+            background:radial-gradient(circle,rgba(0,176,255,0.30),transparent 70%);
+            top:-220px;right:-200px;pointer-events:none;z-index:0;
+        }
+        body::after{
+            content:"";position:fixed;width:520px;height:520px;border-radius:50%;
+            background:radial-gradient(circle,rgba(0,176,255,0.16),transparent 70%);
+            bottom:-220px;left:-180px;pointer-events:none;z-index:0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
+        /* ---------- TOPO FIXO (fora do card, com a marca) ---------- */
+        .top-strip{
+            width:100%;position:relative;z-index:2;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:22px 24px;max-width:1000px;margin:0 auto;
+        }
+        .back-btn{
+            width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.18);color:#fff;display:flex;align-items:center;
+            justify-content:center;text-decoration:none;flex-shrink:0;
+        }
+        .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+        .logo{
+            font-size:19px;font-weight:800;color:#fff;display:flex;align-items:center;
+            font-family:'Franklin Gothic Medium',Arial,sans-serif;
+        }
+        .logo span{color:var(--accent);}
+        .step-chip{
+            font-size:11px;font-weight:700;color:#fff;background:rgba(255,255,255,0.12);
+            border:1px solid rgba(255,255,255,0.22);padding:6px 13px;border-radius:30px;letter-spacing:.3px;
         }
 
-        body {
-            background-color: var(--bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+        /* ---------- WRAPPER + CARD ---------- */
+        .page-wrap{
+            width:100%;max-width:640px;position:relative;z-index:2;
+            padding:6px 20px 60px;margin:0 auto;
         }
+        .card{
+            background:#fff;border-radius:var(--card-radius);
+            box-shadow:0 30px 70px rgba(20,0,45,0.35);
+            padding:34px 30px 30px;
+        }
+        .card-head{text-align:center;margin-bottom:26px;}
+        .card-head h1{font-size:24px;font-weight:800;margin-bottom:6px;}
+        .card-head p{font-size:13.5px;color:var(--text-light);}
 
-        /* Container do App - Travado com overflow hidden */
-        .app-container {
-            width: 100%;
-            max-width: 380px;
-            height: 800px;
-            max-height: 92vh;
-            background: var(--primary);
-            border-radius: 40px;
-            overflow: hidden; /* Evita que qualquer elemento vaze para a esquerda/direita */
-            position: relative;
-            box-shadow: 0 20px 40px rgba(74, 0, 140, 0.25);
-            display: flex;
-            flex-direction: column;
+        /* ---------- FORM ---------- */
+        .form-container{display:flex;flex-direction:column;gap:16px;}
+        .fieldset{display:flex;flex-direction:column;gap:12px;}
+        .fieldset-title{
+            font-size:11.5px;font-weight:700;color:var(--primary);text-transform:uppercase;
+            letter-spacing:.6px;display:flex;align-items:center;gap:8px;margin-bottom:-2px;
         }
+        .fieldset-title::after{content:"";flex:1;height:1px;background:var(--border-color);}
 
-        @media (max-height: 740px) or (max-width: 400px) {
-            .app-container {
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0;
-            }
-        }
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
-        /* Topo Roxo corrigido e centralizado */
-        .header {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 20px 20px;
-            color: white;
-            flex-shrink: 0;
-            width: 100%;
+        .input-group{
+            position:relative;display:flex;align-items:center;gap:10px;
+            border:1.5px solid var(--border-color);border-radius:13px;padding:12px 14px;
+            background:#fbfaff;
         }
-        
-        .back-btn {
-            position: absolute;
-            left: 25px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none;
+        .input-group.active,.input-group:focus-within{
+            border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(0,176,255,0.08);
         }
-        .back-btn:hover {
-            color: var(--accent);
+        .input-group i{color:var(--text-light);font-size:15px;width:18px;text-align:center;flex-shrink:0;}
+        .input-group.active i,.input-group:focus-within i{color:var(--accent);}
+        .input-group input,.input-group select{
+            width:100%;border:none;outline:none;background:none;font-size:13.5px;color:var(--text-dark);
         }
+        .input-group input::placeholder{color:var(--text-light);font-weight:300;}
+        .input-group select{appearance:none;-webkit-appearance:none;cursor:pointer;}
+        .select-arrow{position:absolute;right:14px;color:var(--text-light);pointer-events:none;font-size:12px;}
+        .toggle-password{cursor:pointer;}
+        .hint{font-size:11px;color:var(--text-light);margin-top:-6px;padding-left:2px;}
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+        /* Resumo da conta já criada na etapa 1 */
+        .resumo-conta{
+            display:none;background:#f0faff;border:1.5px solid var(--accent);border-radius:14px;
+            padding:14px 16px;align-items:center;gap:12px;
         }
-        .logo span {
-            color: var(--accent);
+        .resumo-conta .ic{
+            width:36px;height:36px;border-radius:10px;background:rgba(0,176,255,0.15);color:var(--accent-hover);
+            display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;
         }
+        .resumo-conta .txt{flex:1;min-width:0;}
+        .resumo-conta .txt b{display:block;font-size:13px;}
+        .resumo-conta .txt span{font-size:11.5px;color:var(--text-light);}
+        .resumo-conta a{font-size:11.5px;color:var(--accent-hover);text-decoration:none;font-weight:600;white-space:nowrap;}
 
-        /* Corpo Branco Arredondado */
-        .main-content {
-            flex: 1;
-            background-color: white;
-            border-top-left-radius: 40px; 
-            border-top-right-radius: 40px; 
-            padding: 30px 25px;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
+        /* Botão */
+        .btn-submit{
+            width:100%;background:var(--accent);color:#fff;border:none;padding:15px;
+            border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;
+            display:flex;justify-content:center;align-items:center;gap:10px;
+            box-shadow:0 10px 25px rgba(0,176,255,0.32);margin-top:4px;
         }
+        .btn-submit:hover{background:var(--accent-hover);}
+        .btn-submit:disabled{opacity:.6;cursor:not-allowed;}
 
-        .main-content::-webkit-scrollbar {
-            width: 4px;
-        }
-        .main-content::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
+        .switch-link{text-align:center;font-size:12.5px;color:var(--text-light);margin-top:18px;}
+        .switch-link a{color:var(--accent-hover);font-weight:600;text-decoration:none;}
 
-        .page-title {
-            color: var(--text-dark);
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 25px;
+        /* ---------- RESPONSIVO ---------- */
+        @media (min-width:641px){
+            .page-wrap{max-width:760px;padding-top:10px;}
+            .card{padding:44px 54px 40px;}
+            .card-head h1{font-size:27px;}
         }
-
-        /* Formulário */
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-        }
-
-        .input-group {
-            position: relative;
-            display: flex;
-            align-items: center;
-            border-bottom: 1.5px solid var(--border-color);
-            padding: 8px 0;
-        }
-
-        .input-group.active, .input-group:focus-within {
-            border-bottom-color: var(--accent);
-        }
-
-        .input-group i {
-            color: var(--text-dark);
-            font-size: 18px;
-            width: 30px;
-            text-align: left;
-        }
-
-        .input-group input, .input-group select {
-            width: 100%;
-            border: none;
-            outline: none;
-            background: none;
-            font-size: 14px;
-            color: var(--text-dark);
-            padding-right: 20px;
-        }
-
-        .input-group input::placeholder {
-            color: var(--text-light);
-            font-weight: 300;
-        }
-
-        .input-group select {
-            appearance: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-        }
-
-        .select-arrow {
-            position: absolute;
-            right: 5px;
-            color: var(--text-dark);
-            pointer-events: none;
-            font-size: 14px !important;
-        }
-
-        /* Botão Continuar */
-        .btn-container {
-            margin-top: auto;
-            padding-top: 25px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: white;
-            color: var(--text-dark);
-            border: 2px solid var(--accent);
-            padding: 12px;
-            border-radius: 25px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 10px rgba(0, 176, 255, 0.1);
-        }
-
-        .btn-submit:hover {
-            background: #f0faff;
-            box-shadow: 0 6px 15px rgba(0, 176, 255, 0.2);
-            transform: translateY(-1px);
+        @media (max-width:480px){
+            .grid-2{grid-template-columns:1fr;}
+            .card{padding:26px 20px 24px;border-radius:22px;}
+            .top-strip{padding:18px 16px;}
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <div class="header">
-            <a href="login.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-            <div class="logo">
-                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
-                <span>Zib</span>Box
+    <div class="top-strip">
+        <a href="login.html" class="back-btn" id="backBtn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
+        <span class="step-chip">Etapa 2 de 2</span>
+    </div>
+
+    <div class="page-wrap">
+        <div class="card">
+            <div class="card-head">
+                <h1>Cadastre seu condomínio ou empresa</h1>
+                <p>Leva menos de 2 minutos. Você pode editar tudo depois.</p>
             </div>
-        </div>
 
-        <div class="main-content">
-            <h2 class="page-title">Cadastro</h2>
+            <form class="form-container" id="formCadastro" method="POST" novalidate>
 
-            <form class="form-container" action="#" method="POST">
-                
-                <div class="input-group active">
-                    <i class="fa-solid fa-building"></i>
-                    <input type="text" placeholder="Nome do condomínio ou empresa" required>
+                <!-- DADOS DO ESTABELECIMENTO -->
+                <div class="fieldset">
+                    <div class="fieldset-title">Sobre o estabelecimento</div>
+
+                    <div class="input-group active">
+                        <i class="fa-solid fa-building"></i>
+                        <input type="text" id="nomeCondominio" placeholder="Nome do condomínio ou empresa" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-house-laptop"></i>
+                        <select id="tipo" required>
+                            <option value="" disabled selected hidden>Tipo do estabelecimento</option>
+                            <option value="condominio_residencial">Condomínio Residencial</option>
+                            <option value="condominio_comercial">Condomínio Comercial</option>
+                            <option value="predio_comercial">Prédio Comercial</option>
+                            <option value="empresa">Empresa / Escritório</option>
+                            <option value="loja_comercio">Loja / Comércio</option>
+                            <option value="hotel_pousada">Hotel / Pousada</option>
+                            <option value="coworking">Coworking</option>
+                            <option value="clinica_consultorio">Clínica / Consultório</option>
+                            <option value="outro">Outro tipo de estabelecimento</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <i class="fa-solid fa-file-invoice"></i>
+                            <input type="text" id="documento" placeholder="CPF ou CNPJ" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" inputmode="numeric" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <i class="fa-solid fa-magnifying-glass-location"></i>
+                            <input type="text" id="cep" placeholder="CEP" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-city"></i>
+                            <input type="text" id="cidade" placeholder="Cidade" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" id="endereco" placeholder="Endereço" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-map-pin"></i>
+                        <input type="text" id="bairro" placeholder="Bairro" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <i class="fa-solid fa-file-invoice"></i>
-                    <input type="text" placeholder="Cpf ou CNPJ" required>
+                <!-- RESPONSÁVEL -->
+                <div class="fieldset">
+                    <div class="fieldset-title">Responsável</div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <input type="text" id="nomeResponsavel" placeholder="Nome do síndico ou administrador(a)" required>
+                    </div>
+                    <p class="hint">Quem a portaria deve procurar em caso de dúvidas ou urgências.</p>
                 </div>
 
-                <div class="input-group">
-                    <i class="fa-solid fa-magnifying-glass-location"></i>
-                    <input type="text" placeholder="CEP" required>
+                <!-- DADOS DE ACESSO -->
+                <div class="fieldset" id="blocoDadosAcesso">
+                    <div class="fieldset-title">Dados de acesso</div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="E-mail" required>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="senha" placeholder="Crie uma senha" required minlength="6">
+                            <i class="fa-regular fa-eye toggle-password" id="toggleSenha"></i>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="confirmarSenha" placeholder="Confirme a senha" required minlength="6">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <i class="fa-solid fa-city"></i>
-                    <input type="text" placeholder="Cidade" required>
+                <!-- Aparece só quando a pessoa já criou o login na etapa anterior (criar-login.html) -->
+                <div class="resumo-conta" id="resumoContaCriada">
+                    <div class="ic"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="txt">
+                        <b id="resumoContaNome">—</b>
+                        <span id="resumoContaEmail">—</span>
+                    </div>
+                    <a href="criar-login.html">Trocar</a>
                 </div>
 
-                <div class="input-group">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <input type="text" placeholder="Endereço" required>
-                </div>
+                <button type="submit" class="btn-submit" id="btnCadastrar">
+                    Criar minha conta <i class="fa-solid fa-chevron-right"></i>
+                </button>
 
-                <div class="input-group">
-                    <i class="fa-solid fa-map-pin"></i>
-                    <input type="text" placeholder="Bairro" required>
-                </div>
-
-                <div class="input-group">
-                    <i class="fa-solid fa-house-laptop"></i>
-                    <select required>
-                        <option value="" disabled selected hidden>Tipo do estabelecimento</option>
-                        <option value="condominio_residencial">Condomínio Residencial</option>
-                        <option value="condominio_comercial">Condomínio Comercial</option>
-                        <option value="empresa">Empresa / Escritório</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-right select-arrow"></i>
-                </div>
-
-                <div class="btn-container">
-                    <button type="submit" class="btn-submit">
-                        Continuar <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-
+                <p class="switch-link">Já tem uma conta? <a href="login.html">Entrar</a></p>
             </form>
         </div>
-
     </div>
 
     <script>
+        // 0. Recupera os dados criados na etapa 1 (criar-login.html), se existirem
+        const step1Raw = sessionStorage.getItem('cadastro_step1');
+        let step1 = null;
+        if (step1Raw) {
+            try { step1 = JSON.parse(step1Raw); } catch (e) { step1 = null; }
+        }
+
+        if (step1) {
+            // Preenche e trava e-mail/senha com o que já foi criado, mostra o resumo
+            document.querySelector('#email').value = step1.email || '';
+            document.querySelector('#senha').value = step1.senha || '';
+            document.querySelector('#confirmarSenha').value = step1.senha || '';
+            if (step1.nome) document.querySelector('#nomeResponsavel').value = step1.nome;
+
+            document.getElementById('blocoDadosAcesso').style.display = 'none';
+            document.getElementById('resumoContaCriada').style.display = 'flex';
+            document.getElementById('resumoContaNome').textContent = step1.nome || 'Administrador';
+            document.getElementById('resumoContaEmail').textContent = step1.email || '';
+
+            document.getElementById('backBtn').setAttribute('href', 'criar-login.html');
+        }
+
+        // 1. Destacar o campo em foco
         const inputGroups = document.querySelectorAll('.input-group');
-        
         inputGroups.forEach(group => {
             const input = group.querySelector('input, select');
-            if(input) {
+            if (input) {
                 input.addEventListener('focus', () => {
                     inputGroups.forEach(g => g.classList.remove('active'));
                     group.classList.add('active');
                 });
             }
+        });
+
+        // 2. Mostrar/esconder senha
+        const toggleSenha = document.querySelector('#toggleSenha');
+        const campoSenha = document.querySelector('#senha');
+        if (toggleSenha && campoSenha) {
+            toggleSenha.addEventListener('click', function () {
+                const type = campoSenha.getAttribute('type') === 'password' ? 'text' : 'password';
+                campoSenha.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // 3. Máscara simples de telefone: (84) 9 9999-9999
+        const campoTelefone = document.querySelector('#telefone');
+        if (campoTelefone) {
+            campoTelefone.addEventListener('input', function () {
+                let v = this.value.replace(/\D/g, '').slice(0, 11);
+                if (v.length > 10) {
+                    v = v.replace(/(\d{2})(\d{1})(\d{4})(\d{0,4})/, '($1) $2 $3-$4');
+                } else if (v.length > 6) {
+                    v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+                } else if (v.length > 2) {
+                    v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+                } else if (v.length > 0) {
+                    v = v.replace(/(\d{0,2})/, '($1');
+                }
+                this.value = v.trim();
+            });
+        }
+
+        // 4. Máscara simples de CEP: 00000-000
+        const campoCep = document.querySelector('#cep');
+        if (campoCep) {
+            campoCep.addEventListener('input', function () {
+                let v = this.value.replace(/\D/g, '').slice(0, 8);
+                if (v.length > 5) v = v.replace(/(\d{5})(\d{0,3})/, '$1-$2');
+                this.value = v;
+            });
+        }
+
+        // 5. Envio do formulário para o servidor
+        const formCadastro = document.querySelector('#formCadastro');
+        const btnCadastrar = document.querySelector('#btnCadastrar');
+
+        formCadastro.addEventListener('submit', function (evento) {
+            evento.preventDefault();
+
+            const senha = document.querySelector('#senha').value;
+            const confirmarSenha = document.querySelector('#confirmarSenha').value;
+
+            if (senha !== confirmarSenha) {
+                alert('As senhas não coincidem. Verifique e tente novamente.');
+                return;
+            }
+
+            const dadosCadastro = {
+                nomeAdmin: step1 ? step1.nome : undefined, // nome de quem criou o login na etapa 1, quando existir
+                nomeCondominio: document.querySelector('#nomeCondominio').value,
+                tipo: document.querySelector('#tipo').value,
+                documento: document.querySelector('#documento').value,
+                telefone: document.querySelector('#telefone').value,
+                cep: document.querySelector('#cep').value,
+                cidade: document.querySelector('#cidade').value,
+                endereco: document.querySelector('#endereco').value,
+                bairro: document.querySelector('#bairro').value,
+                nomeResponsavel: document.querySelector('#nomeResponsavel').value,
+                email: document.querySelector('#email').value,
+                senha: senha
+            };
+
+            btnCadastrar.disabled = true;
+            btnCadastrar.innerHTML = 'Enviando...';
+
+            fetch('/api/cadastro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosCadastro)
+            })
+            .then(async response => {
+                const dados = await response.json();
+                if (!response.ok) {
+                    throw new Error(dados.mensagem || 'Não foi possível concluir o cadastro.');
+                }
+                return dados;
+            })
+            .then(dados => {
+                if (dados.sucesso) {
+                    alert(dados.mensagem || 'Cadastro realizado com sucesso!');
+                    sessionStorage.removeItem('cadastro_step1'); // limpa a etapa 1, o cadastro já foi concluído
+                    window.location.href = 'login.html';
+                } else {
+                    alert('Erro: ' + dados.mensagem);
+                }
+            })
+            .catch(erro => {
+                console.error('Erro no cadastro:', erro);
+                if (erro.message && erro.message !== 'Failed to fetch') {
+                    alert(erro.message);
+                } else {
+                    alert('Servidor indisponível. Certifique-se de que o Node está rodando no terminal na porta 3000.');
+                }
+            })
+            .finally(() => {
+                btnCadastrar.disabled = false;
+                btnCadastrar.innerHTML = 'Criar minha conta <i class="fa-solid fa-chevron-right"></i>';
+            });
         });
     </script>
 </body>

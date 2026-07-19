@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+   
 :root{
     --primary:#4a008c;
     --primary-dark:#2a0054;
@@ -46,7 +47,7 @@ button{font-family:inherit;cursor:pointer;}
     font-size:15px;position:relative;transition:background .2s,border-color .2s;
 }
 .icon-btn:hover{border-color:var(--accent);color:var(--accent);}
-.logo{font-size:19px;font-weight:800;display:flex;align-items:center;gap:6px;}
+.logo{font-size:19px;font-weight:800;display:flex;align-items:center;}
 .logo span{color:var(--accent);}
 .badge{
     position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;font-size:10px;font-weight:700;
@@ -108,7 +109,7 @@ button{font-family:inherit;cursor:pointer;}
 .action-card:hover .ic{transform:scale(1.08);}
 .action-card.warm .ic{background:rgba(255,177,0,0.14);color:var(--warm);}
 .action-card.danger .ic{background:rgba(255,84,112,0.14);color:var(--danger);}
-.action-card p{font-size:12.5px;font-weight:600;}
+.action-card p{font-size:12.5px;font-weight:600; color:white;}
 
 /* ---------- TIMELINE ---------- */
 .timeline-card{
@@ -165,6 +166,61 @@ button{font-family:inherit;cursor:pointer;}
 }
 .pend-card .confirm-btn:hover{background:rgba(46,213,115,0.26);}
 .pend-empty{text-align:center;color:var(--text-muted);font-size:13px;padding:24px 0;}
+
+/* ---------- RETIRADA DE ENCOMENDA ---------- */
+.ret-info-block{margin-bottom:16px;}
+.ret-info-block .row{display:flex;align-items:baseline;gap:8px;padding:9px 0;border-bottom:1px solid var(--border);}
+.ret-info-block .row .lbl{font-size:12px;font-weight:700;color:var(--text-muted);min-width:70px;}
+.ret-info-block .row .val{font-size:13.5px;font-weight:600;}
+.ret-check-row{display:flex;align-items:center;gap:10px;margin:14px 0;font-size:13px;font-weight:600;}
+.ret-check-row input{accent-color:var(--accent);width:17px;height:17px;}
+.ret-outra-fields{display:none;margin-bottom:6px;}
+.ret-outra-fields.show{display:block;}
+.ret-selecionar-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:14px 0 10px;font-size:12px;font-weight:600;color:var(--text-muted);}
+.ret-selecionar-row input{accent-color:var(--accent);width:16px;height:16px;}
+.ret-pkg-card{
+    background:var(--surface);border-radius:14px;padding:13px 14px;margin-bottom:10px;
+    display:flex;align-items:center;gap:12px;border-left:4px solid var(--accent);
+    transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease;
+}
+.ret-pkg-card.aguardando{border-left-color:var(--warm);}
+.ret-pkg-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.28);}
+.ret-pkg-card .ic{
+    width:40px;height:40px;border-radius:10px;background:rgba(0,176,255,0.14);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;
+}
+.ret-pkg-card.aguardando .ic{background:rgba(255,177,0,0.14);color:var(--warm);}
+.ret-pkg-card .info{flex:1;min-width:0;}
+.ret-pkg-card .info h6{font-size:12.5px;font-weight:700;}
+.ret-pkg-card .info p{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.ret-pkg-card .info .st-tag{font-size:10.5px;font-weight:700;}
+.ret-pkg-card .st-tag.recebido{color:var(--accent);}
+.ret-pkg-card .st-tag.aguardando{color:var(--warm);}
+.ret-pkg-card input[type=checkbox]{accent-color:var(--accent);width:19px;height:19px;flex-shrink:0;}
+.ret-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.btn-cancel{background:var(--surface-2);color:var(--text-muted);}
+
+/* ---------- ASSINATURA ---------- */
+.sig-wrap{display:flex;flex-direction:column;height:100%;}
+.sig-head{padding:16px 20px 6px;text-align:center;position:relative;}
+.sig-head h4{font-size:13.5px;font-weight:600;color:var(--text-muted);}
+.sig-head b{display:block;font-size:15px;font-weight:700;color:var(--text);margin-top:2px;}
+.sig-clear-btn{
+    position:absolute;top:14px;right:18px;width:34px;height:34px;border-radius:10px;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.sig-canvas-wrap{
+    flex:1;margin:14px 20px;background:#fff;border-radius:16px;position:relative;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);overflow:hidden;min-height:220px;
+}
+.sig-canvas-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair;}
+.sig-canvas-wrap .sig-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:#c7c2d4;font-size:12.5px;pointer-events:none;
+}
+.sig-canvas-wrap .sig-line{position:absolute;left:24px;right:24px;bottom:38px;border-bottom:1.5px dashed #d8d4e4;}
+.sig-foot{padding:16px 20px 24px;}
 
 /* ---------- NOVIDADES / CONVITE ---------- */
 .promo-card{
@@ -243,21 +299,40 @@ button{font-family:inherit;cursor:pointer;}
 /* ---------- NOTIF DROPDOWN ---------- */
 .notif-panel{
     position:fixed;top:66px;right:14px;width:300px;max-width:calc(100vw - 28px);
-    background:var(--surface);border:1px solid var(--border);border-radius:16px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.4);z-index:170;
-    opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s,transform .2s;
+    background:var(--surface);border:1px solid var(--border);border-radius:18px;
+    box-shadow:0 24px 48px rgba(0,0,0,0.45);z-index:170;
+    opacity:0;transform:translateY(-8px) scale(0.98);pointer-events:none;transition:opacity .22s ease,transform .22s ease;
     max-height:60vh;overflow-y:auto;
 }
-.notif-panel.open{opacity:1;transform:translateY(0);pointer-events:auto;}
-.notif-panel h4{padding:14px 16px;font-size:13px;border-bottom:1px solid var(--border);}
-.notif-item{padding:12px 16px;border-bottom:1px solid var(--border);font-size:12px;}
+.notif-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.notif-panel h4{
+    padding:14px 8px 14px 16px;font-size:13px;font-weight:700;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:1;
+}
+.notif-clear-btn{
+    background:none;border:none;color:var(--accent);font-size:11px;font-weight:600;padding:6px 8px;
+    border-radius:8px;cursor:pointer;transition:background .15s;
+}
+.notif-clear-btn:hover{background:rgba(0,176,255,0.1);}
+.notif-item{
+    padding:12px 40px 12px 16px;border-bottom:1px solid var(--border);font-size:12px;position:relative;
+    transition:background .15s;
+}
+.notif-item:hover{background:rgba(255,255,255,0.03);}
+.notif-item:last-child{border-bottom:none;}
 .notif-item b{display:block;font-size:12.5px;margin-bottom:2px;}
 .notif-item span{color:var(--text-muted);font-size:10.5px;}
-.notif-empty{padding:20px 16px;color:var(--text-muted);font-size:12.5px;text-align:center;}
+.notif-close{
+    position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;
+    background:var(--surface-2);border:none;color:var(--text-muted);font-size:10px;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,color .15s;
+}
+.notif-close:hover{background:rgba(255,84,112,0.16);color:var(--danger);}
+.notif-empty{padding:26px 16px;color:var(--text-muted);font-size:12.5px;text-align:center;}
 
 /* ---------- MODAL ---------- */
 .modal-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:250;
+    position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:320;
     display:flex;align-items:flex-end;justify-content:center;
     opacity:0;pointer-events:none;transition:opacity .25s ease;
 }
@@ -298,6 +373,22 @@ button{font-family:inherit;cursor:pointer;}
     background:var(--surface-2);border:1px solid var(--border);color:var(--text-muted);
 }
 .filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.relat-head-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.relat-head-row h4{font-size:13px;color:var(--text-muted);font-weight:600;}
+.relat-limpar{background:none;border:none;color:var(--accent);font-size:12.5px;font-weight:600;cursor:pointer;padding:4px;}
+.relat-date-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.relat-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:4px 0 18px;}
+.relat-check-item{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:500;color:var(--text);}
+.relat-check-item input{accent-color:var(--accent);width:17px;height:17px;flex-shrink:0;}
+.fab-print{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:70;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    width:60px;height:60px;border-radius:50%;border:none;
+    background:linear-gradient(155deg,var(--primary),var(--primary-dark));color:#fff;font-size:20px;
+    box-shadow:0 10px 26px rgba(74,0,140,0.55);cursor:pointer;
+}
+.fab-print:hover{filter:brightness(1.12);}
+.relat-summary-count{font-size:12px;color:var(--text-muted);margin:2px 0 14px;}
 
 /* Câmera IA */
 .cam-view{
@@ -391,8 +482,9 @@ button{font-family:inherit;cursor:pointer;}
 .nv-morador-card{
     background:var(--surface);border-radius:14px;padding:11px 14px;margin-bottom:10px;
     display:flex;align-items:center;gap:12px;border-left:4px solid var(--accent);
-    transition:background .2s;
+    transition:background .2s,transform .18s ease,box-shadow .18s ease;
 }
+.nv-morador-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.28);}
 .nv-morador-card:active{background:var(--surface-2);}
 .nv-morador-card img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);flex-shrink:0;}
 .nv-morador-card .m-info{flex:1;min-width:0;}
@@ -402,6 +494,67 @@ button{font-family:inherit;cursor:pointer;}
     min-width:24px;height:24px;padding:0 7px;border-radius:20px;background:var(--accent);color:#fff;
     display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;font-weight:700;flex-shrink:0;
 }
+
+/* ---------- FUNCIONÁRIOS / STATUS DOT ---------- */
+.func-card{
+    background:var(--surface);border-radius:14px;padding:12px 14px;margin-bottom:10px;
+    display:flex;align-items:center;gap:12px;border:1px solid transparent;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.func-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.28);border-color:var(--border);}
+.func-card img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border);}
+.func-card .f-info{flex:1;min-width:0;}
+.func-card .f-info h6{font-size:12px;color:var(--text-muted);font-weight:500;}
+.func-card .f-info p{font-size:13.5px;font-weight:600;margin-top:1px;}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--danger);flex-shrink:0;box-shadow:0 0 0 3px rgba(255,84,112,0.15);}
+.status-dot.online{background:#2ed573;box-shadow:0 0 0 3px rgba(46,213,115,0.18);}
+.func-online-tag{font-size:10.5px;font-weight:600;color:var(--text-muted);display:flex;align-items:center;gap:6px;margin-bottom:12px;}
+.card-edit-btn{
+    width:32px;height:32px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);
+    color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:12.5px;flex-shrink:0;
+    transition:background .15s,color .15s,border-color .15s;
+}
+.card-edit-btn:hover{background:rgba(0,176,255,0.14);color:var(--accent);border-color:rgba(0,176,255,0.4);}
+
+/* ---------- SIMPLE INFO SCREENS (Minha conta / Condomínios / Monitoramento) ---------- */
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:12px;}
+.info-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);}
+.info-row:last-child{border-bottom:none;}
+.info-row .lbl{font-size:12.5px;color:var(--text-muted);}
+.info-row .val{font-size:13px;font-weight:600;text-align:right;}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.metric-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center;
+    transition:transform .18s ease,box-shadow .18s ease;position:relative;overflow:hidden;
+}
+.metric-card::before{
+    content:"";position:absolute;top:-40px;right:-40px;width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle,rgba(0,176,255,0.16),transparent 70%);
+}
+.metric-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,0.3);}
+.metric-card b{font-size:26px;display:block;color:var(--accent);position:relative;}
+.metric-card span{font-size:11.5px;color:var(--text-muted);position:relative;}
+
+/* ---------- ESCANEAR CÓDIGO DE BARRAS (câmera ao vivo) ---------- */
+.scan-modal{position:fixed;inset:0;background:#000;z-index:400;display:none;flex-direction:column;}
+.scan-modal.open{display:flex;}
+.scan-modal video{flex:1;width:100%;object-fit:cover;background:#000;}
+.scan-frame{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:78%;max-width:340px;height:120px;border:2.5px solid var(--accent);border-radius:14px;
+    box-shadow:0 0 0 2000px rgba(0,0,0,0.45);pointer-events:none;
+}
+.scan-top{position:absolute;top:0;left:0;right:0;padding:16px 18px;display:flex;align-items:center;gap:14px;z-index:2;}
+.scan-top h3{color:#fff;font-size:14.5px;font-weight:700;flex:1;}
+.scan-hint{
+    position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#fff;font-size:12.5px;
+    padding:0 24px;z-index:2;
+}
+.scan-status{
+    position:absolute;bottom:70px;left:50%;transform:translateX(-50%);background:rgba(46,213,115,0.92);
+    color:#06231a;font-weight:700;font-size:13px;padding:9px 18px;border-radius:20px;display:none;z-index:2;
+}
+.scan-status.show{display:block;}
 
 /* Etapa 2 — leitura da etiqueta */
 .nv-selected-chip{
@@ -435,15 +588,34 @@ button{font-family:inherit;cursor:pointer;}
 .nv-label{font-size:12.5px;font-weight:600;margin:18px 0 10px;display:flex;align-items:center;justify-content:space-between;}
 .nv-fornecedores{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
 .nv-forn-btn{
-    flex-shrink:0;width:58px;height:58px;border-radius:14px;background:#fff;border:2px solid transparent;
-    display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#222;
-    text-align:center;line-height:1.1;padding:4px;overflow:hidden;transition:border-color .15s,transform .15s;
+    width:58px;
+    height:58px;
+
+    border-radius:14px;
+    border:2px solid transparent;
+
+    background-color:#fff;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:118%;
+
+    overflow:hidden;
+    transition:.2s;
 }
-.nv-forn-btn.mercadolivre{background:#fff159;}
-.nv-forn-btn.americanas{background:#e60014;color:#fff;}
-.nv-forn-btn.correios{background:#003399;color:#ffcc00;}
-.nv-forn-btn.boticario{background:#ffd400;}
-.nv-forn-btn.leroy{background:#78be20;color:#fff;}
+
+.nv-forn-btn.mercado{    
+background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgeCiJUHFgkS9NxKkUF0msgHtHuIOCYfpYu3KhjDLR61UtvTJdYVYVO6ke&s=10')}
+.nv-forn-btn.amazon{background-image:url('https://www.logogenio.pt/images/articles/amazon-logo-a-brief-logo-history-and-what-makes-it-so-special/image5.png')}
+.nv-forn-btn.shein{    
+background-image:url('https://i.pinimg.com/originals/13/6f/d2/136fd2ec27accd1e7abaa09c7fe685f7.jpg')}
+
+.nv-forn-btn.shopee{    
+background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAlQMBEQACEQEDEQH/xAAbAAEBAAMBAQEAAAAAAAAAAAABAgAEBQMHBv/EAC4QAAICAQMCBAQGAwAAAAAAAAABAgMEBRESITETFFFhBkFxgRVSkaGx0RYjMv/EABsBAQEBAQEBAQEAAAAAAAAAAAEABAMCBgUH/8QALREBAAICAQMCBAYCAwAAAAAAAAECAxEEEiFBMVEFEyKBFGFxkcHRFTIjM0L/2gAMAwEAAhEDEQA/ANw+Wf0FhICgRgCgSDF6SSDFAikSkkBIYpJFJEM9FLJJFOwZWVhECgRApJIMXoEgxQIpEpJBiQKSRSJAlJJIp2DKysIgSCQFJJBi9AkGKBFIlJIMSBSSKRMASkkkU7BlZWEQJBICkkgxegSDFAikSkkGJApJFImAJSSSKdgysrCIEgkBSSQYvQJBigRSJSSDEgUkikTAEpJJFOwZWVhECQSApJIMXoEgxQIpEpJBiQKSRSJgCUkkinYMrKwiBIJAUkkGL0CQYoEUiUkgxIFJIpEwBKSSRTsGVlYRSJMIuclGC3lJ7JerGI3Onm1orG5djIjpWl2+UyMWebkQ6XWeK4Ri/mo7d9vc12jDinptG58vzcduVyY+ZW3TWfTtv7y0tVwqsdUZOJOU8TJi5V8/+oNd4v3RzzY611avpLRxORbJNseSNWr6/wBuezi2giBQIpEpJBiQKSRSJgCUkkinYMrKwilip9H0/B0TS1Tj3RwMZWcYzUlWt09t9z6CmDFqJ6XxOXl8iZtWbzpp5VWjSyrktFeZZGX+6dOPGSUn1e7bW79luc70w9U/Rv7O2PJyYpH/AC9MeImW9RpmlZmDUo4FXl1u4V2U8eLffo+zOsYsVqx9PZwtyORTJM9ff3iX4n41xMbC1eurDorph4Ck41x2Te76n5nNpWt9VjT6P4PkyZMM2vO+7Qp0iyePXffl4eJG1b1rJt4ua9dtu3ucq8e2t2mIab86sXmlKzbXrqEfhN/j5NPiUOWPQ75ShPlGUV6NBGC25j27vU82nRW+p+qdOducm0CUkgxIYpJFImAJSSSKdgysrCKX2FPrmlPlpmJL1ph/CPpMU/RD4PPGsto/OWh5XP0++6zAVWRRdY7JU2NxlGT78Zduvo/1OfTekzNe8S7fMxZaxGTcTHbfj7t/TsyvOxlbXGcGpOM4TW0oSXdM6Uv1124ZcU4rdM934D49al8QNelEF+7/ALPyef8A9v2fUfBY1xfvP8NXzWn6lj41WozvxsiipVQvhHlXKK7cl3T+h568WWsRftMOnyeRx72thiLVmd68/ZuaNp3ks3Nqyro+Xt0+yccirqpVvbrH+jthxdFpi09phm5fJ+djpakfVFo7T4lzp4On5WDk5GlTzFPFipWVZPDecN9t48f4Zw+XjvSbY99vdsryORiy1pyIjVvMeJXfg6Rp9scTUbc2WTxTtsx+Hh1NrfbZ9Xt8z3OPDSYrfe3mnI5ees5MMR0+N+svWGh4eNHVHquRdGOFOvjKjbexS7bJ/N9Poevw9Kxabz6OdviGa844wRH1b9fEw0snBwsjT7M3SZZO1M4xuoyOLkuT2i0491v0PFsVLV6qfs0Y+Tmx5oxcjXf0mN+PHd1f8VqrthiX4+rTulsp5VMIeDCT9n1a9Wd/wlf9dTv38MX+WyTE5KzXXtO9y0MD4dnY86eXVlWxxLvAdWGk52T9m+ijtt19zni4+9zbx7NOf4lrojHMR1RvdvSI/t4a9ov4fjY+ZTXlU03ScHTlpKyuS+nRr0DNhikRaPPu68HnTnvbFaYmY77j0mHFOD9RJJIp2DKysIpYp9V+Hr4W6HhSjJPamKfXs0tj6HBMTjj9Hw/MpNeRePzl52Yeowsm8XU4+HOTfG+nm4b+jTX77hNbx/rYxkwzEddO/wCU6/iW1p2JHBxvCVrslKUpzsltvKTe7Z0pWKRpyy5JyW3rT518ZXQu+IMh1zUlFRi2vVI/G50xOWdPq/hFJrxY3DXhfottVay8PLqthFJvFnHjP3al2+xVvhmI6o1+j3OLmVtPy7xMT7+HvLW6XO6MceVeOsGWLRBPdx367yfz9z3+JjfaO2tOX+Pv0xO926uqXP07Nhi42oVWRm3k4/hRcfk9992ccWSKRaJ8w2cnBbLbHaP/ADO5bdupaZmzhkang32ZcYpTdVijC7ZbJyTW6+x1nLit3vHdm/C8nFE48N4is+/rH6NzD1GvK03W8zU8d213W0KUKns4rqo8W/TZHWmSLVva8dp0z5eLbFmw48M6mIn1/ly8vPw68CeFpVF9cLpRldbkSTslxe8UuPRJM5TlrFOnHH7t2Pi5b5IyciYnXaIj07+rZu1nAzLFk6hj5/mtlzWNkKFVjXza7r7Huc9bTu2/3cI+H5se6Y5r0+NxuYauFq9VMMrGyaLpYeRZ4qVNrVlcvVSffp06nmmWI3E+ku2bg2t0XpMdVY13jtP2a2pZWFdXVXhV5a4tuVmVfzlL7LogyXraIirtxcGWlptk6f0iNR/bnnJuSSSKdgysrCIFBNrom19GMWmPR5mlZ9YZzn+eX6j1W918untA5y/PL9S6re5+XT2hLB7iEjBDFJIhiVwyLYY1uNGe1NrjKyOy6uPY9RaYrNY8uVsNLZIyTHeP5eIOwYwkkki9ASkkkU7BlZWEQJBICkkgxegSDFAikSkkGJApJFImAJSSSKdgysrCIEgkBSSQYvQJBigRSJSSDEgUkikTAEpJJFOwZWVhECQSApJIMXoEgxQIpEpJBiQKSRSJgCUkkinYMrKwiBIJAUkkGL0CQYoEUiUkgxIFJIpEwBKSSRTsGVlYRAkEgKSSDF6BIMUCKRKSQYkCkkUiYAlJJIp2DKysIgUCIFJIsYlJIMUCKRKSQYkCkkUiYAlLJJFOyZWYEgKBGAKS+xFjEgklikkQRSKDEgUkikTAYlLJJFP/2Q==')}
+
+.nv-forn-btn.americanas{ background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgBvphy4WXuKg-1UNe2OtqtN6-vekY0lGLFIkmX3Mj0g&s=10')}
+.nv-forn-btn.correios{ background-image:url('https://i.pinimg.com/564x/86/16/47/8616477dd5404a5da4cb94cc389a1e29.jpg')}
+.nv-forn-btn.boticario{ background-image:url('https://images.seeklogo.com/logo-png/54/1/o-boticario-novo-logo-png_seeklogo-543426.png')}
+.nv-forn-btn.leroy{ background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOujlgnXASctrTCLxRylbt9shZd2w40jTl8vEw25Lt1g&s')}
 .nv-forn-btn.outros{background:var(--surface-2);color:var(--text-muted);border:1.5px solid var(--border);}
 .nv-forn-btn.selected{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,176,255,0.35);}
 .nv-tipo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
@@ -571,6 +743,29 @@ button{font-family:inherit;cursor:pointer;}
     border:1.5px solid var(--danger);border-radius:12px;padding:11px 14px;margin-top:10px;cursor:pointer;
 }
 .retirada-toggle span{font-size:12.5px;font-weight:600;color:var(--danger);}
+/* Planta do local — pinos das unidades */
+.planta-pin{
+    position:absolute;transform:translate(-50%,-100%);cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;
+}
+.planta-pin i{
+    font-size:22px;color:var(--text-muted);filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5));
+}
+.planta-pin.pendente i{color:var(--warm);}
+.planta-pin.rota i{color:var(--danger);animation:plantaPulse 1.3s infinite;}
+.planta-pin .planta-pin-badge{
+    position:absolute;top:-4px;right:-8px;background:var(--danger);color:#fff;
+    font-size:9.5px;font-weight:800;border-radius:50%;width:16px;height:16px;
+    display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);
+}
+.planta-pin .planta-pin-label{
+    font-size:9.5px;font-weight:700;background:rgba(18,11,30,0.85);color:var(--text);
+    padding:1px 6px;border-radius:8px;margin-top:2px;white-space:nowrap;
+}
+#plantaImgWrap.modo-adicionar{cursor:crosshair;outline:2px dashed var(--accent);outline-offset:-2px;}
+@keyframes plantaPulse{
+    0%,100%{transform:scale(1);} 50%{transform:scale(1.18);}
+}
 </style>
 </head>
 <body>
@@ -586,7 +781,7 @@ button{font-family:inherit;cursor:pointer;}
 
 <!-- NOTIF PANEL -->
 <div class="notif-panel" id="notifPanel">
-    <h4>Notificações</h4>
+    <h4><span>Notificações</span><button class="notif-clear-btn" id="notifClearAll">Limpar tudo</button></h4>
     <div id="notifList"></div>
 </div>
 
@@ -702,14 +897,16 @@ button{font-family:inherit;cursor:pointer;}
     </div>
     <div class="drawer-body">
         <div class="drawer-cat">Cadastros</div>
-        <a href="#"><i class="fa-solid fa-city"></i> Condomínios</a>
-        <a href="#"><i class="fa-solid fa-user-tie"></i> Funcionários</a>
-        <a href="#"><i class="fa-solid fa-users"></i> Usuários</a>
+        <a href="#" id="abrirCondo"><i class="fa-solid fa-city"></i> Condomínios</a>
+        <a href="#" id="abrirFunc"><i class="fa-solid fa-user-tie"></i> Funcionários</a>
+        <a href="funcionario-login.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Portal do funcionário</a>
+        <a href="#" id="abrirUsuarios"><i class="fa-solid fa-users"></i> Usuários</a>
+        <a href="#" id="abrirPlanta"><i class="fa-solid fa-diagram-project"></i> Planta do local</a>
         <div class="drawer-cat">Minha conta</div>
-        <a href="#"><i class="fa-solid fa-id-badge"></i> Minha conta</a>
+        <a href="#" id="abrirConta"><i class="fa-solid fa-id-badge"></i> Minha conta</a>
         <div class="drawer-cat">Relatórios</div>
-        <a href="#"><i class="fa-solid fa-file-lines"></i> Relatório de encomendas</a>
-        <a href="#"><i class="fa-solid fa-eye"></i> Monitoramento</a>
+        <a href="#" id="abrirRelatorio"><i class="fa-solid fa-file-lines"></i> Relatório de encomendas</a>
+        <a href="#" id="abrirMonitor"><i class="fa-solid fa-eye"></i> Monitoramento</a>
         <div class="drawer-cat">Configuração</div>
         <a href="#" id="abrirConfig"><i class="fa-solid fa-gear"></i> Configurações</a>
     </div>
@@ -799,9 +996,10 @@ button{font-family:inherit;cursor:pointer;}
                 <img id="nvChipFoto" src="" alt="">
                 <div class="info"><b id="nvChipNome"></b><span id="nvChipUnidade"></span></div>
             </div>
-            <p class="empty-note" style="text-align:left;">Fotografe a etiqueta ou o código de barras da encomenda. Nossa IA lê a foto e preenche transportadora e código de rastreio automaticamente.</p>
+            <p class="empty-note" style="text-align:left;">Aponte a câmera para o código de barras da etiqueta para leitura instantânea, ou fotografe a etiqueta inteira para a IA ler o texto.</p>
+            <button class="btn btn-accent btn-block" id="nvEscanearBarras" style="margin-bottom:10px;"><i class="fa-solid fa-barcode"></i> Escanear código de barras</button>
             <div class="nv-etiqueta-actions">
-                <button class="btn btn-accent btn-block" id="nvTirarFoto"><i class="fa-solid fa-camera"></i> Tirar foto</button>
+                <button class="btn btn-outline btn-block" id="nvTirarFoto"><i class="fa-solid fa-camera"></i> Tirar foto</button>
                 <button class="btn btn-outline btn-block" id="nvEnviarGaleria"><i class="fa-solid fa-image"></i> Da galeria</button>
             </div>
             <input type="file" accept="image/*" capture="environment" id="nvInputCamera" style="display:none;">
@@ -827,11 +1025,16 @@ button{font-family:inherit;cursor:pointer;}
 
             <div class="nv-label">Fornecedores</div>
             <div class="nv-fornecedores" id="nvFornecedores">
-                <button type="button" class="nv-forn-btn mercadolivre" data-forn="Mercado Livre">mercado<br>livre</button>
-                <button type="button" class="nv-forn-btn americanas" data-forn="Americanas">a</button>
-                <button type="button" class="nv-forn-btn correios" data-forn="Correios">Correios</button>
-                <button type="button" class="nv-forn-btn boticario" data-forn="Boticário">b</button>
-                <button type="button" class="nv-forn-btn leroy" data-forn="Leroy Merlin">Leroy<br>Merlin</button>
+                <button type="button" class="nv-forn-btn mercado" data-forn="Mercado Livre"></button>
+                <button type="button" class="nv-forn-btn amazon" data-forn="Amazon"></button>
+
+                <button type="button" class="nv-forn-btn shein" data-forn="Shein"></button>
+                <button type="button" class="nv-forn-btn shopee" data-forn="Shopee"></button>
+
+                <button type="button" class="nv-forn-btn americanas" data-forn="Americanas"></button>
+                <button type="button" class="nv-forn-btn correios" data-forn="Correios"></button>
+                <button type="button" class="nv-forn-btn boticario" data-forn="Boticário"></button>
+                <button type="button" class="nv-forn-btn leroy" data-forn="Leroy Merlin"></button>
                 <button type="button" class="nv-forn-btn outros" data-forn="">Outros<br><i class="fa-solid fa-arrow-right" style="font-size:9px;"></i></button>
             </div>
 
@@ -1058,6 +1261,342 @@ button{font-family:inherit;cursor:pointer;}
     </div>
 </div>
 
+<!-- ===================== FUNCIONÁRIOS ===================== -->
+<div class="nv-screen" id="funcScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="funcVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Funcionários</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="func-online-tag"><span class="status-dot online"></span> Usuário logado: <b id="funcUsuarioLogadoNome" style="color:var(--text);"></b></div>
+        <div class="nv-userrow">
+            <h4><button class="nv-add-btn" id="funcAddBtn" title="Cadastrar funcionário"><i class="fa-solid fa-plus"></i></button> Funcionários cadastrados</h4>
+            <span class="count" id="funcCount">0</span>
+        </div>
+        <div class="nv-add-form" id="funcAddForm">
+            <div class="field"><label>Nome</label><input id="funcNovoNome" placeholder="Nome completo" /></div>
+            <div class="field"><label>Cargo</label><input id="funcNovoCargo" placeholder="Ex: Porteiro, Zelador..." /></div>
+            <div class="field"><label>Documento (CPF) *</label><input id="funcNovoDocumento" placeholder="Obrigatório — é o login do funcionário no portal" /></div>
+            <div class="field"><label>Senha de acesso *</label><input id="funcNovoSenha" type="password" placeholder="Obrigatório — senha do funcionário no portal" /></div>
+            <p class="empty-note" style="text-align:left;margin:-6px 0 12px;">Documento + senha são o login do funcionário no <a href="funcionario-login.html" target="_blank" style="color:var(--accent);">portal do funcionário</a>, onde ele vê quem está online.</p>
+            <button class="btn btn-accent btn-block" id="funcSalvar" style="margin-bottom:8px;"><i class="fa-solid fa-user-plus"></i> Cadastrar agora</button>
+            <button class="btn btn-outline btn-block" id="funcConvidar"><i class="fa-solid fa-paper-plane"></i> Ou enviar convite por link</button>
+        </div>
+        <div id="funcList"></div>
+    </div>
+</div>
+
+<!-- ===================== USUÁRIOS (MORADORES) ===================== -->
+<div class="nv-screen" id="usersScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="usersVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Usuários / Moradores</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="nv-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="usersBusca" placeholder="Digite a unidade ou nome do morador">
+        </div>
+        <div class="nv-userrow">
+            <h4><button class="nv-add-btn" id="usersAddBtn" title="Cadastrar morador"><i class="fa-solid fa-plus"></i></button> Moradores cadastrados</h4>
+            <span class="count" id="usersCount">0</span>
+        </div>
+        <div class="nv-add-form" id="usersAddForm">
+            <div class="field"><label>Unidade</label><input id="usersNovaUnidade" placeholder="Ex: 205" /></div>
+            <div class="field"><label>Nome do morador</label><input id="usersNovoNome" placeholder="Nome completo" /></div>
+            <button class="btn btn-accent btn-block" id="usersSalvar" style="margin-bottom:8px;"><i class="fa-solid fa-user-plus"></i> Cadastrar agora</button>
+            <button class="btn btn-outline btn-block" id="usersConvidar"><i class="fa-solid fa-paper-plane"></i> Ou enviar convite por link</button>
+        </div>
+        <div id="usersList"></div>
+    </div>
+</div>
+
+<!-- ===================== MINHA CONTA ===================== -->
+<div class="nv-screen" id="contaScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="contaVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Minha conta</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="nv-selected-chip" style="margin-bottom:18px;">
+            <img id="contaFoto" src="" alt="">
+            <div class="info"><b id="contaNome" style="font-size:14px;"></b><span id="contaPerfil"></span></div>
+        </div>
+        <div class="info-card">
+            <div class="info-row"><span class="lbl">Nome</span><span class="val" id="contaNomeVal">—</span></div>
+            <div class="info-row"><span class="lbl">E-mail / login</span><span class="val" id="contaEmailVal">—</span></div>
+            <div class="info-row"><span class="lbl">Condomínio</span><span class="val" id="contaCondoVal">—</span></div>
+            <div class="info-row"><span class="lbl">Perfil</span><span class="val" id="contaPerfilVal">—</span></div>
+        </div>
+        <p class="empty-note" style="text-align:left;">Para alterar esses dados, fale com o suporte ZibBox.</p>
+    </div>
+</div>
+
+<!-- ===================== RELATÓRIO DE ENCOMENDAS ===================== -->
+<div class="nv-screen" id="relatorioScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="relatorioVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Relatórios</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body" style="padding-bottom:90px;">
+        <div class="relat-head-row">
+            <h4>Relatórios</h4>
+            <button class="relat-limpar" id="relatorioLimpar"><i class="fa-solid fa-filter-circle-xmark"></i> Limpa filtro</button>
+        </div>
+
+        <div class="relat-date-row">
+            <div class="field"><label>Data início</label><input type="date" id="relatorioDataInicio"></div>
+            <div class="field"><label>Data fim</label><input type="date" id="relatorioDataFim"></div>
+        </div>
+
+        <div class="relat-check-grid">
+            <label class="relat-check-item"><input type="checkbox" value="recebido" class="relatorioStatusCk"> Recebidas / condomínio</label>
+            <label class="relat-check-item"><input type="checkbox" value="entregue" class="relatorioStatusCk"> Entregues</label>
+            <label class="relat-check-item"><input type="checkbox" value="aguardando" class="relatorioStatusCk"> Aguardando retiradas</label>
+            <label class="relat-check-item"><input type="checkbox" value="rota" class="relatorioStatusCk"> Em rotas</label>
+        </div>
+
+        <div class="field"><label>Unidade</label>
+            <select id="relatorioUnidade"><option value="">Todas as unidades</option></select>
+        </div>
+        <div class="field"><label>Morador</label>
+            <select id="relatorioMorador"><option value="">Todos os moradores</option></select>
+        </div>
+        <div class="field"><label>Funcionário</label>
+            <select id="relatorioFuncionario"><option value="">Todos os funcionários</option></select>
+        </div>
+        <div class="field"><label>Tipo da encomenda</label>
+            <select id="relatorioTipo"><option value="">Todos os tipos</option></select>
+        </div>
+
+        <p class="relat-summary-count" id="relatorioResumo"></p>
+        <div id="relatorioList"></div>
+    </div>
+    <button class="fab-print" id="relatorioImprimir" title="Gerar relatório em PDF"><i class="fa-solid fa-print"></i></button>
+</div>
+
+<!-- ===================== MONITORAMENTO ===================== -->
+<div class="nv-screen" id="monitorScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="monitorVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Monitoramento</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="metric-grid" id="monitorMetrics"></div>
+        <div class="section-title" style="margin-top:0;">Funcionários online <span class="tag" id="monitorFuncOnlineCount">0</span></div>
+        <div id="monitorFuncOnline"></div>
+        <div class="section-title">Últimas movimentações</div>
+        <div id="monitorTimeline"></div>
+    </div>
+</div>
+
+<!-- ===================== CONDOMÍNIOS ===================== -->
+<div class="nv-screen" id="condoScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="condoVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Condomínios</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="nv-userrow">
+            <h4><button class="nv-add-btn" id="condoAddBtn" title="Cadastrar condomínio"><i class="fa-solid fa-plus"></i></button> Condomínios cadastrados</h4>
+            <span class="count" id="condoCount">0</span>
+        </div>
+        <div class="nv-add-form" id="condoAddForm">
+            <div class="field"><label>Nome do condomínio ou empresa</label><input id="condoNovoNome" placeholder="Ex: Residencial Jardins"></div>
+            <div class="field">
+                <label>Tipo do estabelecimento</label>
+                <select id="condoNovoTipo">
+                    <option value="" disabled selected hidden>Selecione o tipo</option>
+                    <option value="condominio_residencial">Condomínio Residencial</option>
+                    <option value="condominio_comercial">Condomínio Comercial</option>
+                    <option value="predio_comercial">Prédio Comercial</option>
+                    <option value="empresa">Empresa / Escritório</option>
+                    <option value="loja_comercio">Loja / Comércio</option>
+                    <option value="hotel_pousada">Hotel / Pousada</option>
+                    <option value="coworking">Coworking</option>
+                    <option value="clinica_consultorio">Clínica / Consultório</option>
+                    <option value="outro">Outro tipo de estabelecimento</option>
+                </select>
+            </div>
+            <div class="field"><label>CPF ou CNPJ</label><input id="condoNovoDocumento" placeholder="CPF ou CNPJ"></div>
+            <div class="field"><label>Telefone / WhatsApp</label><input id="condoNovoTelefone" placeholder="(84) 9 9999-9999" inputmode="numeric"></div>
+            <div class="field">
+                <label>CEP</label>
+                <input id="condoNovoCep" placeholder="00000-000" inputmode="numeric">
+                <span id="condoCepStatus" style="display:block;font-size:11px;color:var(--text-muted);margin-top:4px;"></span>
+            </div>
+            <div class="field"><label>Cidade</label><input id="condoNovoCidade" placeholder="Cidade"></div>
+            <div class="field"><label>Endereço</label><input id="condoNovoEndereco" placeholder="Endereço"></div>
+            <div class="field"><label>Bairro</label><input id="condoNovoBairro" placeholder="Bairro"></div>
+            <div class="field"><label>Responsável (síndico/admin)</label><input id="condoNovoResponsavel" placeholder="Nome do síndico ou administrador(a)"></div>
+            <button type="button" class="btn btn-outline btn-block" id="condoBuscarMapa" style="margin-bottom:10px;"><i class="fa-solid fa-map-location-dot"></i> Localizar endereço no mapa</button>
+            <div id="condoMapaPreviewWrap" style="display:none;margin-bottom:14px;">
+                <img id="condoMapaPreviewImg" alt="Planta/mapa do endereço" style="width:100%;border-radius:12px;border:1px solid var(--border);display:block;">
+                <a id="condoMapaPreviewLink" href="#" target="_blank" style="display:block;text-align:center;font-size:11.5px;color:var(--accent);margin-top:6px;">Abrir mapa completo</a>
+            </div>
+            <button class="btn btn-accent btn-block" id="condoSalvar" style="margin-bottom:8px;"><i class="fa-solid fa-building-circle-check"></i> Cadastrar agora</button>
+            <button class="btn btn-outline btn-block" id="condoCancelarEdicao" style="display:none;">Cancelar edição</button>
+        </div>
+        <div id="condoList"></div>
+    </div>
+</div>
+
+<!-- ===================== PLANTA DO LOCAL ===================== -->
+<div class="nv-screen" id="plantaScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="plantaVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Planta do local</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <p class="empty-note" style="text-align:left;margin-bottom:14px;">
+            Envie a foto ou o desenho da planta do condomínio/empresa e marque onde fica cada unidade.
+            As unidades com encomenda pendente aparecem destacadas na planta — um mapa rápido de para onde levar cada entrega.
+        </p>
+
+        <input type="file" accept="image/*" id="plantaInputArquivo" style="display:none;">
+
+        <!-- Estado vazio: nenhuma planta enviada ainda -->
+        <div id="plantaVazio" class="empty-state" style="display:none;">
+            <i class="fa-solid fa-file-image"></i>
+            Nenhuma planta enviada ainda.
+            <div style="margin-top:14px;">
+                <button class="btn btn-accent" id="plantaEnviarBtn"><i class="fa-solid fa-upload"></i> Enviar imagem da planta</button>
+            </div>
+        </div>
+
+        <!-- Estado com planta já enviada -->
+        <div id="plantaConteudo" style="display:none;">
+            <div class="sep-count-row">
+                <button class="btn btn-outline" id="plantaModoAdicionar" style="font-size:12.5px;padding:8px 14px;">
+                    <i class="fa-solid fa-map-pin"></i> Marcar unidade
+                </button>
+                <button class="btn btn-outline" id="plantaTrocarBtn" style="font-size:12.5px;padding:8px 14px;">
+                    <i class="fa-solid fa-arrows-rotate"></i> Trocar planta
+                </button>
+            </div>
+            <p class="empty-note" id="plantaDica" style="text-align:left;margin-bottom:10px;display:none;">
+                Toque no ponto da planta onde fica a unidade e informe o número/identificação dela.
+            </p>
+            <div id="plantaImgWrap" style="position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-bottom:16px;line-height:0;cursor:default;">
+                <img id="plantaImg" src="" alt="Planta do local" style="width:100%;display:block;">
+                <div id="plantaPinsCamada" style="position:absolute;inset:0;"></div>
+            </div>
+            <div class="sep-count-row">
+                <span class="lbl"><span class="status-dot" style="background:var(--danger);display:inline-block;box-shadow:none;"></span> Com entrega pendente</span>
+                <span class="lbl"><span class="status-dot online" style="display:inline-block;box-shadow:none;"></span> Sem pendência</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== PONTO DA PLANTA: DEFINIR UNIDADE ===================== -->
+<div class="modal-overlay" id="modalPlantaPonto">
+    <div class="modal-sheet">
+        <div class="modal-head"><h3><i class="fa-solid fa-map-pin" style="color:var(--accent);"></i> Marcar unidade</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="field"><label>Número/identificação da unidade</label><input id="plantaPontoUnidade" placeholder="Ex: 101"></div>
+        <button class="btn btn-accent btn-block" id="plantaPontoSalvar" style="margin-bottom:8px;">Salvar na planta</button>
+    </div>
+</div>
+
+<!-- ===================== PONTO DA PLANTA: ENCOMENDAS DA UNIDADE ===================== -->
+<div class="modal-overlay" id="modalPlantaUnidade">
+    <div class="modal-sheet">
+        <div class="modal-head"><h3 id="plantaUnidadeTitulo"><i class="fa-solid fa-box" style="color:var(--accent);"></i> Unidade</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
+        <div id="plantaUnidadeConteudo"></div>
+        <button class="btn btn-outline btn-block" id="plantaPontoRemover" style="margin-top:10px;color:var(--danger);"><i class="fa-solid fa-trash"></i> Remover marcação</button>
+    </div>
+</div>
+
+<!-- ===================== CONVITE: LINK GERADO ===================== -->
+<div class="modal-overlay" id="modalConviteLink">
+    <div class="modal-sheet" style="text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:rgba(0,176,255,0.14);color:var(--accent);
+            display:flex;align-items:center;justify-content:center;font-size:26px;margin:6px auto 16px;">
+            <i class="fa-solid fa-link"></i>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:6px;">Convite gerado!</h3>
+        <p class="empty-note" style="margin-bottom:14px;">Envie o link abaixo para a pessoa preencher o próprio cadastro.</p>
+        <div class="field"><input id="conviteLinkTxt" readonly style="text-align:center;font-size:11.5px;"></div>
+        <button class="btn btn-accent btn-block" id="conviteWhats" style="margin-bottom:8px;"><i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp</button>
+        <button class="btn btn-outline btn-block" id="conviteEmail" style="margin-bottom:8px;"><i class="fa-solid fa-envelope"></i> Enviar por e-mail</button>
+        <button class="btn btn-outline btn-block" id="conviteCopiar" style="margin-bottom:8px;"><i class="fa-solid fa-copy"></i> Copiar link</button>
+        <button class="btn btn-block" data-close style="background:transparent;color:var(--text-muted);"><i class="fa-solid fa-xmark"></i> Fechar</button>
+    </div>
+</div>
+
+<!-- ===================== EDITAR ITEM (funcionário ou morador) ===================== -->
+<div class="modal-overlay" id="modalEditarItem">
+    <div class="modal-sheet">
+        <div class="modal-head"><h3 id="editItemTitulo"><i class="fa-solid fa-pen" style="color:var(--accent);"></i> Editar</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="field" id="editItemCampo1Wrap"><label id="editItemCampo1Label">Campo 1</label><input id="editItemCampo1"></div>
+        <div class="field" id="editItemCampo2Wrap"><label id="editItemCampo2Label">Campo 2</label><input id="editItemCampo2"></div>
+        <div class="field" id="editItemCampo3Wrap" style="display:none;"><label id="editItemCampo3Label">Documento (CPF)</label><input id="editItemCampo3"></div>
+        <div class="field" id="editItemCampo4Wrap" style="display:none;"><label id="editItemCampo4Label">Nova senha de acesso</label><input id="editItemCampo4" type="password" placeholder="Deixe em branco para manter a atual"></div>
+        <button class="btn btn-accent btn-block" id="editItemSalvar" style="margin-bottom:8px;"><i class="fa-solid fa-check"></i> Salvar alterações</button>
+        <button class="btn btn-block" id="editItemExcluir" style="background:rgba(255,84,112,0.12);color:var(--danger);"><i class="fa-solid fa-trash"></i> Excluir cadastro</button>
+    </div>
+</div>
+
+<!-- ===================== RETIRADA DE ENCOMENDA ===================== -->
+<div class="nv-screen" id="retiradaScreen">
+    <div class="nv-top">
+        <button class="icon-btn" id="retVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+        <h3>Retirada de encomenda</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <div class="nv-body">
+        <div class="ret-info-block">
+            <div class="row"><span class="lbl">Unidade</span><span class="val" id="retUnidadeVal">—</span></div>
+            <div class="row"><span class="lbl">Morador</span><span class="val" id="retMoradorVal">—</span></div>
+        </div>
+
+        <label class="ret-check-row"><input type="checkbox" id="retOutraPessoa"> Outra pessoa?</label>
+        <div class="ret-outra-fields" id="retOutraFields">
+            <div class="field"><label>Nome</label><input id="retOutraNome" placeholder="Nome de quem vai retirar"></div>
+            <div class="field"><label>CPF</label><input id="retOutraCpf" placeholder="000.000.000-00"></div>
+        </div>
+
+        <div class="ret-selecionar-row"><span>Selecionar todos</span><input type="checkbox" id="retSelecionarTodos"></div>
+        <div id="retPkgList"></div>
+
+        <div class="ret-actions">
+            <button class="btn btn-block" id="retConfirmar" style="background:linear-gradient(135deg,#2ed573,#1abc63);color:#06231a;font-weight:700;"><i class="fa-solid fa-arrow-right"></i> Retirar encomenda</button>
+            <button class="btn btn-cancel btn-block" id="retCancelar"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ASSINATURA (funcionário e quem retirou) ===================== -->
+<div class="nv-screen" id="sigScreen">
+    <div class="sig-wrap">
+        <div class="nv-top">
+            <button class="icon-btn" id="sigVoltar"><i class="fa-solid fa-arrow-left"></i></button>
+            <h3>Assinatura</h3>
+            <div style="width:40px;"></div>
+        </div>
+        <div class="sig-head">
+            <h4 id="sigSubtitulo">Assinatura do recebimento</h4>
+            <b id="sigNomeAlvo">Funcionário</b>
+            <button class="sig-clear-btn" id="sigLimpar" title="Limpar assinatura"><i class="fa-solid fa-eraser"></i></button>
+        </div>
+        <div class="sig-canvas-wrap">
+            <canvas id="sigCanvas"></canvas>
+            <div class="sig-line"></div>
+            <div class="sig-placeholder" id="sigPlaceholder">Assine aqui com o dedo ou o mouse</div>
+        </div>
+        <div class="sig-foot">
+            <button class="btn btn-accent btn-block" id="sigSalvar"><i class="fa-solid fa-check"></i> Salvar</button>
+        </div>
+    </div>
+</div>
+
 <!-- SEPARA ENCOMENDA -->
 <div class="modal-overlay" id="modalSepara">
     <div class="modal-sheet">
@@ -1068,6 +1607,7 @@ button{font-family:inherit;cursor:pointer;}
             <option>Prateleira A1</option><option>Prateleira A2</option><option>Prateleira B1</option>
             <option>Prateleira B2</option><option>Armário refrigerado</option>
         </select></div>
+        <div class="field"><label>Responsável pela retirada</label><input type="text" id="separaResponsavel" placeholder="Nome de quem vai retirar (opcional)"></div>
         <button class="btn btn-accent btn-block" id="salvarSepara"><i class="fa-solid fa-boxes-stacked"></i> Separar encomenda</button>
     </div>
 </div>
@@ -1077,6 +1617,7 @@ button{font-family:inherit;cursor:pointer;}
     <div class="modal-sheet">
         <div class="modal-head"><h3><i class="fa-solid fa-route" style="color:var(--accent);"></i> Rota de entregas</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
         <p class="empty-note" style="margin-bottom:6px;text-align:left;">Marque cada parada conforme a entrega for feita no bloco.</p>
+        <button class="btn btn-outline btn-block" id="rotaVerNaPlanta" style="margin-bottom:10px;font-size:12.5px;"><i class="fa-solid fa-diagram-project"></i> Ver essas paradas na planta do local</button>
         <div id="routeList"></div>
     </div>
 </div>
@@ -1085,11 +1626,31 @@ button{font-family:inherit;cursor:pointer;}
 <div class="modal-overlay" id="modalConvite">
     <div class="modal-sheet">
         <div class="modal-head"><h3><i class="fa-solid fa-paper-plane" style="color:var(--accent);"></i> Enviar convite</h3><button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button></div>
-        <div class="field"><label>Nome</label><input id="convNome" placeholder="Nome do convidado" /></div>
-        <div class="field"><label>Unidade</label><input id="convUnidade" placeholder="Ex: Nº 108" /></div>
+        <p class="empty-note" style="margin-bottom:14px;text-align:left;">Informe só o contato — a pessoa preenche o próprio nome ao abrir o link.</p>
+        <div class="field"><label>Tipo de cadastro</label>
+            <select id="convTipo">
+                <option value="morador">Morador</option>
+                <option value="funcionario">Funcionário</option>
+            </select>
+        </div>
+        <div class="field" id="convUnidadeWrap"><label>Unidade</label><input id="convUnidade" placeholder="Ex: Nº 108" /></div>
+        <div class="field" id="convCargoWrap" style="display:none;"><label>Cargo</label><input id="convCargo" placeholder="Ex: Porteiro, Zelador..." /></div>
         <div class="field"><label>E-mail ou WhatsApp</label><input id="convContato" placeholder="email@exemplo.com ou (84) 9 0000-0000" /></div>
-        <button class="btn btn-accent btn-block" id="enviarConvite"><i class="fa-solid fa-paper-plane"></i> Enviar convite</button>
+        <button class="btn btn-accent btn-block" id="enviarConvite"><i class="fa-solid fa-paper-plane"></i> Gerar e enviar convite</button>
     </div>
+</div>
+
+<!-- ESCANEAR CÓDIGO DE BARRAS (câmera ao vivo) -->
+<div class="scan-modal" id="scanModal">
+    <div class="scan-top">
+        <button class="icon-btn" id="scanFechar" style="background:rgba(255,255,255,0.15);border-color:transparent;color:#fff;"><i class="fa-solid fa-xmark"></i></button>
+        <h3>Escanear código de barras</h3>
+        <div style="width:40px;"></div>
+    </div>
+    <video id="scanVideo" autoplay playsinline muted></video>
+    <div class="scan-frame"></div>
+    <div class="scan-status" id="scanStatus"></div>
+    <p class="scan-hint" id="scanHint">Centralize o código de barras dentro da moldura</p>
 </div>
 
 <!-- TOAST -->
@@ -1097,6 +1658,11 @@ button{font-family:inherit;cursor:pointer;}
 
 <!-- OCR local para leitura de etiquetas na "Nova encomenda" (sem backend) -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<!-- ZXing: leitura de código de barras de verdade (Code128/EAN/UPC/QR) via câmera ao vivo -->
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.0/umd/index.min.js"></script>
+<!-- jsPDF + autotable: geração do relatório de encomendas em PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script>
 /* ---------------- SESSÃO (dados vindos do login.html / cadastro.html) ---------------- */
 /*
@@ -1124,6 +1690,37 @@ function initialsAvatar(nome){
         <text x="50" y="59" font-family="Poppins,Arial,sans-serif" font-size="36" font-weight="700" fill="#ffffff" text-anchor="middle">${iniciais}</text>
     </svg>`;
     return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+}
+
+/* ==================================================================
+   COMPRESSÃO DE IMAGEM — antes de qualquer foto ir para o servidor.
+   Fotos de câmera vêm em alta resolução (várias vezes 3-8MB em base64),
+   o que deixava o salvamento e o carregamento da lista bem lentos.
+   Aqui redimensionamos para no máximo ~1000px no lado maior e recomprimimos
+   como JPEG com qualidade ~0.72, o que normalmente reduz o arquivo para
+   menos de 200KB sem perda visível de qualidade — isso é o que realmente
+   deixa o "salvar" e o "carregar" rápidos.
+   ================================================================== */
+function comprimirImagem(dataUrl, maxDim=1000, qualidade=0.72){
+    return new Promise((resolve)=>{
+        if(!dataUrl || !dataUrl.startsWith('data:image')){ resolve(dataUrl); return; }
+        const img = new Image();
+        img.onload = ()=>{
+            let { width, height } = img;
+            if(width > maxDim || height > maxDim){
+                if(width >= height){ height = Math.round(height * (maxDim/width)); width = maxDim; }
+                else { width = Math.round(width * (maxDim/height)); height = maxDim; }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width; canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            try{ resolve(canvas.toDataURL('image/jpeg', qualidade)); }
+            catch(e){ resolve(dataUrl); } // se der erro (ex: imagem "tainted"), mantém a original
+        };
+        img.onerror = ()=> resolve(dataUrl);
+        img.src = dataUrl;
+    });
 }
 
 function pick(obj, keys, fallback){
@@ -1210,6 +1807,7 @@ let encomendas = [];
 let timeline = [];
 
 let notifications = [];
+let notifSeq = 1;
 
 const statusMeta = {
     recebido:{label:'Recebido', icon:'fa-warehouse', color:'#c9a6ff'},
@@ -1217,6 +1815,15 @@ const statusMeta = {
     rota:{label:'Em rota', icon:'fa-truck-fast', color:'#00b0ff'},
     entregue:{label:'Entregue', icon:'fa-check-double', color:'#2ed573'},
 };
+/* Meta "de segurança" para status/tipo que por algum motivo não estejam no
+   mapa acima (ex.: dado antigo no banco). Sem isso, um único registro com
+   status desconhecido travava a função de render no meio do caminho — e
+   como o carregamento inicial roda o render antes de qualquer clique do
+   usuário, as encomendas simplesmente não apareciam até o próximo render
+   (que só acontecia ao registrar uma nova encomenda, pois aí o array em
+   memória já ficava diferente e o próximo render "escapava" do item ruim). */
+const statusMetaFallback = {label:'—', icon:'fa-box', color:'#a79fc0'};
+function metaDe(chave){ return statusMeta[chave] || statusMetaFallback; }
 
 let currentFilter = 'todos';
 
@@ -1245,7 +1852,7 @@ function addTimeline(tipo, unidade, texto, por='Jardelisson'){
     }).catch(e=> console.error('Erro ao salvar histórico no banco:', e));
 }
 function addNotif(title, body){
-    notifications.unshift({title, time:'agora', body});
+    notifications.unshift({id: notifSeq++, title, time:'agora', body});
     renderNotifs();
 }
 
@@ -1294,7 +1901,7 @@ function renderTimeline(){
     const el = document.getElementById('timelineCard');
     if(!timeline.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-clock-rotate-left"></i>Nenhuma movimentação ainda.<br>Assim que uma encomenda for registrada, ela aparece aqui.</div>'; return; }
     el.innerHTML = timeline.slice(0,6).map(t=>{
-        const m = statusMeta[t.tipo];
+        const m = metaDe(t.tipo);
         return `<div class="timeline-item">
             <div class="t-ic ${t.tipo}"><i class="fa-solid ${m.icon}"></i></div>
             <div class="t-body">
@@ -1372,40 +1979,45 @@ function renderPendentes(){
     const el = document.getElementById('pendList');
     if(!pend.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-champagne-glasses"></i>Nenhuma encomenda pendente no momento.</div>'; return; }
     el.innerHTML = pend.map(e=>{
-        const m = statusMeta[e.status];
+        const m = metaDe(e.status);
         return `<div class="pend-card">
             <div class="ic"><i class="fa-solid fa-box"></i></div>
             <div class="info">
                 <h5>${m.label} pelo condomínio</h5>
                 <p>Código: ${e.codigo} &nbsp; Unidade: ${e.unidade} &nbsp; ${e.ts}</p>
             </div>
-            <button class="confirm-btn" data-codigo="${e.codigo}"><i class="fa-solid fa-check"></i> Confirmar</button>
+            <button class="confirm-btn" data-unidade="${e.unidade}"><i class="fa-solid fa-right-from-bracket"></i> Retirar</button>
         </div>`;
     }).join('');
     el.querySelectorAll('.confirm-btn').forEach(btn=>{
-        btn.addEventListener('click', ()=> confirmarRetirada(parseInt(btn.dataset.codigo)));
+        btn.addEventListener('click', ()=> abrirRetiradaScreen(btn.dataset.unidade));
     });
-}
-
-function confirmarRetirada(codigo){
-    const enc = encomendas.find(e=>e.codigo===codigo);
-    if(!enc) return;
-    enc.status = 'entregue';
-    atualizarEncomendaNoBanco(enc.codigo, {status:'entregue'});
-    addTimeline('entregue', enc.unidade, 'Entregue');
-    addNotif(`Retirada confirmada — Unidade ${enc.unidade}`, `Encomenda ${enc.codigo} foi entregue ao morador.`);
-    renderAll();
-    toast(`Retirada da unidade ${enc.unidade} confirmada!`);
 }
 
 /* ---------------- RENDER: NOTIFS ---------------- */
 function renderNotifs(){
     document.getElementById('notifBadge').textContent = notifications.length;
     document.getElementById('notifBadge').style.display = notifications.length ? 'flex' : 'none';
+    document.getElementById('notifClearAll').style.display = notifications.length ? 'block' : 'none';
     const el = document.getElementById('notifList');
     if(!notifications.length){ el.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash" style="display:block;font-size:16px;margin-bottom:6px;color:var(--text-muted);"></i>Sem notificações novas</div>'; return; }
-    el.innerHTML = notifications.map(n=>`<div class="notif-item"><b>${n.title}</b>${n.body}<br><span>${n.time}</span></div>`).join('');
+    el.innerHTML = notifications.map(n=>`
+        <div class="notif-item">
+            <button class="notif-close" data-notif-id="${n.id}" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
+            <b>${n.title}</b>${n.body}<br><span>${n.time}</span>
+        </div>`).join('');
 }
+document.getElementById('notifClearAll').addEventListener('click', ()=>{
+    notifications = [];
+    renderNotifs();
+});
+document.getElementById('notifList').addEventListener('click', e=>{
+    const btn = e.target.closest('.notif-close');
+    if(!btn) return;
+    const id = Number(btn.dataset.notifId);
+    notifications = notifications.filter(n=> n.id !== id);
+    renderNotifs();
+});
 
 /* ---------------- RENDER: ENCOMENDAS MODAL ---------------- */
 function renderFilterRow(){
@@ -1423,7 +2035,7 @@ function renderEncomendasList(){
     const el = document.getElementById('encomendasList');
     if(!list.length){ el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-box-open"></i>Nenhuma encomenda nesse filtro ainda.</div>'; return; }
     el.innerHTML = list.map(e=>{
-        const m = statusMeta[e.status];
+        const m = metaDe(e.status);
         return `<div class="mini-item">
             <div class="m-info">
                 <h6>${e.nome} ${e.privada?'<i class="fa-solid fa-lock" style="color:var(--warm);font-size:10px;"></i>':''}</h6>
@@ -1465,8 +2077,15 @@ function renderRoute(){
 }
 
 function renderAll(){
-    renderTimeline(); renderTimelineChart(); renderChart(); renderPendentes(); renderNotifs();
-    renderEncomendasList(); renderSeparaSelect();
+    // Cada render roda isolado: se um deles falhar (ex.: dado inesperado
+    // vindo do banco), os outros continuam normalmente em vez de travar a
+    // tela inteira. As encomendas vêm primeiro por serem a informação mais
+    // importante ao abrir o painel.
+    const renders = [renderPendentes, renderEncomendasList, renderSeparaSelect,
+                      renderTimeline, renderTimelineChart, renderChart, renderNotifs];
+    renders.forEach(fn=>{
+        try{ fn(); }catch(e){ console.error(`Erro ao renderizar (${fn.name}):`, e); }
+    });
 }
 
 /* ---------------- MODAL CONTROLS ---------------- */
@@ -1514,10 +2133,14 @@ document.getElementById('salvarPrivada').addEventListener('click', async ()=>{
         const resp = await fetch('/api/encomendas', {
             method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(nova)
         });
-        const data = await resp.json();
-        if(!data.sucesso){ toast('Erro ao salvar encomenda no banco.'); return; }
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){
+            console.error('Falha ao registrar encomenda privada. Status:', resp.status, 'Resposta:', data);
+            toast(data.mensagem ? `Erro: ${data.mensagem}` : `Erro ao salvar encomenda (status ${resp.status}).`);
+            return;
+        }
         codigo = data.codigo;
-    }catch(e){ console.error('Erro ao registrar encomenda privada:', e); toast('Erro de conexão com o servidor.'); return; }
+    }catch(e){ console.error('Erro ao registrar encomenda privada:', e); toast('Erro de conexão com o servidor. Confira se o node server.js está rodando e se você está acessando via http://localhost:3000.'); return; }
 
     encomendas.push({...nova, codigo});
     addTimeline('recebido', unidade, 'Recebido pelo condomínio (privada)');
@@ -1562,13 +2185,11 @@ document.getElementById('confirmarCodigo').addEventListener('click', ()=>{
     }
     if(!enc) return;
     if(enc.status==='entregue'){ toast('Essa encomenda já foi retirada.'); return; }
-    enc.status='entregue';
-    atualizarEncomendaNoBanco(enc.codigo, {status:'entregue'});
-    addTimeline('entregue', enc.unidade, retiradaSemCodigo ? 'Entregue (retirada sem código)' : 'Entregue (retirada por código)');
     document.getElementById('codigoInput').value='';
     document.getElementById('modalCodigo').classList.remove('open');
-    renderAll();
-    toast(`Retirada confirmada para unidade ${enc.unidade}!`);
+    // A confirmação final (com assinatura do funcionário e de quem retira)
+    // acontece na tela de Retirada de encomenda — o código só localiza a unidade.
+    abrirRetiradaScreen(enc.unidade);
 });
 
 document.getElementById('modalCodigo').addEventListener('click', e=>{ /* reset ao fechar via overlay */ });
@@ -1628,19 +2249,47 @@ function extrairDadosDaEtiqueta(texto){
 }
 
 async function lerEtiquetaComOCR(imagemBase64, onProgresso){
-    if(!window.Tesseract) throw new Error('OCR indisponível');
-    const { data } = await Tesseract.recognize(imagemBase64, 'por+eng', {
-        logger: info=>{
-            if(onProgresso && info.status === 'recognizing text'){
-                onProgresso(Math.round(info.progress*100));
-            }
-        }
-    });
+    let worker;
+    try{
+        worker = await getTesseractWorker(onProgresso);
+    }catch(err){
+        console.error('Falha ao iniciar o OCR (Tesseract.js):', err);
+        throw new Error('OCR indisponível — verifique sua conexão com a internet e tente novamente.');
+    }
+    const { data } = await worker.recognize(imagemBase64);
     const { transportadora, codigoRastreio } = extrairDadosDaEtiqueta(data.text || '');
     if(!transportadora && !codigoRastreio){
         throw new Error('Não foi possível identificar transportadora/código na etiqueta');
     }
     return { sucesso:true, transportadora, codigoRastreio };
+}
+
+/* Worker do Tesseract.js (API nova da v5 — Tesseract.recognize() estático foi
+   removido/descontinuado nessa versão, por isso a leitura não funcionava).
+   Mantemos um único worker reaproveitado entre leituras: mais rápido do que
+   criar/derrubar um worker inteiro a cada foto, e o "logger" passado na
+   criação continua valendo para todas as leituras seguintes. */
+let tesseractWorkerPromise = null;
+let tesseractProgressCallback = null;
+
+function getTesseractWorker(onProgresso){
+    tesseractProgressCallback = onProgresso || null;
+    if(!window.Tesseract){
+        return Promise.reject(new Error('A biblioteca Tesseract.js não carregou (verifique sua conexão com a internet).'));
+    }
+    if(!tesseractWorkerPromise){
+        tesseractWorkerPromise = Tesseract.createWorker(['por','eng'], 1, {
+            logger: info=>{
+                if(tesseractProgressCallback && info.status === 'recognizing text'){
+                    tesseractProgressCallback(Math.round(info.progress*100));
+                }
+            }
+        }).catch(err=>{
+            tesseractWorkerPromise = null; // permite tentar de novo na próxima foto em vez de travar pra sempre
+            throw err;
+        });
+    }
+    return tesseractWorkerPromise;
 }
 
 let moradores = [];
@@ -1728,10 +2377,14 @@ document.getElementById('nvSalvarMorador').addEventListener('click', async ()=>{
             method:'POST', headers:{'Content-Type':'application/json'},
             body: JSON.stringify({usuario_id:USUARIO_ID, unidade, nome, foto})
         });
-        const data = await resp.json();
-        if(!data.sucesso){ toast('Erro ao salvar morador no banco.'); return; }
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){
+            console.error('Falha ao cadastrar morador. Status:', resp.status, 'Resposta:', data);
+            toast(data.mensagem ? `Erro: ${data.mensagem}` : `Erro ao salvar morador (status ${resp.status}).`);
+            return;
+        }
         id = data.id;
-    }catch(e){ console.error('Erro ao cadastrar morador:', e); toast('Erro de conexão com o servidor.'); return; }
+    }catch(e){ console.error('Erro ao cadastrar morador:', e); toast('Erro de conexão com o servidor. Confira se o node server.js está rodando e se você está acessando via http://localhost:3000.'); return; }
 
     moradores.push({id, unidade, nome, foto});
     document.getElementById('nvNovaUnidade').value='';
@@ -1801,6 +2454,7 @@ function processarFotoEtiqueta(file){
                 status.classList.add('ok');
                 statusText.textContent = 'Etiqueta lida com sucesso!';
             }catch(err){
+                console.error('Falha na leitura da etiqueta:', err);
                 status.classList.add('err');
                 statusText.textContent = 'Não conseguimos ler a etiqueta automaticamente. Preencha os dados manualmente.';
             }
@@ -1913,9 +2567,12 @@ document.getElementById('nvRegistrar').addEventListener('click', async ()=>{
     const grupo = nvGrupoQtd;
     const unidade = `Nº ${nvMoradorSelecionado.unidade}`;
 
+    // Comprime a foto antes de enviar — isso é o que evita o salvamento lento.
+    const fotoComprimida = await comprimirImagem(nvFotoBase64);
+
     const nova = {
         usuario_id:USUARIO_ID, unidade, nome: nvMoradorSelecionado.nome, transp, tipo, grupo,
-        codigoRastreio, entregadorNome, entregadorDoc, observacao, foto:nvFotoBase64,
+        codigoRastreio, entregadorNome, entregadorDoc, observacao, foto:fotoComprimida,
         status:'recebido', privada:false, ts:nowStamp(), por:'Nova encomenda (IA)'
     };
 
@@ -1924,10 +2581,14 @@ document.getElementById('nvRegistrar').addEventListener('click', async ()=>{
         const resp = await fetch('/api/encomendas', {
             method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(nova)
         });
-        const data = await resp.json();
-        if(!data.sucesso){ toast('Erro ao salvar encomenda no banco.'); return; }
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){
+            console.error('Falha ao registrar encomenda. Status:', resp.status, 'Resposta:', data);
+            toast(data.mensagem ? `Erro: ${data.mensagem}` : `Erro ao salvar encomenda (status ${resp.status}).`);
+            return;
+        }
         codigo = data.codigo;
-    }catch(e){ console.error('Erro ao registrar encomenda:', e); toast('Erro de conexão com o servidor.'); return; }
+    }catch(e){ console.error('Erro ao registrar encomenda:', e); toast('Erro de conexão com o servidor. Confira se o node server.js está rodando e se você está acessando via http://localhost:3000.'); return; }
 
     encomendas.push({...nova, codigo});
     addTimeline('recebido', unidade, `Recebido pelo condomínio (${tipo})`);
@@ -1945,29 +2606,84 @@ document.getElementById('salvarSepara').addEventListener('click', ()=>{
     if(!sel.value){ toast('Nenhuma encomenda disponível para separar.'); return; }
     const codigo = parseInt(sel.value);
     const escaninho = document.getElementById('separaEscaninho').value;
+    const responsavelRetirada = document.getElementById('separaResponsavel').value.trim();
     const enc = encomendas.find(e=>e.codigo===codigo);
     if(!enc) return;
     enc.status = 'aguardando';
     enc.escaninho = escaninho;
-    atualizarEncomendaNoBanco(codigo, {status:'aguardando', escaninho});
+    enc.responsavelRetirada = responsavelRetirada;
+    atualizarEncomendaNoBanco(codigo, {status:'aguardando', escaninho, responsavelRetirada});
     addTimeline('aguardando', enc.unidade, `Separado em ${escaninho}`);
     document.getElementById('modalSepara').classList.remove('open');
+    document.getElementById('separaResponsavel').value = '';
     renderAll();
     toast(`Encomenda ${codigo} separada em ${escaninho}.`);
 });
 
-/* Enviar convite */
-document.getElementById('openInvite').addEventListener('click', ()=> document.getElementById('modalConvite').classList.add('open'));
-document.getElementById('enviarConvite').addEventListener('click', ()=>{
-    const nome = document.getElementById('convNome').value.trim();
+/* ==================================================================
+   CONVITE DE CADASTRO — gera um link único; a pessoa preenche o próprio
+   nome/foto nesse link (convite.html) e o servidor salva automaticamente
+   como morador ou funcionário, já vinculado a este administrador.
+   ================================================================== */
+function abrirModalConvite(tipoPreSelecionado){
+    document.getElementById('convTipo').value = tipoPreSelecionado || 'morador';
+    atualizarCamposConvite();
+    document.getElementById('modalConvite').classList.add('open');
+}
+document.getElementById('openInvite').addEventListener('click', ()=> abrirModalConvite('morador'));
+
+function atualizarCamposConvite(){
+    const tipo = document.getElementById('convTipo').value;
+    document.getElementById('convUnidadeWrap').style.display = tipo==='morador' ? 'block' : 'none';
+    document.getElementById('convCargoWrap').style.display = tipo==='funcionario' ? 'block' : 'none';
+}
+document.getElementById('convTipo').addEventListener('change', atualizarCamposConvite);
+
+document.getElementById('enviarConvite').addEventListener('click', async ()=>{
+    const tipo = document.getElementById('convTipo').value;
+    const unidade = document.getElementById('convUnidade').value.trim();
+    const cargo = document.getElementById('convCargo').value.trim();
     const contato = document.getElementById('convContato').value.trim();
-    if(!nome || !contato){ toast('Preencha nome e contato.'); return; }
-    document.getElementById('convNome').value='';
+
+    if(!contato){ toast('Informe um e-mail ou WhatsApp para enviar o convite.'); return; }
+    if(tipo==='morador' && !unidade){ toast('Informe a unidade do morador.'); return; }
+
+    let token;
+    try{
+        const resp = await fetch('/api/convites', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ usuario_id:USUARIO_ID, tipo, unidade, cargo, contato })
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao gerar convite.'); return; }
+        token = data.token;
+    }catch(e){ console.error('Erro ao gerar convite:', e); toast('Erro de conexão com o servidor.'); return; }
+
+    const link = `${window.location.origin}/convite.html?token=${token}`;
     document.getElementById('convUnidade').value='';
+    document.getElementById('convCargo').value='';
     document.getElementById('convContato').value='';
     document.getElementById('modalConvite').classList.remove('open');
-    toast(`Convite enviado para ${nome}!`);
+    abrirLinkConvite(link, contato);
 });
+
+function abrirLinkConvite(link, contato){
+    document.getElementById('conviteLinkTxt').value = link;
+    const mensagem = encodeURIComponent(`Olá! Você foi convidado(a) para se cadastrar no ZibBox. Preencha seus dados aqui: ${link}`);
+    // Se o contato parece um número (majoritariamente dígitos), usamos direto no wa.me
+    const soDigitos = contato.replace(/\D/g,'');
+    const whatsHref = soDigitos.length>=8 ? `https://wa.me/${soDigitos}?text=${mensagem}` : `https://wa.me/?text=${mensagem}`;
+    document.getElementById('conviteWhats').onclick = ()=> window.open(whatsHref, '_blank');
+    document.getElementById('conviteEmail').onclick = ()=>{
+        const emailAlvo = contato.includes('@') ? contato : '';
+        window.location.href = `mailto:${emailAlvo}?subject=${encodeURIComponent('Convite ZibBox')}&body=${mensagem}`;
+    };
+    document.getElementById('conviteCopiar').onclick = async ()=>{
+        try{ await navigator.clipboard.writeText(link); toast('Link copiado!'); }
+        catch(e){ toast('Não foi possível copiar automaticamente — selecione e copie manualmente.'); }
+    };
+    document.getElementById('modalConviteLink').classList.add('open');
+}
 
 /* ==================================================================
    CONFIGURAÇÕES — notificações automáticas e SMTP
@@ -2193,14 +2909,35 @@ document.getElementById('cfgRestaurar').addEventListener('click', ()=>{
     toast('Configurações restauradas para o padrão.');
 });
 
-/* Salvar configurações */
-document.getElementById('cfgSalvar').addEventListener('click', ()=>{
+/* Salvar configurações — grava local (resposta instantânea) e também no
+   servidor por usuario_id, para as configurações valerem em qualquer
+   dispositivo em que o administrador fizer login. */
+document.getElementById('cfgSalvar').addEventListener('click', async ()=>{
     const cfg = lerConfiguracoesDaTela();
     localStorage.setItem(CFG_STORAGE_KEY, JSON.stringify(cfg));
+    try{
+        await fetch(`/api/configuracoes/${USUARIO_ID}`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(cfg)
+        });
+    }catch(e){ console.error('Não foi possível sincronizar configurações com o servidor:', e); }
     toast('Configurações salvas com sucesso!');
     document.getElementById('cfgSavedHint').innerHTML = `<i class="fa-solid fa-circle-check" style="color:#2ed573;"></i> Salvo agora — ${nowStamp()}`;
     setTimeout(()=> cfgScreen.classList.remove('open'), 500);
 });
+
+/* Busca as configurações salvas no servidor (se existirem) e aplica na tela
+   — assim o administrador vê as mesmas configurações em outro dispositivo. */
+async function sincronizarConfiguracoesComServidor(){
+    try{
+        const resp = await fetch(`/api/configuracoes/${USUARIO_ID}`);
+        const data = await resp.json().catch(()=>({}));
+        if(data.sucesso && data.configuracoes){
+            localStorage.setItem(CFG_STORAGE_KEY, JSON.stringify(data.configuracoes));
+            carregarConfiguracoes();
+        }
+    }catch(e){ /* sem servidor disponível, mantém a configuração local */ }
+}
 
 /* Aplica as notificações automáticas configuradas quando uma encomenda é registrada */
 function aplicarNotificacaoEnvio(morador, codigo){
@@ -2238,17 +2975,1319 @@ function aplicarNotificacaoEnvio(morador, codigo){
     }
 }
 
+/* ==================================================================
+   FUNCIONÁRIOS — tela cheia (aba do menu), estilo "responsável pelo
+   recebimento": lista com foto, nome, cargo e status online/offline.
+   ================================================================== */
+let funcionarios = [];
+
+async function carregarFuncionariosDoBanco(){
+    try{
+        const resp = await fetch(`/api/funcionarios/${USUARIO_ID}`);
+        const data = await resp.json();
+        if(data.sucesso) funcionarios = data.funcionarios;
+    }catch(e){ console.error('Erro ao carregar funcionários:', e); }
+}
+
+function renderFuncList(){
+    document.getElementById('funcCount').textContent = funcionarios.length;
+    const nomeLogado = pick(usuarioLogado, ['nome','name','usuario','login'], 'Usuário');
+    document.getElementById('funcUsuarioLogadoNome').textContent = nomeLogado;
+    const el = document.getElementById('funcList');
+    if(!funcionarios.length){
+        el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-user-tie"></i>Nenhum funcionário cadastrado ainda.<br>Toque no botão + acima para cadastrar o primeiro.</div>';
+        return;
+    }
+    el.innerHTML = funcionarios.map(f=>{
+        const foto = f.foto || initialsAvatar(f.nome);
+        const acesso = f.acessoConfigurado
+            ? '<span class="tag" style="font-size:10px;">Acesso ao portal ativo</span>'
+            : '<span class="tag" style="font-size:10px;opacity:.6;">Sem senha de portal</span>';
+        return `<div class="func-card">
+            <img src="${foto}" alt="${f.nome}">
+            <div class="f-info"><h6>${f.cargo || 'Funcionário'}</h6><p>${f.nome}</p>${acesso}</div>
+            <button class="card-edit-btn" data-editar-func="${f.id}" title="Editar"><i class="fa-solid fa-pen"></i></button>
+            <span class="status-dot ${f.online ? 'online' : ''}" title="${f.online ? 'Online agora' : 'Offline'}"></span>
+        </div>`;
+    }).join('');
+}
+
+document.getElementById('funcAddBtn').addEventListener('click', ()=> document.getElementById('funcAddForm').classList.toggle('show'));
+document.getElementById('funcSalvar').addEventListener('click', async ()=>{
+    const nome = document.getElementById('funcNovoNome').value.trim();
+    const cargo = document.getElementById('funcNovoCargo').value.trim();
+    const documento = document.getElementById('funcNovoDocumento').value.trim();
+    const senha = document.getElementById('funcNovoSenha').value;
+    if(!nome){ toast('Preencha o nome do funcionário.'); return; }
+    if(!documento || !senha){
+        toast('Preencha documento e senha — sem isso o funcionário não consegue entrar no portal dele.');
+        return;
+    }
+    try{
+        const resp = await fetch('/api/funcionarios', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ usuario_id:USUARIO_ID, nome, cargo, foto: initialsAvatar(nome), documento, senha })
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao cadastrar funcionário.'); return; }
+        funcionarios.push({ id:data.id, nome, cargo: cargo||'Funcionário', foto: initialsAvatar(nome), online:false, acessoConfigurado: !!senha, documento });
+        document.getElementById('funcNovoNome').value='';
+        document.getElementById('funcNovoCargo').value='';
+        document.getElementById('funcNovoDocumento').value='';
+        document.getElementById('funcNovoSenha').value='';
+        document.getElementById('funcAddForm').classList.remove('show');
+        renderFuncList();
+        toast('Funcionário cadastrado!');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+document.getElementById('funcConvidar').addEventListener('click', ()=>{
+    document.getElementById('funcAddForm').classList.remove('show');
+    abrirModalConvite('funcionario');
+});
+document.getElementById('abrirFunc').addEventListener('click', async e=>{
+    e.preventDefault();
+    closeDrawer();
+    document.getElementById('funcScreen').classList.add('open');
+    await carregarFuncionariosDoBanco();
+    renderFuncList();
+});
+document.getElementById('funcVoltar').addEventListener('click', ()=> document.getElementById('funcScreen').classList.remove('open'));
+
+/* ==================================================================
+   USUÁRIOS / MORADORES — tela cheia (aba do menu), reaproveita o array
+   "moradores" já carregado do banco.
+   ================================================================== */
+function renderUsersList(filtro=''){
+    const f = filtro.trim().toLowerCase();
+    const lista = moradores.filter(m => !f || m.nome.toLowerCase().includes(f) || m.unidade.toLowerCase().includes(f));
+    document.getElementById('usersCount').textContent = moradores.length;
+    const el = document.getElementById('usersList');
+    if(!lista.length){
+        el.innerHTML = f
+            ? '<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i>Nenhum morador encontrado para essa busca.</div>'
+            : '<div class="empty-state"><i class="fa-solid fa-users"></i>Nenhum morador cadastrado ainda.</div>';
+        return;
+    }
+    el.innerHTML = lista.map((m,i)=>{
+        const cor = nvCores[i % nvCores.length];
+        const qtd = contarEncomendasDoMorador(m.unidade);
+        return `<div class="nv-morador-card" style="border-left-color:${cor};">
+            <img src="${m.foto}" alt="${m.nome}" style="border-color:${cor};">
+            <div class="m-info"><h6>Unidade: ${m.unidade}</h6><p>${m.nome}</p></div>
+            ${qtd>0 ? `<div class="nv-badge" style="background:${cor};"><i class="fa-solid fa-box"></i>${qtd}</div>` : ''}
+            <button class="card-edit-btn" data-editar-morador="${m.id}" title="Editar"><i class="fa-solid fa-pen"></i></button>
+        </div>`;
+    }).join('');
+}
+document.getElementById('usersBusca').addEventListener('input', e=> renderUsersList(e.target.value));
+document.getElementById('usersAddBtn').addEventListener('click', ()=> document.getElementById('usersAddForm').classList.toggle('show'));
+document.getElementById('usersSalvar').addEventListener('click', async ()=>{
+    const unidade = document.getElementById('usersNovaUnidade').value.trim();
+    const nome = document.getElementById('usersNovoNome').value.trim();
+    if(!unidade || !nome){ toast('Preencha unidade e nome do morador.'); return; }
+    const foto = initialsAvatar(nome);
+    try{
+        const resp = await fetch('/api/moradores', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({usuario_id:USUARIO_ID, unidade, nome, foto})
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao salvar morador.'); return; }
+        moradores.push({id:data.id, unidade, nome, foto});
+        document.getElementById('usersNovaUnidade').value='';
+        document.getElementById('usersNovoNome').value='';
+        document.getElementById('usersAddForm').classList.remove('show');
+        renderUsersList(document.getElementById('usersBusca').value);
+        toast('Morador cadastrado!');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+document.getElementById('usersConvidar').addEventListener('click', ()=>{
+    document.getElementById('usersAddForm').classList.remove('show');
+    abrirModalConvite('morador');
+});
+document.getElementById('abrirUsuarios').addEventListener('click', e=>{
+    e.preventDefault();
+    closeDrawer();
+    document.getElementById('usersBusca').value='';
+    renderUsersList();
+    document.getElementById('usersScreen').classList.add('open');
+});
+document.getElementById('usersVoltar').addEventListener('click', ()=> document.getElementById('usersScreen').classList.remove('open'));
+
+/* ==================================================================
+   EDITAR / EXCLUIR — funcionário ou morador (modal genérico)
+   ================================================================== */
+let editContext = null; // {tipo:'funcionario'|'morador', id}
+
+function abrirEditarFuncionario(id){
+    const f = funcionarios.find(x=> x.id===id);
+    if(!f) return;
+    editContext = { tipo:'funcionario', id };
+    document.getElementById('editItemTitulo').innerHTML = '<i class="fa-solid fa-pen" style="color:var(--accent);"></i> Editar funcionário';
+    document.getElementById('editItemCampo1Label').textContent = 'Nome';
+    document.getElementById('editItemCampo1').value = f.nome;
+    document.getElementById('editItemCampo2Label').textContent = 'Cargo';
+    document.getElementById('editItemCampo2').value = f.cargo || '';
+    document.getElementById('editItemCampo3Wrap').style.display = 'block';
+    document.getElementById('editItemCampo3').value = f.documento || '';
+    document.getElementById('editItemCampo4Wrap').style.display = 'block';
+    document.getElementById('editItemCampo4').value = '';
+    document.getElementById('modalEditarItem').classList.add('open');
+}
+
+function abrirEditarMorador(id){
+    const m = moradores.find(x=> x.id===id);
+    if(!m) return;
+    editContext = { tipo:'morador', id };
+    document.getElementById('editItemTitulo').innerHTML = '<i class="fa-solid fa-pen" style="color:var(--accent);"></i> Editar morador';
+    document.getElementById('editItemCampo1Label').textContent = 'Unidade';
+    document.getElementById('editItemCampo1').value = m.unidade;
+    document.getElementById('editItemCampo2Label').textContent = 'Nome';
+    document.getElementById('editItemCampo2').value = m.nome;
+    document.getElementById('editItemCampo3Wrap').style.display = 'none';
+    document.getElementById('editItemCampo4Wrap').style.display = 'none';
+    document.getElementById('modalEditarItem').classList.add('open');
+}
+
+document.getElementById('funcList').addEventListener('click', e=>{
+    const btn = e.target.closest('[data-editar-func]');
+    if(btn) abrirEditarFuncionario(Number(btn.dataset.editarFunc));
+});
+document.getElementById('usersList').addEventListener('click', e=>{
+    const btn = e.target.closest('[data-editar-morador]');
+    if(btn) abrirEditarMorador(Number(btn.dataset.editarMorador));
+});
+
+document.getElementById('editItemSalvar').addEventListener('click', async ()=>{
+    if(!editContext) return;
+    const v1 = document.getElementById('editItemCampo1').value.trim();
+    const v2 = document.getElementById('editItemCampo2').value.trim();
+    if(!v1){ toast('Preencha os campos obrigatórios.'); return; }
+
+    try{
+        if(editContext.tipo === 'funcionario'){
+            const documento = document.getElementById('editItemCampo3').value.trim();
+            const senha = document.getElementById('editItemCampo4').value;
+            const resp = await fetch(`/api/funcionarios/${editContext.id}`, {
+                method:'PATCH', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ nome:v1, cargo:v2, documento, senha })
+            });
+            const data = await resp.json().catch(()=>({}));
+            if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao editar funcionário.'); return; }
+            const f = funcionarios.find(x=> x.id===editContext.id);
+            if(f){ f.nome=v1; f.cargo=v2; f.documento=documento; if(senha) f.acessoConfigurado=true; }
+            renderFuncList();
+        } else {
+            const resp = await fetch(`/api/moradores/${editContext.id}`, {
+                method:'PATCH', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ unidade:v1, nome:v2 })
+            });
+            const data = await resp.json().catch(()=>({}));
+            if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao editar morador.'); return; }
+            const m = moradores.find(x=> x.id===editContext.id);
+            if(m){ m.unidade=v1; m.nome=v2; }
+            renderUsersList(document.getElementById('usersBusca').value);
+        }
+        document.getElementById('modalEditarItem').classList.remove('open');
+        toast('Cadastro atualizado!');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+
+document.getElementById('editItemExcluir').addEventListener('click', async ()=>{
+    if(!editContext) return;
+    const confirmado = confirm('Tem certeza que deseja excluir este cadastro? Essa ação não pode ser desfeita.');
+    if(!confirmado) return;
+
+    try{
+        if(editContext.tipo === 'funcionario'){
+            const resp = await fetch(`/api/funcionarios/${editContext.id}`, { method:'DELETE' });
+            const data = await resp.json().catch(()=>({}));
+            if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao excluir funcionário.'); return; }
+            funcionarios = funcionarios.filter(x=> x.id!==editContext.id);
+            renderFuncList();
+        } else {
+            const resp = await fetch(`/api/moradores/${editContext.id}`, { method:'DELETE' });
+            const data = await resp.json().catch(()=>({}));
+            if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao excluir morador.'); return; }
+            moradores = moradores.filter(x=> x.id!==editContext.id);
+            renderUsersList(document.getElementById('usersBusca').value);
+        }
+        document.getElementById('modalEditarItem').classList.remove('open');
+        toast('Cadastro excluído.');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+
+/* ==================================================================
+   MINHA CONTA
+   ================================================================== */
+document.getElementById('abrirConta').addEventListener('click', e=>{
+    e.preventDefault();
+    closeDrawer();
+    const nome = pick(usuarioLogado, ['nome','name','usuario','login'], 'Usuário');
+    const email = pick(usuarioLogado, ['email','e-mail'], '—');
+    const condominio = pick(usuarioLogado, ['condominio','nomeCondominio','condominioNome'], 'Meu condomínio');
+    const perfil = pick(usuarioLogado, ['perfil','role','cargo'], 'Admin');
+    const foto = pick(usuarioLogado, ['foto','avatar','imagem'], initialsAvatar(nome));
+    document.getElementById('contaFoto').src = foto;
+    document.getElementById('contaNome').textContent = nome;
+    document.getElementById('contaPerfil').textContent = perfil;
+    document.getElementById('contaNomeVal').textContent = nome;
+    document.getElementById('contaEmailVal').textContent = email || '—';
+    document.getElementById('contaCondoVal').textContent = condominio;
+    document.getElementById('contaPerfilVal').textContent = perfil;
+    document.getElementById('contaScreen').classList.add('open');
+});
+document.getElementById('contaVoltar').addEventListener('click', ()=> document.getElementById('contaScreen').classList.remove('open'));
+
+/* ==================================================================
+   RELATÓRIO DE ENCOMENDAS — filtros completos (período, status, unidade,
+   morador, funcionário e tipo) + geração do relatório final em PDF.
+   ================================================================== */
+const relatorioStatusLabel = {recebido:'Recebido', aguardando:'Aguardando retirada', entregue:'Entregue', rota:'Em rota de entrega'};
+
+// Preenche os selects de Unidade / Morador / Funcionário / Tipo com os
+// valores realmente existentes no condomínio, para o admin escolher em vez
+// de digitar.
+function popularFiltrosRelatorio(){
+    const selUnidade = document.getElementById('relatorioUnidade');
+    const selMorador = document.getElementById('relatorioMorador');
+    const selFunc = document.getElementById('relatorioFuncionario');
+    const selTipo = document.getElementById('relatorioTipo');
+
+    const unidades = [...new Set(moradores.map(m=> m.unidade).filter(Boolean))].sort();
+    selUnidade.innerHTML = '<option value="">Todas as unidades</option>' +
+        unidades.map(u=> `<option value="${u}">${u}</option>`).join('');
+
+    selMorador.innerHTML = '<option value="">Todos os moradores</option>' +
+        moradores.slice().sort((a,b)=> a.nome.localeCompare(b.nome))
+            .map(m=> `<option value="${m.nome}">${m.nome} (Unid. ${m.unidade})</option>`).join('');
+
+    selFunc.innerHTML = '<option value="">Todos os funcionários</option>' +
+        funcionarios.slice().sort((a,b)=> a.nome.localeCompare(b.nome))
+            .map(f=> `<option value="${f.nome}">${f.nome}</option>`).join('');
+
+    const tipos = [...new Set(encomendas.map(e=> e.tipo).filter(Boolean))].sort();
+    selTipo.innerHTML = '<option value="">Todos os tipos</option>' +
+        tipos.map(t=> `<option value="${t}">${t}</option>`).join('');
+}
+
+// Aplica todos os filtros ativos sobre o array local de encomendas.
+function filtrarEncomendasRelatorio(){
+    const statusAtivos = Array.from(document.querySelectorAll('.relatorioStatusCk:checked')).map(c=> c.value);
+    const dataInicio = document.getElementById('relatorioDataInicio').value;
+    const dataFim = document.getElementById('relatorioDataFim').value;
+    const unidade = document.getElementById('relatorioUnidade').value;
+    const morador = document.getElementById('relatorioMorador').value;
+    const func = document.getElementById('relatorioFuncionario').value;
+    const tipo = document.getElementById('relatorioTipo').value;
+
+    return encomendas.filter(e=>{
+        if(statusAtivos.length && !statusAtivos.includes(e.status)) return false;
+        if(unidade && e.unidade !== unidade) return false;
+        if(morador && e.nome !== morador) return false;
+        if(func && e.por !== func) return false;
+        if(tipo && e.tipo !== tipo) return false;
+        if(dataInicio || dataFim){
+            const dataEnc = (e.ts || '').slice(0,10); // ts guardado como ISO/"YYYY-MM-DD ..."
+            if(dataInicio && dataEnc && dataEnc < dataInicio) return false;
+            if(dataFim && dataEnc && dataEnc > dataFim) return false;
+        }
+        return true;
+    });
+}
+
+function renderRelatorio(){
+    const lista = filtrarEncomendasRelatorio();
+    document.getElementById('relatorioResumo').textContent =
+        `${lista.length} encomenda${lista.length===1?'':'s'} encontrada${lista.length===1?'':'s'} para os filtros selecionados`;
+    const el = document.getElementById('relatorioList');
+    if(!lista.length){
+        el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-file-lines"></i>Nenhuma encomenda encontrada para esses filtros.</div>';
+        return;
+    }
+    el.innerHTML = lista.slice().reverse().map(e=>`
+        <div class="func-card">
+            <div class="f-info">
+                <h6>Código ${e.codigo} · Unidade ${e.unidade}</h6>
+                <p>${e.nome} — ${e.transp || 'Transportadora'} · ${e.tipo || ''}${e.por ? ' · Por ' + e.por : ''}</p>
+            </div>
+            <span class="tag" style="white-space:nowrap;">${relatorioStatusLabel[e.status] || e.status}</span>
+        </div>`).join('');
+}
+
+document.querySelectorAll('.relatorioStatusCk').forEach(cb=> cb.addEventListener('change', renderRelatorio));
+['relatorioDataInicio','relatorioDataFim','relatorioUnidade','relatorioMorador','relatorioFuncionario','relatorioTipo']
+    .forEach(id=> document.getElementById(id).addEventListener('change', renderRelatorio));
+
+document.getElementById('relatorioLimpar').addEventListener('click', ()=>{
+    document.querySelectorAll('.relatorioStatusCk').forEach(cb=> cb.checked=false);
+    document.getElementById('relatorioDataInicio').value='';
+    document.getElementById('relatorioDataFim').value='';
+    document.getElementById('relatorioUnidade').value='';
+    document.getElementById('relatorioMorador').value='';
+    document.getElementById('relatorioFuncionario').value='';
+    document.getElementById('relatorioTipo').value='';
+    renderRelatorio();
+});
+
+document.getElementById('abrirRelatorio').addEventListener('click', e=>{
+    e.preventDefault();
+    closeDrawer();
+    popularFiltrosRelatorio();
+    renderRelatorio();
+    document.getElementById('relatorioScreen').classList.add('open');
+});
+document.getElementById('relatorioVoltar').addEventListener('click', ()=> document.getElementById('relatorioScreen').classList.remove('open'));
+
+// Gera o relatório final em PDF com os filtros aplicados (jsPDF + autotable).
+function gerarRelatorioPDF(){
+    if(!window.jspdf){ toast('Não foi possível carregar o gerador de PDF. Verifique sua conexão.'); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const lista = filtrarEncomendasRelatorio();
+
+    const condominioNome = pick(usuarioLogado, ['nomeAdministrador','condominio','nome'], 'Condomínio');
+    const nomeAdmin = pick(usuarioLogado, ['nome','name','usuario','login'], '—');
+
+    // Cabeçalho com a identidade visual do ZibBox
+    doc.setFillColor(74,0,140);
+    doc.rect(0,0,210,26,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(16);
+    doc.setFont(undefined,'bold');
+    doc.text('ZibBox — Relatório de encomendas', 14, 16);
+    doc.setFontSize(10);
+    doc.setFont(undefined,'normal');
+    doc.text(condominioNome, 14, 22);
+
+    doc.setTextColor(40,40,40);
+    doc.setFontSize(10);
+    let y = 34;
+    doc.text(`Gerado em: ${new Date().toLocaleString('pt-BR')}`, 14, y);
+    doc.text(`Gerado por: ${nomeAdmin}`, 120, y);
+    y += 6;
+
+    const statusAtivos = Array.from(document.querySelectorAll('.relatorioStatusCk:checked')).map(c=> relatorioStatusLabel[c.value] || c.value);
+    const filtrosTexto = [
+        statusAtivos.length ? `Status: ${statusAtivos.join(', ')}` : null,
+        document.getElementById('relatorioDataInicio').value ? `De: ${document.getElementById('relatorioDataInicio').value}` : null,
+        document.getElementById('relatorioDataFim').value ? `Até: ${document.getElementById('relatorioDataFim').value}` : null,
+        document.getElementById('relatorioUnidade').value ? `Unidade: ${document.getElementById('relatorioUnidade').value}` : null,
+        document.getElementById('relatorioMorador').value ? `Morador: ${document.getElementById('relatorioMorador').value}` : null,
+        document.getElementById('relatorioFuncionario').value ? `Funcionário: ${document.getElementById('relatorioFuncionario').value}` : null,
+        document.getElementById('relatorioTipo').value ? `Tipo: ${document.getElementById('relatorioTipo').value}` : null,
+    ].filter(Boolean).join('  •  ');
+    if(filtrosTexto){
+        doc.setFontSize(9);
+        doc.setTextColor(100,100,100);
+        doc.text(`Filtros: ${filtrosTexto}`, 14, y);
+        y += 6;
+    }
+    doc.setFontSize(9);
+    doc.setTextColor(100,100,100);
+    doc.text(`Total de encomendas no relatório: ${lista.length}`, 14, y);
+    y += 4;
+
+    const linhas = lista.slice().reverse().map(e=> ([
+        e.codigo,
+        e.unidade,
+        e.nome,
+        e.transp || '—',
+        e.tipo || '—',
+        relatorioStatusLabel[e.status] || e.status,
+        e.por || '—',
+        e.ts ? String(e.ts).slice(0,16).replace('T',' ') : '—'
+    ]));
+
+    doc.autoTable({
+        startY: y + 4,
+        head: [['Código','Unidade','Destinatário','Transp.','Tipo','Status','Registrado por','Data/hora']],
+        body: linhas,
+        styles:{ fontSize:8, cellPadding:3 },
+        headStyles:{ fillColor:[74,0,140], textColor:255 },
+        alternateRowStyles:{ fillColor:[245,242,250] },
+        margin:{ left:14, right:14 }
+    });
+
+    doc.save(`relatorio-zibbox-${new Date().toISOString().slice(0,10)}.pdf`);
+    toast('Relatório em PDF gerado!');
+}
+document.getElementById('relatorioImprimir').addEventListener('click', gerarRelatorioPDF);
+
+/* ==================================================================
+   MONITORAMENTO
+   ================================================================== */
+function renderMonitor(){
+    const total = encomendas.length;
+    const recebido = encomendas.filter(e=>e.status==='recebido').length;
+    const aguardando = encomendas.filter(e=>e.status==='aguardando').length;
+    const entregue = encomendas.filter(e=>e.status==='entregue').length;
+    document.getElementById('monitorMetrics').innerHTML = `
+        <div class="metric-card"><b>${total}</b><span>Total de encomendas</span></div>
+        <div class="metric-card"><b>${recebido}</b><span>Recebidas</span></div>
+        <div class="metric-card"><b>${aguardando}</b><span>Aguardando retirada</span></div>
+        <div class="metric-card"><b>${entregue}</b><span>Entregues</span></div>
+    `;
+    const online = funcionarios.filter(f=> f.online);
+    const elOnline = document.getElementById('monitorFuncOnline');
+    if(elOnline){
+        document.getElementById('monitorFuncOnlineCount').textContent = online.length;
+        elOnline.innerHTML = funcionarios.length
+            ? funcionarios.slice().sort((a,b)=> (b.online?1:0)-(a.online?1:0)).map(f=>`
+                <div class="func-card">
+                    <img src="${f.foto || initialsAvatar(f.nome)}" alt="${f.nome}">
+                    <div class="f-info"><h6>${f.cargo || 'Funcionário'}</h6><p>${f.nome}</p></div>
+                    <span class="tag" style="white-space:nowrap;">${f.online ? 'Online agora' : (f.ultimoAcesso ? 'Visto por último' : 'Nunca acessou')}</span>
+                    <span class="status-dot ${f.online ? 'online' : ''}"></span>
+                </div>`).join('')
+            : '<div class="empty-state"><i class="fa-solid fa-user-tie"></i>Nenhum funcionário cadastrado ainda.</div>';
+    }
+
+    const el = document.getElementById('monitorTimeline');
+    if(!timeline.length){
+        el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-eye"></i>Nenhuma movimentação registrada ainda.</div>';
+        return;
+    }
+    el.innerHTML = timeline.slice(0,20).map(t=>`
+        <div class="func-card">
+            <div class="f-info"><h6>${t.ts || ''} · ${t.por || ''}</h6><p>${t.texto}</p></div>
+        </div>`).join('');
+}
+document.getElementById('abrirMonitor').addEventListener('click', async e=>{
+    e.preventDefault();
+    closeDrawer();
+    await carregarFuncionariosDoBanco();
+    renderMonitor();
+    document.getElementById('monitorScreen').classList.add('open');
+});
+document.getElementById('monitorVoltar').addEventListener('click', ()=> document.getElementById('monitorScreen').classList.remove('open'));
+
+/* ==================================================================
+   CONDOMÍNIO
+   ================================================================== */
+/* ==================================================================
+   CONDOMÍNIOS — uma mesma conta pode ter vários condomínios/empresas
+   cadastrados. Lista + formulário de cadastro rápido, no mesmo padrão
+   das telas de Funcionários e Usuários.
+   ================================================================== */
+const CONDO_TIPO_LABELS = {
+    condominio_residencial: 'Condomínio Residencial',
+    condominio_comercial: 'Condomínio Comercial',
+    predio_comercial: 'Prédio Comercial',
+    empresa: 'Empresa / Escritório',
+    loja_comercio: 'Loja / Comércio',
+    hotel_pousada: 'Hotel / Pousada',
+    coworking: 'Coworking',
+    clinica_consultorio: 'Clínica / Consultório',
+    outro: 'Outro tipo de estabelecimento'
+};
+function condoTipoLabel(tipo){
+    if(!tipo) return '—';
+    return CONDO_TIPO_LABELS[tipo] || tipo;
+}
+
+let condominiosConta = [];
+let condoEditandoId = null; // null = cadastrando novo; caso contrário, id do condomínio em edição
+
+async function carregarCondominiosDoBanco(){
+    try{
+        const resp = await fetch(`/api/condominio/${USUARIO_ID}`);
+        const data = await resp.json();
+        if(data.sucesso) condominiosConta = data.condominios || [];
+    }catch(e){ console.error('Erro ao carregar condomínios:', e); }
+}
+
+function renderCondoList(){
+    document.getElementById('condoCount').textContent = condominiosConta.length;
+    const el = document.getElementById('condoList');
+    if(!condominiosConta.length){
+        el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-city"></i>Nenhum condomínio cadastrado ainda.<br>Toque no botão + acima para cadastrar o primeiro.</div>';
+        return;
+    }
+    el.innerHTML = condominiosConta.map(c=>{
+        return `<div class="func-card">
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(0,176,255,0.14);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;"><i class="fa-solid fa-city"></i></div>
+            <div class="f-info">
+                <h6>${c.nome || 'Sem nome'}</h6>
+                <p>${condoTipoLabel(c.tipo)}${c.cidade ? ' · ' + c.cidade : ''}</p>
+                <span class="tag" style="font-size:10px;">${c.documento || 'Sem documento'}</span>
+                ${c.latitude && c.longitude ? '<span class="tag" style="font-size:10px;"><i class="fa-solid fa-map-location-dot"></i> Mapa salvo</span>' : ''}
+            </div>
+            <button class="card-edit-btn" data-editar-condo="${c.id}" title="Editar"><i class="fa-solid fa-pen"></i></button>
+        </div>`;
+    }).join('');
+}
+
+// Coordenadas do endereço atualmente no formulário — preenchidas por
+// condoLocalizarNoMapa() (Nominatim/OpenStreetMap) e enviadas junto no
+// cadastro/edição do condomínio, pra guardar a planta/mapa do local.
+let condoLat = null;
+let condoLng = null;
+
+function condoLimparForm(){
+    document.getElementById('condoNovoNome').value = '';
+    document.getElementById('condoNovoTipo').value = '';
+    document.getElementById('condoNovoDocumento').value = '';
+    document.getElementById('condoNovoTelefone').value = '';
+    document.getElementById('condoNovoCep').value = '';
+    document.getElementById('condoNovoCidade').value = '';
+    document.getElementById('condoNovoEndereco').value = '';
+    document.getElementById('condoNovoBairro').value = '';
+    document.getElementById('condoNovoResponsavel').value = '';
+    document.getElementById('condoCepStatus').textContent = '';
+    condoOcultarMapa();
+}
+
+function condoOcultarMapa(){
+    condoLat = null;
+    condoLng = null;
+    document.getElementById('condoMapaPreviewWrap').style.display = 'none';
+}
+
+function condoMostrarMapa(lat, lng){
+    condoLat = lat;
+    condoLng = lng;
+    const img = document.getElementById('condoMapaPreviewImg');
+    const link = document.getElementById('condoMapaPreviewLink');
+    // Miniatura estática (sem precisar de API key) via staticmap.openstreetmap.de
+    img.src = `https://staticmap.openstreetmap.de/staticmap.php?center=${lat},${lng}&zoom=17&size=600x280&markers=${lat},${lng},red-pushpin`;
+    // Link pro mapa completo/interativo, pra conferir a planta com mais detalhe
+    link.href = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=18/${lat}/${lng}`;
+    document.getElementById('condoMapaPreviewWrap').style.display = 'block';
+}
+
+// Busca lat/lng do endereço digitado (Nominatim/OpenStreetMap, gratuito e
+// sem precisar de API key) e mostra a planta/mapa do local no formulário.
+async function condoLocalizarNoMapa(){
+    const endereco = document.getElementById('condoNovoEndereco').value.trim();
+    const bairro = document.getElementById('condoNovoBairro').value.trim();
+    const cidade = document.getElementById('condoNovoCidade').value.trim();
+    const cep = document.getElementById('condoNovoCep').value.trim();
+    if(!endereco || !cidade){
+        toast('Preencha ao menos endereço e cidade antes de localizar no mapa.');
+        return;
+    }
+    const query = [endereco, bairro, cidade, cep, 'Brasil'].filter(Boolean).join(', ');
+    const btn = document.getElementById('condoBuscarMapa');
+    const textoOriginal = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Localizando...';
+    try{
+        const resp = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`);
+        const resultados = await resp.json();
+        if(!resultados || !resultados.length){
+            toast('Não foi possível localizar esse endereço no mapa. Confira o CEP e o endereço.');
+            condoOcultarMapa();
+            return;
+        }
+        condoMostrarMapa(resultados[0].lat, resultados[0].lon);
+    }catch(e){
+        console.error('Erro ao localizar endereço no mapa:', e);
+        toast('Erro de conexão ao buscar o mapa do endereço.');
+    }finally{
+        btn.disabled = false;
+        btn.innerHTML = textoOriginal;
+    }
+}
+document.getElementById('condoBuscarMapa').addEventListener('click', condoLocalizarNoMapa);
+
+// Autocompleta cidade/bairro/endereço a partir do CEP (ViaCEP, gratuito e
+// sem API key), assim que os 8 dígitos forem digitados.
+async function condoBuscarPorCep(cepDigitado){
+    const cep = cepDigitado.replace(/\D/g, '');
+    if(cep.length !== 8) return;
+    const status = document.getElementById('condoCepStatus');
+    status.textContent = 'Buscando endereço...';
+    try{
+        const resp = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await resp.json();
+        if(data.erro){
+            status.textContent = 'CEP não encontrado — preencha o endereço manualmente.';
+            return;
+        }
+        document.getElementById('condoNovoCidade').value = data.localidade || '';
+        document.getElementById('condoNovoBairro').value = data.bairro || '';
+        document.getElementById('condoNovoEndereco').value = data.logradouro || document.getElementById('condoNovoEndereco').value;
+        status.textContent = 'Endereço preenchido pelo CEP. Confira e toque em "Localizar endereço no mapa".';
+    }catch(e){
+        console.error('Erro ao buscar CEP:', e);
+        status.textContent = 'Erro ao buscar o CEP — preencha o endereço manualmente.';
+    }
+}
+
+function condoAbrirParaNovo(){
+    condoEditandoId = null;
+    condoLimparForm();
+    document.getElementById('condoSalvar').innerHTML = '<i class="fa-solid fa-building-circle-check"></i> Cadastrar agora';
+    document.getElementById('condoCancelarEdicao').style.display = 'none';
+    document.getElementById('condoAddForm').classList.add('show');
+}
+
+function condoAbrirParaEditar(id){
+    const c = condominiosConta.find(x=> x.id===id);
+    if(!c) return;
+    condoEditandoId = id;
+    document.getElementById('condoNovoNome').value = c.nome || '';
+    document.getElementById('condoNovoTipo').value = c.tipo || '';
+    document.getElementById('condoNovoDocumento').value = c.documento || '';
+    document.getElementById('condoNovoTelefone').value = c.telefone || '';
+    document.getElementById('condoNovoCep').value = c.cep || '';
+    document.getElementById('condoNovoCidade').value = c.cidade || '';
+    document.getElementById('condoNovoEndereco').value = c.endereco || '';
+    document.getElementById('condoNovoBairro').value = c.bairro || '';
+    document.getElementById('condoNovoResponsavel').value = c.nomeResponsavel || '';
+    document.getElementById('condoSalvar').innerHTML = '<i class="fa-solid fa-check"></i> Salvar alterações';
+    document.getElementById('condoCancelarEdicao').style.display = 'block';
+    document.getElementById('condoAddForm').classList.add('show');
+    if(c.latitude && c.longitude){
+        condoMostrarMapa(c.latitude, c.longitude);
+    } else {
+        condoOcultarMapa();
+    }
+}
+
+document.getElementById('condoAddBtn').addEventListener('click', ()=>{
+    const form = document.getElementById('condoAddForm');
+    if(form.classList.contains('show')){ form.classList.remove('show'); return; }
+    condoAbrirParaNovo();
+});
+document.getElementById('condoCancelarEdicao').addEventListener('click', ()=>{
+    document.getElementById('condoAddForm').classList.remove('show');
+    condoEditandoId = null;
+});
+
+document.getElementById('condoSalvar').addEventListener('click', async ()=>{
+    const payload = {
+        usuario_id: USUARIO_ID,
+        nome: document.getElementById('condoNovoNome').value.trim(),
+        tipo: document.getElementById('condoNovoTipo').value,
+        documento: document.getElementById('condoNovoDocumento').value.trim(),
+        telefone: document.getElementById('condoNovoTelefone').value.trim(),
+        cep: document.getElementById('condoNovoCep').value.trim(),
+        cidade: document.getElementById('condoNovoCidade').value.trim(),
+        endereco: document.getElementById('condoNovoEndereco').value.trim(),
+        bairro: document.getElementById('condoNovoBairro').value.trim(),
+        nomeResponsavel: document.getElementById('condoNovoResponsavel').value.trim(),
+        latitude: condoLat,
+        longitude: condoLng
+    };
+    if(!payload.nome || !payload.tipo || !payload.documento || !payload.cep || !payload.cidade || !payload.endereco || !payload.bairro){
+        toast('Preencha nome, tipo, documento, CEP, cidade, endereço e bairro.');
+        return;
+    }
+    try{
+        const editando = condoEditandoId !== null;
+        const url = editando ? `/api/condominio/${condoEditandoId}` : '/api/condominio';
+        const method = editando ? 'PATCH' : 'POST';
+        const resp = await fetch(url, {
+            method, headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(payload)
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao salvar condomínio.'); return; }
+
+        document.getElementById('condoAddForm').classList.remove('show');
+        condoEditandoId = null;
+        await carregarCondominiosDoBanco();
+        renderCondoList();
+        toast(editando ? 'Condomínio atualizado!' : 'Condomínio cadastrado!');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+
+document.getElementById('condoList').addEventListener('click', e=>{
+    const btn = e.target.closest('[data-editar-condo]');
+    if(!btn) return;
+    condoAbrirParaEditar(Number(btn.dataset.editarCondo));
+});
+
+document.getElementById('abrirCondo').addEventListener('click', async e=>{
+    e.preventDefault();
+    closeDrawer();
+    document.getElementById('condoAddForm').classList.remove('show');
+    condoEditandoId = null;
+    document.getElementById('condoScreen').classList.add('open');
+    document.getElementById('condoList').innerHTML = '<div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i>Carregando...</div>';
+    await carregarCondominiosDoBanco();
+    renderCondoList();
+});
+document.getElementById('condoVoltar').addEventListener('click', ()=> document.getElementById('condoScreen').classList.remove('open'));
+
+/* ==================================================================
+   PLANTA DO LOCAL — upload da imagem + pinos das unidades, cruzando
+   com as encomendas pendentes/em rota pra virar um mapa rápido de
+   entregas ("cenário de rotas de acordo com a encomenda").
+   ================================================================== */
+let plantaImagemAtual = null;
+let plantaPontos = [];
+let plantaModoAdicionarAtivo = false;
+let plantaClickPendente = null; // {x, y} aguardando o nome da unidade no modal
+let plantaPontoAberto = null;   // ponto atualmente aberto no modal de detalhes
+
+// Tira um "Nº " opcional que a pessoa possa digitar, pra ficar no mesmo
+// formato que "unidade" já usa em moradores/encomendas (ex: "101").
+function plantaNormalizarUnidade(v){
+    return (v || '').trim().replace(/^n[ºo°]?\.?\s*/i, '');
+}
+
+function plantaEncomendasDaUnidade(unidade){
+    const chave = `Nº ${unidade}`;
+    return encomendas.filter(e => e.unidade === chave && e.status !== 'entregue');
+}
+
+function plantaStatusUnidade(unidade){
+    const lista = plantaEncomendasDaUnidade(unidade);
+    const emRota = lista.filter(e=> e.status==='rota').length;
+    if(emRota > 0) return { classe:'rota', qtd: emRota, lista };
+    if(lista.length > 0) return { classe:'pendente', qtd: lista.length, lista };
+    return { classe:'livre', qtd: 0, lista };
+}
+
+async function carregarPlantaDoBanco(){
+    try{
+        const resp = await fetch(`/api/planta/${USUARIO_ID}`);
+        const data = await resp.json();
+        if(!data.sucesso) return;
+        plantaImagemAtual = data.imagem || null;
+        plantaPontos = data.pontos || [];
+    }catch(e){ console.error('Erro ao carregar planta:', e); }
+}
+
+function renderPlanta(){
+    const vazio = document.getElementById('plantaVazio');
+    const conteudo = document.getElementById('plantaConteudo');
+    if(!plantaImagemAtual){
+        vazio.style.display = 'block';
+        conteudo.style.display = 'none';
+        return;
+    }
+    vazio.style.display = 'none';
+    conteudo.style.display = 'block';
+    document.getElementById('plantaImg').src = plantaImagemAtual;
+    renderPlantaPins();
+}
+
+function renderPlantaPins(){
+    const camada = document.getElementById('plantaPinsCamada');
+    camada.innerHTML = plantaPontos.map(p=>{
+        const st = plantaStatusUnidade(p.unidade);
+        const badge = st.qtd > 0 ? `<span class="planta-pin-badge">${st.qtd}</span>` : '';
+        return `<div class="planta-pin ${st.classe}" style="left:${p.x}%;top:${p.y}%;" data-ponto="${p.id}">
+            <span style="position:relative;"><i class="fa-solid fa-location-dot"></i>${badge}</span>
+            <span class="planta-pin-label">${p.unidade}</span>
+        </div>`;
+    }).join('');
+    camada.querySelectorAll('[data-ponto]').forEach(el=>{
+        el.addEventListener('click', ev=>{
+            ev.stopPropagation();
+            abrirDetalheDoPontoPlanta(Number(el.dataset.ponto));
+        });
+    });
+}
+
+function plantaLigarModoAdicionar(ligar){
+    plantaModoAdicionarAtivo = ligar;
+    document.getElementById('plantaImgWrap').classList.toggle('modo-adicionar', ligar);
+    document.getElementById('plantaDica').style.display = ligar ? 'block' : 'none';
+    document.getElementById('plantaModoAdicionar').classList.toggle('btn-accent', ligar);
+}
+
+document.getElementById('plantaModoAdicionar').addEventListener('click', ()=>{
+    plantaLigarModoAdicionar(!plantaModoAdicionarAtivo);
+});
+
+document.getElementById('plantaImgWrap').addEventListener('click', e=>{
+    if(!plantaModoAdicionarAtivo) return;
+    if(e.target.closest('[data-ponto]')) return; // clique em cima de um pino já existente
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    plantaClickPendente = { x, y };
+    document.getElementById('plantaPontoUnidade').value = '';
+    document.getElementById('modalPlantaPonto').classList.add('open');
+});
+
+document.getElementById('plantaPontoSalvar').addEventListener('click', async ()=>{
+    const unidade = plantaNormalizarUnidade(document.getElementById('plantaPontoUnidade').value);
+    if(!unidade || !plantaClickPendente){ toast('Informe o número/identificação da unidade.'); return; }
+    try{
+        const resp = await fetch('/api/planta/pontos', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ usuario_id:USUARIO_ID, unidade, x:plantaClickPendente.x, y:plantaClickPendente.y })
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao marcar unidade na planta.'); return; }
+        plantaPontos = plantaPontos.filter(p=> p.unidade !== unidade);
+        plantaPontos.push({ id:data.id, unidade, x:plantaClickPendente.x, y:plantaClickPendente.y });
+        renderPlantaPins();
+        document.getElementById('modalPlantaPonto').classList.remove('open');
+        plantaClickPendente = null;
+        toast('Unidade marcada na planta!');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+
+function abrirDetalheDoPontoPlanta(pontoId){
+    const ponto = plantaPontos.find(p=> p.id===pontoId);
+    if(!ponto) return;
+    plantaPontoAberto = ponto;
+    const st = plantaStatusUnidade(ponto.unidade);
+    document.getElementById('plantaUnidadeTitulo').innerHTML = `<i class="fa-solid fa-box" style="color:var(--accent);"></i> Unidade ${ponto.unidade}`;
+    const corpo = document.getElementById('plantaUnidadeConteudo');
+    if(!st.lista.length){
+        corpo.innerHTML = '<div class="empty-state"><i class="fa-solid fa-circle-check"></i>Nenhuma encomenda pendente para essa unidade.</div>';
+    } else {
+        corpo.innerHTML = st.lista.map(e=>`
+            <div class="route-item">
+                <div class="route-info"><h6>Cód. ${e.codigo}</h6><span>${e.nome} &middot; ${e.status==='rota' ? 'Em rota de entrega' : (e.status==='aguardando' ? 'Aguardando retirada' : 'Recebida, aguardando envio')}</span></div>
+            </div>
+        `).join('');
+    }
+    document.getElementById('modalPlantaUnidade').classList.add('open');
+}
+
+document.getElementById('plantaPontoRemover').addEventListener('click', async ()=>{
+    if(!plantaPontoAberto) return;
+    const confirmado = confirm(`Remover a marcação da unidade ${plantaPontoAberto.unidade} da planta?`);
+    if(!confirmado) return;
+    try{
+        const resp = await fetch(`/api/planta/pontos/${plantaPontoAberto.id}`, { method:'DELETE' });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao remover marcação.'); return; }
+        plantaPontos = plantaPontos.filter(p=> p.id !== plantaPontoAberto.id);
+        renderPlantaPins();
+        document.getElementById('modalPlantaUnidade').classList.remove('open');
+        plantaPontoAberto = null;
+        toast('Marcação removida.');
+    }catch(e){ console.error(e); toast('Erro de conexão com o servidor.'); }
+});
+
+// Upload/troca da imagem da planta
+document.getElementById('plantaEnviarBtn').addEventListener('click', ()=> document.getElementById('plantaInputArquivo').click());
+document.getElementById('plantaTrocarBtn').addEventListener('click', ()=> document.getElementById('plantaInputArquivo').click());
+document.getElementById('plantaInputArquivo').addEventListener('change', e=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async ()=>{
+        const base64 = reader.result;
+        try{
+            const resp = await fetch('/api/planta', {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ usuario_id:USUARIO_ID, imagem:base64 })
+            });
+            const data = await resp.json().catch(()=>({}));
+            if(!resp.ok || !data.sucesso){ toast(data.mensagem || 'Erro ao salvar a planta.'); return; }
+            plantaImagemAtual = base64;
+            renderPlanta();
+            toast('Planta salva!');
+        }catch(err){ console.error(err); toast('Erro de conexão com o servidor.'); }
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+});
+
+document.getElementById('abrirPlanta').addEventListener('click', async e=>{
+    e.preventDefault();
+    closeDrawer();
+    plantaLigarModoAdicionar(false);
+    document.getElementById('plantaScreen').classList.add('open');
+    // Encomendas frescas, pra planta refletir o status mais atual das entregas.
+    await Promise.allSettled([carregarEncomendasDoBanco(), carregarPlantaDoBanco()]);
+    renderPlanta();
+});
+document.getElementById('plantaVoltar').addEventListener('click', ()=>{
+    plantaLigarModoAdicionar(false);
+    document.getElementById('plantaScreen').classList.remove('open');
+});
+
+// Atalho de dentro do modal "Rota de entregas" pra pular direto pra planta,
+// já com os pinos das paradas em rota destacados.
+document.getElementById('rotaVerNaPlanta').addEventListener('click', async ()=>{
+    document.getElementById('modalRota').classList.remove('open');
+    document.getElementById('abrirPlanta').click();
+});
+
+
+// Máscaras simples, iguais às usadas no cadastro.html
+document.getElementById('condoNovoTelefone').addEventListener('input', function(){
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 10) v = v.replace(/(\d{2})(\d{1})(\d{4})(\d{0,4})/, '($1) $2 $3-$4');
+    else if (v.length > 6) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    else if (v.length > 2) v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    else if (v.length > 0) v = v.replace(/(\d{0,2})/, '($1');
+    this.value = v.trim();
+});
+document.getElementById('condoNovoCep').addEventListener('input', function(){
+    let v = this.value.replace(/\D/g, '').slice(0, 8);
+    if (v.length > 5) v = v.replace(/(\d{5})(\d{0,3})/, '$1-$2');
+    this.value = v;
+    if (v.replace(/\D/g, '').length === 8) condoBuscarPorCep(v);
+});
+
+/* ==================================================================
+   RETIRADA DE ENCOMENDA — com assinatura do funcionário e de quem retira
+   ==================================================================
+   Fluxo: abrirRetiradaScreen(unidade) mostra as encomendas pendentes da
+   unidade com checkboxes; ao confirmar, primeiro o funcionário assina
+   (tela "Assinatura do recebimento"), depois quem está retirando assina
+   também — só então as encomendas selecionadas são marcadas como
+   entregues no servidor, já com as duas assinaturas e o nome/CPF de quem
+   retirou salvos junto.
+   ================================================================== */
+let retiradaCtx = null; // { unidade, morador, codigosSelecionados, retiradoPor, retiradoDoc }
+
+function abrirRetiradaScreen(unidade){
+    const pacotes = encomendas.filter(e=> e.unidade===unidade && e.status!=='entregue');
+    if(!pacotes.length){ toast('Não há encomendas pendentes para essa unidade.'); return; }
+
+    const morador = moradores.find(m=> `Nº ${m.unidade}`===unidade || m.unidade===unidade);
+    retiradaCtx = { unidade, morador, pacotes };
+
+    document.getElementById('retUnidadeVal').textContent = unidade;
+    document.getElementById('retMoradorVal').textContent = morador ? morador.nome : (pacotes[0].nome || '—');
+
+    document.getElementById('retOutraPessoa').checked = false;
+    document.getElementById('retOutraFields').classList.remove('show');
+    document.getElementById('retOutraNome').value = '';
+    document.getElementById('retOutraCpf').value = '';
+    document.getElementById('retSelecionarTodos').checked = false;
+
+    renderRetPkgList(pacotes);
+    document.getElementById('retiradaScreen').classList.add('open');
+}
+
+function renderRetPkgList(pacotes){
+    const el = document.getElementById('retPkgList');
+    el.innerHTML = pacotes.map(e=>{
+        const st = e.status==='aguardando' ? 'aguardando' : 'recebido';
+        const label = e.status==='aguardando' ? 'Aguardando retirada' : 'Recebido pelo condomínio';
+        return `<div class="ret-pkg-card ${st}">
+            <div class="ic"><i class="fa-solid fa-box"></i></div>
+            <div class="info">
+                <h6>Código ${e.codigo} &nbsp;·&nbsp; ${e.ts || ''}</h6>
+                <p>Unidade: ${e.unidade} &nbsp; Tipo: ${e.tipo || 'Pacote'}</p>
+                <span class="st-tag ${st}">${label}</span>
+            </div>
+            <input type="checkbox" data-pkg-codigo="${e.codigo}">
+        </div>`;
+    }).join('');
+}
+
+document.getElementById('retOutraPessoa').addEventListener('change', e=>{
+    document.getElementById('retOutraFields').classList.toggle('show', e.target.checked);
+});
+document.getElementById('retSelecionarTodos').addEventListener('change', e=>{
+    document.querySelectorAll('#retPkgList input[type=checkbox]').forEach(cb=> cb.checked = e.target.checked);
+});
+document.getElementById('retPkgList').addEventListener('change', e=>{
+    if(e.target.matches('input[type=checkbox]')){
+        const total = document.querySelectorAll('#retPkgList input[type=checkbox]').length;
+        const marcados = document.querySelectorAll('#retPkgList input[type=checkbox]:checked').length;
+        document.getElementById('retSelecionarTodos').checked = total>0 && total===marcados;
+    }
+});
+
+function fecharRetiradaScreen(){
+    document.getElementById('retiradaScreen').classList.remove('open');
+    retiradaCtx = null;
+}
+document.getElementById('retVoltar').addEventListener('click', fecharRetiradaScreen);
+document.getElementById('retCancelar').addEventListener('click', fecharRetiradaScreen);
+
+document.getElementById('retConfirmar').addEventListener('click', ()=>{
+    if(!retiradaCtx) return;
+    const codigos = Array.from(document.querySelectorAll('#retPkgList input[type=checkbox]:checked'))
+        .map(cb=> parseInt(cb.dataset.pkgCodigo));
+    if(!codigos.length){ toast('Selecione ao menos uma encomenda para retirar.'); return; }
+
+    const outraPessoa = document.getElementById('retOutraPessoa').checked;
+    let retiradoPor, retiradoDoc = '';
+    if(outraPessoa){
+        const nome = document.getElementById('retOutraNome').value.trim();
+        const cpf = document.getElementById('retOutraCpf').value.trim();
+        if(!nome || !cpf){ toast('Preencha o nome e o CPF de quem vai retirar.'); return; }
+        retiradoPor = nome; retiradoDoc = cpf;
+    } else {
+        retiradoPor = retiradaCtx.morador ? retiradaCtx.morador.nome : (retiradaCtx.pacotes[0].nome || 'Morador');
+    }
+
+    retiradaCtx.codigosSelecionados = codigos;
+    retiradaCtx.retiradoPor = retiradoPor;
+    retiradaCtx.retiradoDoc = retiradoDoc;
+
+    document.getElementById('retiradaScreen').classList.remove('open');
+    abrirAssinatura('funcionario');
+});
+
+/* -------- Painel de assinatura (canvas) -------- */
+let sigCanvasCtx = null;
+let sigDesenhando = false;
+let sigTemTraco = false;
+let sigEtapaAtual = null; // 'funcionario' | 'retirada'
+
+function prepararSigCanvas(){
+    const canvas = document.getElementById('sigCanvas');
+    const wrap = canvas.parentElement;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = wrap.clientWidth * dpr;
+    canvas.height = wrap.clientHeight * dpr;
+    sigCanvasCtx = canvas.getContext('2d');
+    sigCanvasCtx.scale(dpr, dpr);
+    sigCanvasCtx.lineWidth = 2.4;
+    sigCanvasCtx.lineCap = 'round';
+    sigCanvasCtx.lineJoin = 'round';
+    sigCanvasCtx.strokeStyle = '#241a3a';
+    sigTemTraco = false;
+    document.getElementById('sigPlaceholder').style.display = 'flex';
+}
+
+function sigPosicao(e, canvas){
+    const rect = canvas.getBoundingClientRect();
+    const ponto = e.touches ? e.touches[0] : e;
+    return { x: ponto.clientX - rect.left, y: ponto.clientY - rect.top };
+}
+
+function iniciarSigListeners(){
+    const canvas = document.getElementById('sigCanvas');
+    const comecar = (e)=>{
+        e.preventDefault();
+        sigDesenhando = true;
+        sigTemTraco = true;
+        document.getElementById('sigPlaceholder').style.display = 'none';
+        const p = sigPosicao(e, canvas);
+        sigCanvasCtx.beginPath();
+        sigCanvasCtx.moveTo(p.x, p.y);
+    };
+    const desenhar = (e)=>{
+        if(!sigDesenhando) return;
+        e.preventDefault();
+        const p = sigPosicao(e, canvas);
+        sigCanvasCtx.lineTo(p.x, p.y);
+        sigCanvasCtx.stroke();
+    };
+    const parar = ()=>{ sigDesenhando = false; };
+
+    canvas.addEventListener('mousedown', comecar);
+    canvas.addEventListener('mousemove', desenhar);
+    window.addEventListener('mouseup', parar);
+    canvas.addEventListener('touchstart', comecar, {passive:false});
+    canvas.addEventListener('touchmove', desenhar, {passive:false});
+    canvas.addEventListener('touchend', parar);
+}
+iniciarSigListeners();
+
+document.getElementById('sigLimpar').addEventListener('click', ()=>{
+    const canvas = document.getElementById('sigCanvas');
+    sigCanvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    sigTemTraco = false;
+    document.getElementById('sigPlaceholder').style.display = 'flex';
+});
+
+function abrirAssinatura(etapa){
+    sigEtapaAtual = etapa;
+    if(etapa === 'funcionario'){
+        document.getElementById('sigSubtitulo').textContent = 'Assinatura do recebimento';
+        document.getElementById('sigNomeAlvo').textContent = 'Funcionário';
+    } else {
+        document.getElementById('sigSubtitulo').textContent = 'Assinatura de quem retirou';
+        document.getElementById('sigNomeAlvo').textContent = retiradaCtx ? retiradaCtx.retiradoPor : 'Morador';
+    }
+    document.getElementById('sigScreen').classList.add('open');
+    // O canvas só pode ser dimensionado corretamente depois de estar visível na tela.
+    requestAnimationFrame(prepararSigCanvas);
+}
+
+document.getElementById('sigVoltar').addEventListener('click', ()=>{
+    document.getElementById('sigScreen').classList.remove('open');
+    if(sigEtapaAtual === 'retirada'){
+        // Volta um passo (para o funcionário assinar de novo), não cancela tudo.
+        abrirAssinatura('funcionario');
+    } else {
+        document.getElementById('retiradaScreen').classList.add('open');
+    }
+});
+
+document.getElementById('sigSalvar').addEventListener('click', async ()=>{
+    if(!sigTemTraco){ toast('Assine no quadro antes de salvar.'); return; }
+    const assinaturaDataUrl = document.getElementById('sigCanvas').toDataURL('image/png');
+
+    if(sigEtapaAtual === 'funcionario'){
+        retiradaCtx.assinaturaFuncionario = assinaturaDataUrl;
+        abrirAssinatura('retirada');
+        return;
+    }
+
+    // Última etapa: salva a assinatura de quem retirou e finaliza a retirada.
+    retiradaCtx.assinaturaRetirada = assinaturaDataUrl;
+    const btn = document.getElementById('sigSalvar');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
+
+    try{
+        const resp = await fetch('/api/encomendas/retirar', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({
+                codigos: retiradaCtx.codigosSelecionados,
+                retiradoPor: retiradaCtx.retiradoPor,
+                retiradoDoc: retiradaCtx.retiradoDoc,
+                assinaturaFuncionario: retiradaCtx.assinaturaFuncionario,
+                assinaturaRetirada: retiradaCtx.assinaturaRetirada
+            })
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){
+            toast(data.mensagem || 'Erro ao confirmar retirada.');
+            btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-check"></i> Salvar';
+            return;
+        }
+        retiradaCtx.codigosSelecionados.forEach(codigo=>{
+            const enc = encomendas.find(e=> e.codigo===codigo);
+            if(enc) enc.status = 'entregue';
+        });
+        addTimeline('entregue', retiradaCtx.unidade, `Retirada por ${retiradaCtx.retiradoPor}${retiradaCtx.retiradoDoc ? ' (CPF '+retiradaCtx.retiradoDoc+')' : ''}`);
+        addNotif(`Retirada confirmada — Unidade ${retiradaCtx.unidade}`, `${retiradaCtx.retiradoPor} retirou ${retiradaCtx.codigosSelecionados.length} encomenda(s).`);
+        toast('Retirada confirmada com sucesso!');
+        document.getElementById('sigScreen').classList.remove('open');
+        renderAll();
+    }catch(e){
+        console.error('Erro ao confirmar retirada:', e);
+        toast('Erro de conexão com o servidor.');
+    }finally{
+        btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-check"></i> Salvar';
+    }
+});
+
+/* ==================================================================
+   LEITOR DE CÓDIGO DE BARRAS (câmera ao vivo, via ZXing)
+   ==================================================================
+   O botão "Tirar foto" (com OCR) continua existindo para etiquetas sem
+   um código de barras legível, mas o botão abaixo faz leitura de verdade
+   do código de barras (Code128/EAN/UPC) apontando a câmera, sem precisar
+   tirar foto e esperar — funciona com getUserMedia, então precisa de
+   permissão de câmera no navegador (e de HTTPS ou localhost).
+------------------------------------------------------------------- */
+let zxingReader = null;
+let zxingStream = null;
+
+async function abrirScannerBarras(){
+    const modal = document.getElementById('scanModal');
+    const video = document.getElementById('scanVideo');
+    const status = document.getElementById('scanStatus');
+    const hint = document.getElementById('scanHint');
+    status.classList.remove('show');
+    hint.textContent = 'Centralize o código de barras dentro da moldura';
+
+    if(!window.ZXingBrowser && !window.ZXing){
+        toast('Biblioteca de leitura de código de barras não carregou — verifique sua conexão com a internet.');
+        return;
+    }
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+        toast('Seu navegador não suporta acesso à câmera (getUserMedia). Use "Tirar foto" como alternativa.');
+        return;
+    }
+
+    modal.classList.add('open');
+
+    try{
+        // A lib pode se chamar ZXingBrowser (mais recente) ou ZXing (builds antigas) dependendo do CDN.
+        const ZX = window.ZXingBrowser || window.ZXing;
+        const Reader = ZX.BrowserMultiFormatReader || (ZX.default && ZX.default.BrowserMultiFormatReader);
+        zxingReader = new Reader();
+
+        // listVideoInputDevices é método de instância no @zxing/library (usado aqui via CDN).
+        const devices = zxingReader.listVideoInputDevices ? await zxingReader.listVideoInputDevices() : [];
+        const deviceId = devices.length ? (devices.find(d=>/back|tras/i.test(d.label))||devices[devices.length-1]).deviceId : undefined;
+
+        zxingReader.decodeFromVideoDevice(deviceId, video, (result, err)=>{
+            if(result){
+                const codigo = result.getText ? result.getText() : result.text;
+                status.textContent = `Código lido: ${codigo}`;
+                status.classList.add('show');
+                if(navigator.vibrate) navigator.vibrate(120);
+                setTimeout(()=>{
+                    fecharScannerBarras();
+                    aplicarCodigoEscaneado(codigo);
+                }, 500);
+            }
+        });
+        zxingStream = video.srcObject;
+    }catch(err){
+        console.error('Erro ao iniciar o leitor de código de barras:', err);
+        toast('Não foi possível acessar a câmera. Verifique as permissões do navegador.');
+        modal.classList.remove('open');
+    }
+}
+
+function fecharScannerBarras(){
+    document.getElementById('scanModal').classList.remove('open');
+    try{ if(zxingReader && zxingReader.reset) zxingReader.reset(); }catch(e){}
+    const video = document.getElementById('scanVideo');
+    if(video.srcObject){
+        video.srcObject.getTracks().forEach(t=> t.stop());
+        video.srcObject = null;
+    }
+    zxingReader = null;
+}
+
+function aplicarCodigoEscaneado(codigo){
+    // Tenta reconhecer a transportadora pelo padrão do código; senão deixa em branco para o usuário preencher.
+    const { transportadora } = extrairDadosDaEtiqueta(codigo);
+    toast('Código de barras lido com sucesso!');
+    irParaConfirmacao({ sucesso:true, transportadora, codigoRastreio: codigo });
+}
+
+document.getElementById('nvEscanearBarras').addEventListener('click', abrirScannerBarras);
+document.getElementById('scanFechar').addEventListener('click', fecharScannerBarras);
+
 /* ---------------- INIT ---------------- */
+/*
+   IMPORTANTE — correção do "painel vazio até eu cadastrar uma encomenda":
+   Antes, initPainel() usava Promise.all([...]) e chamava carregarConfiguracoes()
+   fora de qualquer try/catch. Se QUALQUER uma dessas etapas travasse ou
+   lançasse um erro não tratado (ex.: sessão inválida, backend fora do ar
+   num dos endpoints, um dado inesperado no meio do carregamento), a
+   Promise rejeitava e a linha `renderAll()` nunca era executada — a tela
+   ficava com os placeholders vazios até o usuário fazer alguma ação que
+   chamasse renderAll() manualmente (como registrar uma encomenda nova, que
+   dá push() no array local e re-renderiza na hora). Por fora, isso parecia
+   "só aparece quando eu cadastro".
+   Agora: (1) cada etapa roda isolada com Promise.allSettled — uma falhar
+   não derruba as outras; (2) renderAll() SEMPRE roda, mesmo se tudo falhar,
+   pintando ao menos os estados vazios corretos; (3) qualquer falha é
+   logada no console com detalhes (e um aviso aparece na tela) para dar pra
+   diagnosticar rápido pelo DevTools (F12 → Console) qual etapa falhou.
+*/
 async function initPainel(){
-    carregarConfiguracoes();
-    await Promise.all([
-        carregarEncomendasDoBanco(),
-        carregarMoradoresDoBanco(),
-        carregarTimelineDoBanco()
-    ]);
+    console.log('[ZibBox] Iniciando painel — USUARIO_ID =', USUARIO_ID, usuarioLogado);
+    try{ carregarConfiguracoes(); }
+    catch(e){ console.error('[ZibBox] Erro em carregarConfiguracoes():', e); }
+
+    const etapas = [
+        {nome:'encomendas', fn:carregarEncomendasDoBanco},
+        {nome:'moradores', fn:carregarMoradoresDoBanco},
+        {nome:'timeline', fn:carregarTimelineDoBanco},
+        {nome:'funcionarios', fn:carregarFuncionariosDoBanco},
+        {nome:'configuracoes(servidor)', fn:sincronizarConfiguracoesComServidor},
+    ];
+    const resultados = await Promise.allSettled(etapas.map(e=> e.fn()));
+
+    const falhas = resultados
+        .map((r,i)=> ({...r, nome:etapas[i].nome}))
+        .filter(r=> r.status==='rejected');
+    if(falhas.length){
+        falhas.forEach(f=> console.error(`[ZibBox] Falha ao carregar "${f.nome}":`, f.reason));
+        toast(`Alguns dados não carregaram (${falhas.map(f=>f.nome).join(', ')}). Veja o console (F12) para detalhes.`);
+    }
+    console.log('[ZibBox] Carregamento concluído — encomendas:', encomendas.length, 'moradores:', moradores.length, 'timeline:', timeline.length);
+
     renderAll();
 }
-initPainel();
+initPainel().catch(e=>{
+    // Rede de segurança final: mesmo um erro totalmente inesperado aqui não
+    // deve deixar a tela travada sem explicação nenhuma.
+    console.error('[ZibBox] Erro inesperado ao iniciar o painel:', e);
+    toast('Houve um erro ao carregar o painel. Veja o console (F12) para detalhes.');
+    try{ renderAll(); }catch(e2){ console.error('[ZibBox] renderAll() também falhou:', e2); }
+});
 </script>
 </body>
 </html>

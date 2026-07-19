@@ -3,350 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZibBox - Criar Login</title>
+    <title>ZibBox - Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Identity Services: usado pelo botão "Continuar com Google" -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
-        :root {
-            --primary: #4a008c;
-            --accent: #00b0ff;
-            --accent-hover: #0091ea;
-            --bg: #f5f6fa;
-            --text-white: #ffffff;
+        :root{
+            --primary:#4a008c;
+            --primary-dark:#2a0054;
+            --accent:#00b0ff;
+            --accent-hover:#0091ea;
+            --bg:#f5f6fa;
+            --text-dark:#1e1e24;
+            --text-light:#7f8c8d;
+            --border-color:#e1dfe8;
+            --card-radius:26px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+        html{scroll-behavior:smooth;}
+        body{
+            background:linear-gradient(150deg,var(--primary) 0%,var(--primary-dark) 100%);
+            min-height:100vh;color:var(--text-dark);justify-content:center;align-items:flex-start;
+            padding:0;position:relative;overflow-x:hidden;
+        }
+        /* Brilho de fundo — mesmo elemento de assinatura usado nas demais telas do fluxo */
+        body::before{
+            content:"";position:fixed;width:620px;height:620px;border-radius:50%;
+            background:radial-gradient(circle,rgba(0,176,255,0.30),transparent 70%);
+            top:-220px;right:-200px;pointer-events:none;z-index:0;
+        }
+        body::after{
+            content:"";position:fixed;width:520px;height:520px;border-radius:50%;
+            background:radial-gradient(circle,rgba(0,176,255,0.16),transparent 70%);
+            bottom:-220px;left:-180px;pointer-events:none;z-index:0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
+        /* ---------- TOPO FIXO ---------- */
+        .top-strip{
+            width:100%;position:relative;z-index:2;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:22px 24px;max-width:1000px;margin:0 auto;
         }
+        .back-btn{
+            width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.18);color:#fff;display:flex;align-items:center;
+            justify-content:center;text-decoration:none;flex-shrink:0;
+        }
+        .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+        .logo{
+            font-size:19px;font-weight:800;color:#fff;display:flex;align-items:center;gap:7px;
+            font-family:'Franklin Gothic Medium',Arial,sans-serif;
+        }
+        .logo span{color:var(--accent);}
+        .top-spacer{width:40px;}
 
-        body {
-            background-color: var(--bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+        /* ---------- WRAPPER + CARD ---------- */
+        .page-wrap{
+            width:100%;max-width:460px;position:relative;z-index:2;
+            padding:6px 20px 60px;margin:0 auto;
         }
+        .card{
+            background:#fff;border-radius:var(--card-radius);
+            box-shadow:0 30px 70px rgba(20,0,45,0.35);
+            padding:34px 30px 30px;
+        }
+        .card-head{text-align:center;margin-bottom:24px;}
+        .card-head .avatar-ring{
+            width:56px;height:56px;border-radius:50%;background:rgba(0,176,255,0.12);
+            display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+            color:var(--accent-hover);font-size:22px;
+        }
+        .card-head h1{font-size:24px;font-weight:800;margin-bottom:6px;}
+        .card-head p{font-size:13.5px;color:var(--text-light);}
 
-        /* Container do Celular */
-        .app-container {
-            width: 100%;
-            max-width: 380px;
-            height: 800px;
-            max-height: 92vh;
-            background: linear-gradient(135deg, var(--primary) 0%, #2a0054 100%);
-            border-radius: 40px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(74, 0, 140, 0.25);
-            display: flex;
-            flex-direction: column;
-            color: var(--text-white);
+        /* ---------- GOOGLE BUTTON ---------- */
+        .google-area{margin-bottom:6px;}
+        #googleBtnContainer{display:flex;justify-content:center;}
+        .google-fallback{
+            width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+            border:1.5px solid var(--border-color);border-radius:13px;padding:12px 14px;
+            background:#fff;font-size:13.5px;font-weight:600;color:var(--text-dark);cursor:pointer;
         }
+        .google-fallback:hover{border-color:#c7c5d6;background:#fbfaff;}
+        .google-fallback svg{width:18px;height:18px;flex-shrink:0;}
 
-        @media (max-height: 740px) or (max-width: 400px) {
-            .app-container {
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0;
-            }
-        }
+        .divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text-light);font-size:11.5px;}
+        .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--border-color);}
 
-        /* Header */
-        .header {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 20px 15px;
-            flex-shrink: 0;
+        /* ---------- FORM ---------- */
+        .form-container{display:flex;flex-direction:column;gap:12px;}
+        .input-group{
+            position:relative;display:flex;align-items:center;gap:10px;
+            border:1.5px solid var(--border-color);border-radius:13px;padding:12px 14px;
+            background:#fbfaff;
         }
-        
-        .back-btn {
-            position: absolute;
-            left: 25px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none;
+        .input-group.active,.input-group:focus-within{
+            border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(0,176,255,0.08);
         }
-        .back-btn:hover { color: var(--accent); }
+        .input-group i{color:var(--text-light);font-size:15px;width:18px;text-align:center;flex-shrink:0;}
+        .input-group.active i,.input-group:focus-within i{color:var(--accent);}
+        .input-group input{
+            width:100%;border:none;outline:none;background:none;font-size:13.5px;color:var(--text-dark);
+        }
+        .input-group input::placeholder{color:var(--text-light);font-weight:300;}
+        .toggle-password{cursor:pointer;}
 
-        .logo {
-            font-size: 26px;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Franklin Gothic Medium', Arial, sans-serif;
-        }
-        .logo span { color: var(--accent); }
+        .extra-links{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:2px 0 4px;}
+        .checkbox-container{display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--text-light);}
+        .extra-links a{color:var(--accent-hover);text-decoration:none;font-weight:500;}
 
-        /* Centro */
-        .main-content {
-            flex: 1;
-            border-top-left-radius: 60px; 
-            padding: 30px 25px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
+        .btn-submit{
+            width:100%;background:var(--accent);color:#fff;border:none;padding:15px;
+            border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;
+            display:flex;justify-content:center;align-items:center;gap:10px;
+            box-shadow:0 10px 25px rgba(0,176,255,0.32);margin-top:4px;
         }
+        .btn-submit:hover{background:var(--accent-hover);}
+        .btn-submit:disabled{opacity:.6;cursor:not-allowed;}
 
-        .main-content::-webkit-scrollbar { width: 4px; }
+        .switch-link{text-align:center;font-size:12.5px;color:var(--text-light);margin-top:18px;}
+        .switch-link a{color:var(--accent-hover);font-weight:600;text-decoration:none;}
 
-        .title-section {
-            margin-bottom: 25px;
+        .news-card{
+            border:1px solid var(--border-color);border-radius:14px;padding:12px;
+            background:#fbfaff;display:flex;align-items:center;gap:12px;margin-top:18px;
         }
-        .title-section h2 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 5px;
+        .news-icon{
+            background:rgba(0,176,255,0.12);color:var(--accent-hover);width:34px;height:34px;
+            border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
         }
-        .title-section p {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 300;
-        }
+        .news-text{font-size:11.5px;line-height:1.4;color:var(--text-light);}
 
-        /* Form */
-        .form-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            flex: 1;
+        /* ---------- RESPONSIVO ---------- */
+        @media (min-width:520px){
+            .page-wrap{padding-top:16px;}
+            .card{padding:40px 40px 34px;}
         }
-        
-        .input-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            padding: 14px 15px;
-            backdrop-filter: blur(10px);
-        }
-        .input-box:focus-within {
-            border-color: var(--accent);
-            background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 10px rgba(0, 176, 255, 0.2);
-        }
-        .input-box i {
-            color: rgba(255, 255, 255, 0.7);
-            margin-right: 12px;
-            width: 20px;
-            text-align: center;
-        }
-        .input-box input {
-            background: none;
-            border: none;
-            outline: none;
-            width: 100%;
-            font-size: 14px;
-            color: var(--text-white);
-        }
-        .input-box input::placeholder { color: rgba(255, 255, 255, 0.4); }
-        .toggle-password { cursor: pointer; }
-
-        /* Termos de Uso */
-        .terms-container {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            line-height: 1.4;
-            margin-top: 5px;
-        }
-        .terms-container input {
-            margin-top: 3px;
-            accent-color: var(--accent);
-        }
-        .terms-container a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        .terms-container a:hover { text-decoration: underline; }
-
-        /* Botão Finalizar */
-        .btn-submit {
-            width: 100%;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 176, 255, 0.4);
-            margin-top: auto; /* Joga para o final da tela */
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-submit:hover { 
-            background: var(--accent-hover); 
-            transform: translateY(-1px);
+        @media (max-width:480px){
+            .card{padding:26px 20px 24px;border-radius:22px;}
+            .top-strip{padding:18px 16px;}
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <!-- Header -->
-        <div class="header">
-            <a href="cadastro.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-            <div class="logo">
-                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
-                <span>Zib</span>Box
-            </div>
-        </div>
+    <div class="top-strip">
+        <a href="zibbox-landing.html" class="back-btn" title="Voltar ao site"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
+        <span class="top-spacer"></span>
+    </div>
 
-        <!-- Conteúdo Principal -->
-        <div class="main-content">
-            
-            <div class="title-section">
-                <h2>Criar Login</h2>
-                <p>Configure as credenciais de administrador para acessar o painel do seu condomínio.</p>
+    <div class="page-wrap">
+        <div class="card">
+            <div class="card-head">
+                <div class="avatar-ring"><i class="fa-solid fa-user"></i></div>
+                <h1>Acessar conta</h1>
+                <p>Entre para ver as encomendas do seu condomínio.</p>
             </div>
 
-            <form class="form-container" id="formCriarLogin">
-                
-                <!-- Nome Completo do Admin -->
-                <div class="input-box">
-                    <i class="fa-regular fa-id-card"></i>
-                    <input type="text" id="nomeAdmin" placeholder="Seu nome completo" required>
+            <!-- LOGIN COM GOOGLE -->
+            <div class="google-area">
+                <div id="googleBtnContainer"></div>
+            </div>
+
+            <div class="divider">ou entre com e-mail</div>
+
+            <form class="form-container" id="formLogin" method="POST">
+
+                <div class="input-group">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="emailAdmin" placeholder="E-mail ou usuário" required>
                 </div>
 
-                <!-- Usuário/E-mail -->
-                <div class="input-box">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="email" id="emailAdmin" placeholder="Digite seu e-mail" required>
-                </div>
-
-                <!-- Senha -->
-                <div class="input-box">
+                <div class="input-group">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="senhaAdmin" placeholder="Crie uma senha forte" required>
+                    <input type="password" id="passwordField" placeholder="Digite sua senha" required>
                     <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
                 </div>
 
-                <!-- Confirmar Senha -->
-                <div class="input-box">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <input type="password" id="confirmarSenhaAdmin" placeholder="Confirme sua senha" required>
+                <div class="extra-links">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="lembrarAcesso"> Lembrar acesso
+                    </label>
+                    <a href="#" id="esqueceuSenha">Esqueceu a senha?</a>
                 </div>
 
-                <!-- Aceitar termos -->
-                <label class="terms-container">
-                    <input type="checkbox" required>
-                    <span>Li e estou de acordo com os <a href="#">Termos de Uso</a> e <a href="#">Políticas de Privacidade</a>.</span>
-                </label>
+                <button type="submit" class="btn-submit" id="btnEntrar">Entrar</button>
 
-                <!-- Botão Criar -->
-                <button type="submit" class="btn-submit">
-                    Finalizar Cadastro <i class="fa-solid fa-circle-check"></i>
-                </button>
-
+                <p class="switch-link">Não tem conta? <a href="criar-login.html">Criar login</a></p>
             </form>
-        </div>
 
+            <div class="news-card">
+                <div class="news-icon"><i class="fa-solid fa-bell"></i></div>
+                <div class="news-text">Tenha todo o controle das encomendas do seu condomínio na palma da mão.</div>
+            </div>
+        </div>
     </div>
 
-    <!-- Integração do Banco de Dados Local (JSON + LocalStorage) -->
-    <script>
+<script>
+/* =====================================================================
+   LOGIN COM GOOGLE (Google Identity Services)
+   -----------------------------------------------------------------
+   Para este botão funcionar de verdade, você precisa de um Client ID:
+   1. Acesse https://console.cloud.google.com/apis/credentials
+   2. Crie uma credencial do tipo "ID do cliente OAuth" > "Aplicativo da Web"
+   3. Em "Origens JavaScript autorizadas", adicione o domínio onde o
+      ZibBox vai rodar (ex: https://seusite.com.br ou http://localhost:3000)
+   4. Cole o Client ID gerado na constante abaixo.
+   5. IMPORTANTE: cole esse MESMO Client ID também no server.js, na
+      constante GOOGLE_CLIENT_ID (ou defina a variável de ambiente
+      GOOGLE_CLIENT_ID) — o backend valida o token comparando os dois
+      e rejeita se não baterem.
+   Enquanto isso não for feito, o botão mostra um aviso ao ser clicado.
+===================================================================== */
+const GOOGLE_CLIENT_ID = 'SEU_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+
+function decodificarJwt(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+        atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
+    );
+    return JSON.parse(jsonPayload);
+}
+
+function entrarComGoogle(dadosGoogle, credential){
+    fetch('/api/login-google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential })
+    })
+    .then(async response => {
+        let dados = {};
+        try { dados = await response.json(); } catch(e) { /* resposta sem corpo JSON */ }
+        if(!response.ok){
+            throw new Error(dados.mensagem || `Erro ${response.status} ao validar login com Google.`);
+        }
+        return dados;
+    })
+    .then(dados => {
+        if(dados.sucesso){
+            localStorage.setItem('usuario_logado', JSON.stringify(dados.usuario));
+            window.location.href = 'zibbox-painel.html';
+        } else {
+            alert('Erro: ' + dados.mensagem);
+        }
+    })
+    .catch(erro => {
+        console.error('Erro ao entrar com Google:', erro);
+        // Só cai no modo local se o servidor realmente não respondeu (offline/CORS/etc).
+        // Erros de validação (Client ID errado, token inválido...) são mostrados de verdade,
+        // em vez de fingir sucesso escondendo o problema.
+        if(erro.message === 'Failed to fetch'){
+            alert('Servidor indisponível. Certifique-se de que o Node está rodando (npm start) na porta 3000. Entrando em modo local de teste, sem salvar no banco.');
+            const usuario = {
+                nome: dadosGoogle.name,
+                email: dadosGoogle.email,
+                foto: dadosGoogle.picture,
+                origem: 'google'
+            };
+            localStorage.setItem('usuario_logado', JSON.stringify(usuario));
+            window.location.href = 'zibbox-painel.html';
+        } else {
+            alert(erro.message);
+        }
+    });
+}
+
+function handleGoogleCredential(response){
+    const dadosGoogle = decodificarJwt(response.credential);
+    entrarComGoogle(dadosGoogle, response.credential);
+}
+
+(function initGoogleButton(){
+    const container = document.getElementById('googleBtnContainer');
+
+    if (GOOGLE_CLIENT_ID.startsWith('SEU_')) {
+        // Client ID ainda não configurado: mostra um botão "de mentira" explicando o que falta
+        container.innerHTML = `
+            <button type="button" class="google-fallback" id="googleFallbackBtn">
+                <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.5 5.5 29.5 3.5 24 3.5 12.7 3.5 3.5 12.7 3.5 24S12.7 44.5 24 44.5 44.5 35.3 44.5 24c0-1.2-.1-2.4-.3-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.5 5.5 29.5 3.5 24 3.5c-7.7 0-14.3 4.4-17.7 11.2z"/><path fill="#4CAF50" d="M24 44.5c5.4 0 10.3-1.8 14.1-5l-6.5-5.5C29.6 35.5 27 36.5 24 36.5c-5.3 0-9.7-3.4-11.3-8.1l-6.6 5C9.6 39.9 16.2 44.5 24 44.5z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.5l6.5 5.5C40.9 36.5 44.5 30.9 44.5 24c0-1.2-.1-2.4-.3-3.5z"/></svg>
+                Continuar com Google
+            </button>`;
+        document.getElementById('googleFallbackBtn').addEventListener('click', () => {
+            alert('Login com Google ainda não configurado.\n\nAdicione seu Client ID do Google na constante GOOGLE_CLIENT_ID (topo do <script> deste arquivo) para habilitar este botão.');
+        });
+        return;
+    }
+
+    if (typeof google === 'undefined' || !google.accounts) {
+        // O script do Google ainda não carregou (ex: sem internet) — tenta de novo em breve
+        setTimeout(initGoogleButton, 300);
+        return;
+    }
+
+    google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredential
+    });
+    google.accounts.id.renderButton(container, {
+        theme: 'outline', size: 'large', width: 360, text: 'continue_with', locale: 'pt-BR'
+    });
+})();
+
+/* =====================================================================
+   LOGIN NORMAL (e-mail + senha)
+===================================================================== */
+
 // 1. Mostrar/Esconder Senha
 const togglePassword = document.querySelector('#togglePassword');
-const senhaAdmin = document.querySelector('#senhaAdmin');
+const campoSenha = document.querySelector('#passwordField');
 
-if (togglePassword && senhaAdmin) {
+if (togglePassword && campoSenha) {
     togglePassword.addEventListener('click', function () {
-        const type = senhaAdmin.getAttribute('type') === 'password' ? 'text' : 'password';
-        senhaAdmin.setAttribute('type', type);
+        const type = campoSenha.getAttribute('type') === 'password' ? 'text' : 'password';
+        campoSenha.setAttribute('type', type);
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
     });
 }
 
-// 2. Lógica de Validação e Envio ao Servidor
-const form = document.querySelector('#formCriarLogin');
+// 2. Destacar campo em foco
+document.querySelectorAll('.input-group').forEach(group => {
+    const input = group.querySelector('input');
+    if (input) {
+        input.addEventListener('focus', () => group.classList.add('active'));
+        input.addEventListener('blur', () => group.classList.remove('active'));
+    }
+});
 
-form.addEventListener('submit', function (evento) {
+// 3. "Lembrar acesso": guarda só o e-mail/usuário (nunca a senha) no localStorage
+const campoIdentificador = document.querySelector('#emailAdmin');
+const checkboxLembrar = document.querySelector('#lembrarAcesso');
+const emailLembrado = localStorage.getItem('zibbox_lembrar_email');
+if (emailLembrado) {
+    campoIdentificador.value = emailLembrado;
+    checkboxLembrar.checked = true;
+}
+
+// 4. "Esqueceu a senha?" — aviso claro em vez de link morto
+document.getElementById('esqueceuSenha').addEventListener('click', function(e){
+    e.preventDefault();
+    alert('Recuperação de senha em breve. Por enquanto, fale com o suporte ZibBox pelo WhatsApp.');
+});
+
+// 5. Lógica de autenticação com o servidor
+const formLogin = document.querySelector('#formLogin');
+const btnEntrar = document.querySelector('#btnEntrar');
+
+formLogin.addEventListener('submit', function (evento) {
     evento.preventDefault();
 
-    const nome = document.querySelector('#nomeAdmin').value;
-    const email = document.querySelector('#emailAdmin').value;
-    const senha = senhaAdmin.value;
-    const confirmarSenha = document.querySelector('#confirmarSenhaAdmin').value;
-
-    // Validação de senha
-    if (senha !== confirmarSenha) {
-        alert("As senhas informadas não coincidem. Tente novamente!");
-        return;
-    }
-
-    // Pega dados prévios salvos no localStorage (ex: dados do condomínio se houver)
-    const dadosCondominioExistentes = JSON.parse(localStorage.getItem('dados_condominio')) || {};
-
-    // Unindo os dados para enviar
-    const contaCompleta = {
-        ...dadosCondominioExistentes,
-        nomeAdministrador: nome,
-        login: email.split('@')[0], // Gera usuário com o que vem antes do @
-        email: email,
-        senha: senha
+    const dadosLogin = {
+        login: campoIdentificador.value, // O backend aceita e-mail ou login neste campo
+        senha: campoSenha.value
     };
 
-    // CORREÇÃO: Usando rota relativa "/api/registrar". O navegador já sabe que a porta é 3000.
-    fetch("/api/registrar", {
+    if (checkboxLembrar.checked) {
+        localStorage.setItem('zibbox_lembrar_email', campoIdentificador.value);
+    } else {
+        localStorage.removeItem('zibbox_lembrar_email');
+    }
+
+    btnEntrar.disabled = true;
+    const textoOriginalBtn = btnEntrar.innerHTML;
+    btnEntrar.innerHTML = "Entrando...";
+
+    fetch("/api/login", {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(contaCompleta)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosLogin)
     })
     .then(async response => {
-        // CORREÇÃO ESSENCIAL: Converte para JSON primeiro, mesmo se o status for de erro (como 400 ou 401)
         const dados = await response.json();
-        
         if (!response.ok) {
-            // Se o servidor respondeu com erro (ex: e-mail duplicado), envia a mensagem real do backend
-            throw new Error(dados.mensagem || 'Erro desconhecido no servidor.');
+            throw new Error(dados.mensagem || 'Usuário ou senha incorretos.');
         }
-        
         return dados;
     })
     .then(dados => {
         if (dados.sucesso) {
-            alert(`Parabéns! A conta foi criada.\nSeu usuário de login será: ${contaCompleta.login}`);
-            localStorage.setItem('usuario_zibbox', JSON.stringify(contaCompleta));
-            
-            // Redireciona para a página de login
-            window.location.href = "login.html";
+            alert(dados.mensagem || "Login realizado com sucesso!");
+            localStorage.setItem('usuario_logado', JSON.stringify(dados.usuario));
+            window.location.href = "zibbox-painel.html";
         } else {
-            alert("Erro ao salvar: " + dados.mensagem);
+            alert("Erro: " + dados.mensagem);
         }
     })
     .catch(erro => {
-        console.error("Erro processado:", erro);
-        // Se o erro veio da validação do backend, mostra a mensagem real. Se não, mostra falha de conexão.
-        if (erro.message && erro.message !== "Failed to fetch" && erro.message !== "Resposta inválida do servidor") {
+        console.error("Erro no processamento do login:", erro);
+        if (erro.message && erro.message !== "Failed to fetch") {
             alert(erro.message);
         } else {
-            alert("Servidor indisponível. Verifique se o Node está rodando na porta 3000.");
+            alert("Servidor indisponível. Certifique-se de que o Node está rodando no terminal na porta 3000.");
         }
+    })
+    .finally(() => {
+        btnEntrar.disabled = false;
+        btnEntrar.innerHTML = textoOriginalBtn;
     });
 });
 </script>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZibBox - Complete seu cadastro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+    --primary:#4a008c;
+    --primary-dark:#2a0054;
+    --accent:#00b0ff;
+    --accent-hover:#0091ea;
+    --danger:#ff5470;
+    --bg:#120b1e;
+    --surface:#1d1430;
+    --surface-2:#241a3a;
+    --border:rgba(255,255,255,0.09);
+    --text:#f3f1f9;
+    --text-muted:#a79fc0;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 0 40px;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;}
+
+.hero{
+    width:100%;background:linear-gradient(155deg,var(--primary),var(--primary-dark));
+    padding:36px 20px 30px;text-align:center;border-radius:0 0 26px 26px;position:relative;overflow:hidden;
+}
+.hero::after{
+    content:"";position:absolute;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle,rgba(0,176,255,0.28),transparent 70%);top:-120px;right:-90px;pointer-events:none;
+}
+.hero .logo{font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;}
+.hero .logo span{color:var(--accent);}
+.hero p{margin-top:10px;font-size:13px;color:rgba(255,255,255,0.75);position:relative;}
+
+.wrap{max-width:440px;width:100%;padding:22px 20px;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:16px;}
+.chip{
+    display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);
+    border-radius:14px;padding:12px 14px;margin-bottom:18px;font-size:12.5px;color:var(--text-muted);
+}
+.chip b{color:var(--text);font-weight:600;}
+.chip i{color:var(--accent);font-size:15px;}
+
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;font-weight:500;}
+.field input{
+    width:100%;background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+    padding:13px 14px;border-radius:12px;font-size:14px;
+}
+.field input:focus{outline:none;border-color:var(--accent);}
+
+.photo-picker{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.photo-picker .preview{
+    width:64px;height:64px;border-radius:50%;object-fit:cover;background:var(--surface-2);
+    border:2px dashed var(--border);flex-shrink:0;
+}
+.btn{
+    border:none;border-radius:13px;padding:14px;font-size:14px;font-weight:700;width:100%;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-accent{background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);}
+
+.msg{
+    display:none;align-items:center;gap:10px;border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12.5px;font-weight:500;
+}
+.msg.show{display:flex;}
+.msg.err{background:rgba(255,84,112,0.1);border:1px solid rgba(255,84,112,0.3);color:var(--danger);}
+.msg.ok{background:rgba(46,213,115,0.1);border:1px solid rgba(46,213,115,0.3);color:#2ed573;}
+
+.success-screen{display:none;text-align:center;padding:40px 20px;}
+.success-screen.show{display:block;}
+.success-screen .ic{
+    width:74px;height:74px;border-radius:50%;background:rgba(46,213,115,0.14);color:#2ed573;
+    display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 18px;
+}
+.success-screen h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+.success-screen p{font-size:13px;color:var(--text-muted);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="logo"><i class="fa-solid fa-cube" style="color:var(--accent);"></i><span>Zib</span>Box</div>
+    <p>Complete seu cadastro para usar o ZibBox no seu condomínio</p>
+</div>
+
+<div class="wrap">
+
+    <div id="loadingState" style="text-align:center;padding:40px 0;color:var(--text-muted);font-size:13px;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size:22px;display:block;margin-bottom:10px;"></i>
+        Carregando convite...
+    </div>
+
+    <div id="formState" style="display:none;">
+        <div class="chip" id="conviteInfoChip"></div>
+
+        <div class="card">
+            <div class="photo-picker">
+                <img class="preview" id="fotoPreview" alt="Foto">
+                <div style="flex:1;">
+                    <button type="button" class="btn btn-outline" id="btnFoto" style="padding:10px;font-size:12.5px;"><i class="fa-solid fa-camera"></i> Adicionar foto (opcional)</button>
+                    <input type="file" accept="image/*" capture="user" id="inputFoto" style="display:none;">
+                </div>
+            </div>
+            <div class="field"><label>Nome completo</label><input id="campoNome" placeholder="Digite seu nome completo"></div>
+            <div class="field"><label>Telefone / WhatsApp (opcional)</label><input id="campoTelefone" placeholder="(84) 9 0000-0000"></div>
+
+            <div class="msg" id="msgErro"></div>
+            <button class="btn btn-accent" id="btnEnviar"><i class="fa-solid fa-circle-check"></i> Concluir cadastro</button>
+        </div>
+    </div>
+
+    <div class="success-screen" id="successState">
+        <div class="ic"><i class="fa-solid fa-check"></i></div>
+        <h3>Cadastro concluído!</h3>
+        <p>Seus dados já foram enviados para a portaria. Pode fechar esta página.</p>
+    </div>
+
+    <div id="errorState" style="display:none;text-align:center;padding:40px 20px;">
+        <div class="ic" style="background:rgba(255,84,112,0.14);color:var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;">Não foi possível abrir este convite</h3>
+        <p style="font-size:13px;color:var(--text-muted);" id="errorText">Peça um novo link ao administrador.</p>
+    </div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const token = params.get('token');
+
+let fotoBase64 = null;
+
+/* Reduz o tamanho da foto antes de enviar — fotos de câmera em alta resolução
+   deixavam o cadastro lento; aqui redimensionamos para no máximo 800px e
+   recomprimimos como JPEG, o que normalmente cai para menos de 150KB. */
+function comprimirImagem(dataUrl, maxDim=800, qualidade=0.72){
+    return new Promise((resolve)=>{
+        if(!dataUrl || !dataUrl.startsWith('data:image')){ resolve(dataUrl); return; }
+        const img = new Image();
+        img.onload = ()=>{
+            let { width, height } = img;
+            if(width > maxDim || height > maxDim){
+                if(width >= height){ height = Math.round(height * (maxDim/width)); width = maxDim; }
+                else { width = Math.round(width * (maxDim/height)); height = maxDim; }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width; canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            try{ resolve(canvas.toDataURL('image/jpeg', qualidade)); }
+            catch(e){ resolve(dataUrl); }
+        };
+        img.onerror = ()=> resolve(dataUrl);
+        img.src = dataUrl;
+    });
+}
+
+function mostrar(id){
+    ['loadingState','formState','successState','errorState'].forEach(s=>{
+        document.getElementById(s).style.display = (s===id) ? 'block' : 'none';
+    });
+}
+
+function mostrarErro(msg){
+    document.getElementById('errorText').textContent = msg || 'Peça um novo link ao administrador.';
+    mostrar('errorState');
+}
+
+async function carregarConvite(){
+    if(!token){ mostrarErro('Link inválido — nenhum token de convite encontrado.'); return; }
+    try{
+        const resp = await fetch(`/api/convites/${token}`);
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){
+            mostrarErro(data.mensagem);
+            return;
+        }
+        const c = data.convite;
+        const chip = document.getElementById('conviteInfoChip');
+        if(c.tipo === 'morador'){
+            chip.innerHTML = `<i class="fa-solid fa-house"></i> Cadastro de morador — Unidade <b>${c.unidade}</b>`;
+        } else {
+            chip.innerHTML = `<i class="fa-solid fa-user-tie"></i> Cadastro de funcionário${c.cargo ? ` — <b>${c.cargo}</b>` : ''}`;
+        }
+        mostrar('formState');
+    }catch(e){
+        console.error('Erro ao carregar convite:', e);
+        mostrarErro('Erro de conexão com o servidor. Tente novamente em instantes.');
+    }
+}
+carregarConvite();
+
+document.getElementById('btnFoto').addEventListener('click', ()=> document.getElementById('inputFoto').click());
+document.getElementById('inputFoto').addEventListener('change', e=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async ()=>{
+        fotoBase64 = await comprimirImagem(reader.result);
+        document.getElementById('fotoPreview').src = fotoBase64;
+    };
+    reader.readAsDataURL(file);
+});
+
+document.getElementById('btnEnviar').addEventListener('click', async ()=>{
+    const nome = document.getElementById('campoNome').value.trim();
+    const telefone = document.getElementById('campoTelefone').value.trim();
+    const msgErro = document.getElementById('msgErro');
+    msgErro.classList.remove('show','err');
+
+    if(!nome){
+        msgErro.textContent = 'Digite seu nome completo para continuar.';
+        msgErro.classList.add('show','err');
+        return;
+    }
+
+    const btn = document.getElementById('btnEnviar');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+
+    try{
+        const resp = await fetch(`/api/convites/${token}/preencher`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ nome, telefone, foto: fotoBase64 })
+        });
+        const data = await resp.json().catch(()=>({}));
+        if(!resp.ok || !data.sucesso){
+            msgErro.textContent = data.mensagem || 'Não foi possível concluir o cadastro.';
+            msgErro.classList.add('show','err');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Concluir cadastro';
+            return;
+        }
+        mostrar('successState');
+    }catch(e){
+        console.error('Erro ao enviar cadastro:', e);
+        msgErro.textContent = 'Erro de conexão com o servidor. Tente novamente.';
+        msgErro.classList.add('show','err');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Concluir cadastro';
+    }
+});
+</script>
+</body>
+</html>
